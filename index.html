@@ -1,0 +1,3281 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#ffffff">
+    <title>半岛医疗 · AI 人才进阶之旅</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* === PRESENTATION THEME === */
+        :root {
+            --stage-bg: #ffffff;
+            --slide-bg: #ffffff;
+            --control-bg: rgba(17, 35, 72, 0.82);
+            --control-text: #ffffff;
+            --control-accent: #2f6fe4;
+            --font-scale: 1;
+            --text-contrast: 1.14;
+            --text-stroke: 0.15px;
+            --title-outline: 1.1px;
+            --weight-regular: 520;
+            --weight-medium: 650;
+            --weight-strong: 800;
+            --weight-heavy: 850;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        /* === FIXED 16:9 STAGE === */
+        /* The presentation scales as one 1920×1080 canvas. */
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+            background: var(--stage-bg, #000);
+        }
+
+        .deck-viewport {
+            position: fixed;
+            inset: 0;
+            overflow: hidden;
+            background: var(--stage-bg, #000);
+        }
+
+        /* Cover art fills the browser independently of the fixed slide canvas. */
+        .deck-viewport.cover-background-active::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            background-image: url("./slide-01-background-v2.png");
+            background-size: 100% 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            pointer-events: none;
+        }
+
+        .deck-viewport.closing-background-active::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            background-image: url("./closing-background.png");
+            background-size: 100% 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            pointer-events: none;
+        }
+
+        .deck-stage {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 1920px;
+            height: 1080px;
+            overflow: hidden;
+            transform-origin: 0 0;
+            z-index: 1;
+            background: var(--slide-bg, #fff);
+        }
+
+        .deck-stage.cover-background-active,
+        .deck-stage.cover-background-active .slide {
+            background: transparent;
+        }
+
+        .deck-stage.closing-background-active,
+        .deck-stage.closing-background-active .slide {
+            background: transparent;
+        }
+
+        .slide {
+            position: absolute;
+            inset: 0;
+            width: 1920px;
+            height: 1080px;
+            overflow: hidden;
+            display: block;
+            visibility: hidden;
+            opacity: 0;
+            pointer-events: none;
+            background: var(--slide-bg, #fff);
+            transition: opacity 180ms ease;
+        }
+
+        .slide.active,
+        .slide.visible {
+            visibility: visible;
+            opacity: 1;
+            pointer-events: auto;
+            z-index: 1;
+        }
+
+        /* === COVER TYPOGRAPHY === */
+        .cover-copy {
+            position: absolute;
+            inset: 0;
+            color: #111a2e;
+            font-family: "Noto Sans SC", "DM Sans", sans-serif;
+            filter: contrast(var(--text-contrast));
+            pointer-events: none;
+        }
+
+        .brand-row {
+            position: absolute;
+            top: 72px;
+            left: 88px;
+            right: 82px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .peninsula-brand {
+            position: relative;
+            display: flex;
+            align-items: center;
+            flex: 0 0 auto;
+        }
+
+        .peninsula-logo-image {
+            display: block;
+            width: auto;
+            height: calc(58px * var(--font-scale));
+            max-width: 600px;
+            object-fit: contain;
+        }
+
+        .peninsula-brand .brand-underline {
+            position: absolute;
+            top: calc(100% + 36px);
+            left: 0;
+            width: 150px;
+            height: 10px;
+            border-radius: 2px;
+            background: #1248bd;
+        }
+
+        .event-logos {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            color: #101c3e;
+            font-family: "DM Sans", "Noto Sans SC", sans-serif;
+            font-size: calc(64px * var(--font-scale));
+            font-weight: 700;
+            line-height: 1;
+            white-space: nowrap;
+        }
+
+        .event-logos .hiagent-mark {
+            letter-spacing: -0.035em;
+        }
+
+        .event-logos .separator {
+            width: 3px;
+            height: 80px;
+            border-radius: 999px;
+            background: #153eaa;
+            opacity: 0.52;
+        }
+
+        .waic-mark {
+            display: flex;
+            flex-direction: column;
+            color: #1248bd;
+            letter-spacing: -0.035em;
+            font-size: calc(60px * var(--font-scale));
+        }
+
+        .waic-mark small {
+            margin-top: 6px;
+            color: #263958;
+            font-family: "Noto Sans SC", sans-serif;
+            font-size: calc(26px * var(--font-scale));
+            font-weight: var(--weight-medium);
+            letter-spacing: 0.02em;
+            line-height: 1.1;
+        }
+
+        .event-line {
+            position: absolute;
+            top: 232px;
+            left: 88px;
+            color: #1248bd;
+            font-size: calc(32px * var(--font-scale));
+            font-weight: var(--weight-strong);
+            letter-spacing: 0.01em;
+            line-height: 1.3;
+            -webkit-text-stroke: var(--text-stroke) currentColor;
+            paint-order: stroke fill;
+        }
+
+        .event-line .separator-dot {
+            margin: 0 16px;
+        }
+
+        .cover-title {
+            position: absolute;
+            top: 354px;
+            left: 88px;
+            width: 1740px;
+            margin: 0;
+            color: #101629;
+            font-size: calc(88.8px * var(--font-scale));
+            font-weight: var(--weight-heavy);
+            letter-spacing: -0.065em;
+            line-height: 1.18;
+            white-space: nowrap;
+            text-shadow: 0 1px 5px rgba(255, 255, 255, 0.72);
+            -webkit-text-stroke: var(--title-outline) rgba(255, 255, 255, 0.96);
+            paint-order: stroke fill;
+        }
+
+        .cover-title span {
+            color: #114bc6;
+            -webkit-text-stroke: var(--title-outline) rgba(255, 255, 255, 0.96);
+        }
+
+        .cover-subtitle {
+            position: absolute;
+            top: 472px;
+            left: 90px;
+            margin: 0;
+            color: #5f6d82;
+            font-size: calc(34px * var(--font-scale));
+            font-weight: var(--weight-regular);
+            letter-spacing: 0.025em;
+            line-height: 1.5;
+            -webkit-text-stroke: var(--text-stroke) currentColor;
+            paint-order: stroke fill;
+        }
+
+        .speaker-block {
+            position: absolute;
+            top: 742px;
+            left: 86px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            padding: 2px 0 2px 32px;
+            border-left: 5px solid #1450cf;
+        }
+
+        .speaker-name {
+            color: #121a2d;
+            font-size: calc(36px * var(--font-scale));
+            font-weight: var(--weight-heavy);
+            line-height: 1.25;
+            -webkit-text-stroke: var(--text-stroke) currentColor;
+            paint-order: stroke fill;
+        }
+
+        .speaker-role {
+            color: #65738a;
+            font-size: calc(28px * var(--font-scale));
+            font-weight: var(--weight-regular);
+            line-height: 1.4;
+            -webkit-text-stroke: var(--text-stroke) currentColor;
+            paint-order: stroke fill;
+        }
+
+        .cover-footer-signature {
+            position: absolute;
+            right: 84px;
+            bottom: 62px;
+            left: 84px;
+            display: flex;
+            align-items: center;
+            color: rgba(86, 111, 148, 0.74);
+            font-family: "DM Sans", "Noto Sans SC", sans-serif;
+            font-size: calc(18px * var(--font-scale));
+            font-weight: 500;
+            line-height: 1;
+            white-space: nowrap;
+            user-select: none;
+        }
+
+        .cover-footer-signature-label {
+            letter-spacing: 0.58em;
+        }
+
+        .cover-footer-signature-rule {
+            flex: 1 1 auto;
+            height: 2px;
+            margin-left: 28px;
+            background: linear-gradient(90deg, rgba(86, 111, 148, 0.58), rgba(86, 111, 148, 0.16));
+        }
+
+        /* === INTRODUCTION SLIDE === */
+        .intro-copy {
+            position: absolute;
+            inset: 0;
+            color: #1b1b1b;
+            font-family: "Noto Sans SC", "DM Sans", sans-serif;
+        }
+
+        .intro-top-rule {
+            position: absolute;
+            top: 40px;
+            left: 104px;
+            width: 104px;
+            height: 10px;
+            background: #084bb7;
+        }
+
+        .intro-section-label {
+            position: absolute;
+            top: 78px;
+            left: 104px;
+            display: flex;
+            align-items: baseline;
+            gap: 26px;
+            color: #084bb7;
+            font-size: calc(26px * var(--font-scale));
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .intro-brand-mark {
+            position: absolute;
+            top: 30px;
+            right: 104px;
+            display: block;
+            width: auto;
+            height: 44px;
+            object-fit: contain;
+        }
+
+        .intro-title {
+            position: absolute;
+            top: 132px;
+            left: 104px;
+            right: 104px;
+            margin: 0;
+            color: #171717;
+            font-size: calc(70px * var(--font-scale));
+            font-weight: 800;
+            letter-spacing: -0.045em;
+            line-height: 1.18;
+            white-space: nowrap;
+        }
+
+        .intro-card-list {
+            position: absolute;
+            top: 248px;
+            right: 104px;
+            left: 104px;
+            display: grid;
+            grid-template-rows: repeat(3, 216px);
+            gap: 20px;
+        }
+
+        .intro-card {
+            display: grid;
+            grid-template-columns: 38px minmax(0, 1fr);
+            grid-template-rows: auto 1fr;
+            column-gap: 22px;
+            row-gap: 24px;
+            padding: 28px 52px;
+            overflow: hidden;
+            border-left: 11px solid #084bb7;
+            background: #f3f3f3;
+        }
+
+        .intro-card-number,
+        .intro-card-title {
+            margin: 0;
+            color: #202020;
+            font-size: calc(32px * var(--font-scale));
+            font-weight: 750;
+            line-height: 1.2;
+        }
+
+        .intro-card-number {
+            text-align: center;
+        }
+
+        .intro-card-body {
+            grid-column: 1 / -1;
+            margin: 0;
+            color: #90969f;
+            font-size: calc(42px * var(--font-scale));
+            font-weight: 400;
+            letter-spacing: 0.005em;
+            line-height: 1.35;
+            white-space: nowrap;
+        }
+
+        .intro-flow {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .intro-flow-step {
+            flex: 0 0 auto;
+        }
+
+        .intro-flow-arrow {
+            position: relative;
+            flex: 0 0 28px;
+            height: 2px;
+            border-radius: 2px;
+            background: linear-gradient(90deg, #9fc3f4, #1762c4);
+        }
+
+        .intro-flow-arrow::after {
+            position: absolute;
+            top: 50%;
+            right: 1px;
+            width: 8px;
+            height: 8px;
+            border-top: 2px solid #1762c4;
+            border-right: 2px solid #1762c4;
+            content: "";
+            transform: translateY(-50%) rotate(45deg);
+        }
+
+        .intro-footer-rule {
+            position: absolute;
+            right: 104px;
+            bottom: 74px;
+            left: 104px;
+            height: 1px;
+            background: #dedede;
+        }
+
+        .intro-page-number {
+            position: absolute;
+            right: 104px;
+            bottom: 24px;
+            color: #858585;
+            font-family: "DM Sans", sans-serif;
+            font-size: calc(18px * var(--font-scale));
+            font-weight: 400;
+            letter-spacing: 0.12em;
+            line-height: 1;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .troubleshooting-scroll {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+            overflow-y: auto;
+            background: #edf2f8;
+            overscroll-behavior: contain;
+            scrollbar-color: rgba(8, 75, 183, 0.48) transparent;
+            scrollbar-width: thin;
+            touch-action: pan-y;
+        }
+
+        .deck-stage.troubleshooting-active,
+        .troubleshooting-slide {
+            overflow: visible;
+        }
+
+        .troubleshooting-scroll:focus-visible {
+            outline: 2px solid rgba(8, 75, 183, 0.72);
+            outline-offset: -3px;
+        }
+
+        .troubleshooting-scroll::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .troubleshooting-scroll::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .troubleshooting-scroll::-webkit-scrollbar-thumb {
+            border: 2px solid transparent;
+            border-radius: 999px;
+            background: rgba(8, 75, 183, 0.42);
+            background-clip: padding-box;
+        }
+
+        .troubleshooting-report {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .library-copy {
+            position: absolute;
+            inset: 0;
+            color: #1b1b1b;
+            font-family: "Noto Sans SC", "DM Sans", sans-serif;
+        }
+
+        .library-title {
+            position: absolute;
+            top: 132px;
+            right: 104px;
+            left: 104px;
+            margin: 0;
+            color: #171717;
+            font-size: calc(64px * var(--font-scale));
+            font-weight: 800;
+            letter-spacing: -0.035em;
+            line-height: 1.18;
+            white-space: nowrap;
+        }
+
+        .library-grid {
+            position: absolute;
+            top: 238px;
+            right: 104px;
+            bottom: 92px;
+            left: 104px;
+        }
+
+        .library-table {
+            width: 100%;
+            height: 100%;
+            table-layout: fixed;
+            border: 1px solid #dce6f2;
+            border-spacing: 0;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #ffffff;
+            box-shadow: 0 10px 28px rgba(31, 69, 120, 0.08);
+            color: #253750;
+            font-family: "Noto Sans SC", "DM Sans", sans-serif;
+        }
+
+        .library-table col:first-child {
+            width: 360px;
+        }
+
+        .library-table th,
+        .library-table td {
+            padding: 13px 22px;
+            border-bottom: 1px solid #e5ebf3;
+            text-align: left;
+            vertical-align: middle;
+        }
+
+        .library-table thead th {
+            height: 62px;
+            color: #ffffff;
+            background: #164bb8;
+            font-size: calc(22px * var(--font-scale));
+            font-weight: 750;
+            letter-spacing: 0.02em;
+        }
+
+        .library-table tbody tr:last-child th,
+        .library-table tbody tr:last-child td {
+            border-bottom: 0;
+        }
+
+        .library-table tbody th {
+            color: #16468f;
+            background: #f1f6ff;
+            font-size: calc(22px * var(--font-scale));
+            font-weight: 700;
+            line-height: 1.35;
+            white-space: nowrap;
+        }
+
+        .library-table tbody td {
+            color: #42536b;
+            background: #ffffff;
+            font-size: calc(22px * var(--font-scale));
+            font-weight: 520;
+            line-height: 1.42;
+        }
+
+        .library-table tbody tr:nth-child(even) td {
+            background: #fbfcff;
+        }
+
+        .library-business-note {
+            display: block;
+            margin-top: 6px;
+            color: #16468f;
+            font-weight: 650;
+        }
+
+        .solution-copy {
+            position: absolute;
+            inset: 0;
+            color: #1b1b1b;
+            font-family: "Noto Sans SC", "DM Sans", sans-serif;
+        }
+
+        .solution-title {
+            position: absolute;
+            top: 132px;
+            right: 104px;
+            left: 104px;
+            margin: 0;
+            color: #171717;
+            font-size: calc(64px * var(--font-scale));
+            font-weight: 800;
+            letter-spacing: -0.035em;
+            line-height: 1.18;
+            white-space: nowrap;
+        }
+
+        .solution-flow {
+            position: absolute;
+            top: 320px;
+            right: 104px;
+            bottom: 92px;
+            left: 104px;
+        }
+
+        .solution-process {
+            position: absolute;
+            top: 224px;
+            right: 104px;
+            left: 104px;
+            display: grid;
+            height: 72px;
+            grid-template-columns: minmax(0, 1.05fr) 30px minmax(0, 1.35fr) 30px minmax(0, 1.2fr) 30px minmax(0, 1.05fr) 30px minmax(0, 1.55fr);
+            align-items: center;
+            gap: 8px;
+        }
+
+        .solution-process-step {
+            display: flex;
+            min-width: 0;
+            min-height: 58px;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 12px;
+            border: 1px solid #dbe7f6;
+            border-radius: 12px;
+            color: #214c84;
+            background: linear-gradient(135deg, #f7faff, #edf4ff);
+            box-shadow: 0 4px 12px rgba(31, 69, 120, 0.06);
+            font-size: calc(20px * var(--font-scale));
+            line-height: 1.3;
+            text-align: center;
+        }
+
+        .solution-process-step strong {
+            font-weight: 750;
+        }
+
+        .solution-process-arrow {
+            display: grid;
+            place-items: center;
+            color: #3976ca;
+            font-family: "DM Sans", sans-serif;
+            font-size: calc(28px * var(--font-scale));
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .solution-table {
+            width: 100%;
+            height: 100%;
+            table-layout: fixed;
+            border: 1px solid #dce6f2;
+            border-spacing: 0;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #ffffff;
+            box-shadow: 0 10px 28px rgba(31, 69, 120, 0.08);
+            color: #253750;
+            font-family: "Noto Sans SC", "DM Sans", sans-serif;
+        }
+
+        .solution-table col:first-child {
+            width: 32%;
+        }
+
+        .solution-table th,
+        .solution-table td {
+            padding: 16px 24px;
+            border-bottom: 1px solid #e5ebf3;
+            text-align: left;
+            vertical-align: middle;
+        }
+
+        .solution-table thead th {
+            height: 62px;
+            color: #ffffff;
+            background: #164bb8;
+            font-size: calc(22px * var(--font-scale));
+            font-weight: 750;
+            letter-spacing: 0.02em;
+        }
+
+        .solution-table tbody tr:last-child th,
+        .solution-table tbody tr:last-child td {
+            border-bottom: 0;
+        }
+
+        .solution-table tbody th {
+            color: #16468f;
+            background: #f1f6ff;
+            font-size: calc(24px * var(--font-scale));
+            font-weight: 600;
+            line-height: 1.45;
+            text-align: left;
+            vertical-align: middle;
+        }
+
+        .solution-table tbody td {
+            color: #183c70;
+            background: #ffffff;
+            font-size: calc(24px * var(--font-scale));
+            font-weight: 700;
+            line-height: 1.45;
+            vertical-align: middle;
+        }
+
+        .solution-table tbody tr:nth-child(even) td {
+            background: #fbfcff;
+        }
+
+        .runtime-copy {
+            position: absolute;
+            inset: 0;
+            color: #1b1b1b;
+            font-family: "Noto Sans SC", "DM Sans", sans-serif;
+        }
+
+        .runtime-title {
+            position: absolute;
+            top: 132px;
+            right: 104px;
+            left: 104px;
+            margin: 0;
+            color: #171717;
+            font-size: calc(56px * var(--font-scale));
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            line-height: 1.2;
+            white-space: nowrap;
+        }
+
+        .runtime-evolution {
+            position: absolute;
+            top: 252px;
+            right: 104px;
+            left: 104px;
+            display: grid;
+            height: 170px;
+            grid-template-columns: minmax(0, 0.9fr) 86px minmax(0, 1.05fr) 86px minmax(0, 1.55fr);
+            align-items: center;
+            gap: 8px;
+        }
+
+        .runtime-evolution-stage {
+            display: flex;
+            min-width: 0;
+            min-height: 138px;
+            flex-direction: column;
+            justify-content: center;
+            gap: 10px;
+            padding: 20px 26px;
+            border: 1px solid #dce7f5;
+            border-radius: 16px;
+            background: #ffffff;
+            box-shadow: 0 8px 20px rgba(31, 69, 120, 0.07);
+        }
+
+        .runtime-evolution-name {
+            margin: 0;
+            color: #30425a;
+            font-size: calc(30px * var(--font-scale));
+            font-weight: 750;
+            line-height: 1.2;
+        }
+
+        .runtime-evolution-caption {
+            margin: 0;
+            color: #77869b;
+            font-size: calc(20px * var(--font-scale));
+            font-weight: 550;
+            line-height: 1.35;
+        }
+
+        .runtime-evolution-arrow {
+            display: grid;
+            place-items: center;
+            color: #2868c3;
+            font-family: "DM Sans", sans-serif;
+            font-size: calc(42px * var(--font-scale));
+            font-weight: 500;
+            line-height: 1;
+        }
+
+        .runtime-evolution-stage-current {
+            border-color: #bfd4f0;
+            background: linear-gradient(145deg, #f5f9ff, #eaf2ff);
+            box-shadow: 0 12px 26px rgba(32, 86, 163, 0.1);
+        }
+
+        .runtime-evolution-stage-current .runtime-evolution-name {
+            color: #0d4eaf;
+            font-size: calc(34px * var(--font-scale));
+        }
+
+        .runtime-evolution-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .runtime-evolution-feature {
+            display: inline-flex;
+            min-height: 32px;
+            align-items: center;
+            padding: 5px 11px;
+            border: 1px solid #d5e3f6;
+            border-radius: 999px;
+            color: #365a86;
+            background: rgba(255, 255, 255, 0.82);
+            font-size: calc(17px * var(--font-scale));
+            font-weight: 650;
+            line-height: 1.2;
+            white-space: nowrap;
+        }
+
+        .runtime-core {
+            position: absolute;
+            top: 512px;
+            right: 104px;
+            bottom: 118px;
+            left: 104px;
+        }
+
+        .runtime-core-modules {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            display: grid;
+            height: 270px;
+            grid-template-columns: minmax(0, 1fr) 80px minmax(0, 1fr) 80px minmax(0, 1fr);
+            align-items: center;
+        }
+
+        .runtime-module {
+            display: flex;
+            min-width: 0;
+            height: 250px;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            padding: 28px;
+            border: 1px solid #d9e5f4;
+            border-radius: 20px;
+            background: #ffffff;
+            box-shadow: 0 10px 28px rgba(31, 69, 120, 0.08);
+            text-align: center;
+        }
+
+        .runtime-module-runtime {
+            border-color: #bfd4f0;
+            background: linear-gradient(145deg, #f4f8ff, #eaf2ff);
+            box-shadow: 0 14px 32px rgba(32, 86, 163, 0.12);
+        }
+
+        .runtime-module-name {
+            margin: 0;
+            color: #124da7;
+            font-family: "DM Sans", "Noto Sans SC", sans-serif;
+            font-size: calc(38px * var(--font-scale));
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            line-height: 1.1;
+        }
+
+        .runtime-module-description {
+            max-width: 100%;
+            margin: 0;
+            color: #485d77;
+            font-size: calc(25px * var(--font-scale));
+            font-weight: 600;
+            line-height: 1.45;
+        }
+
+        .runtime-module-skill {
+            gap: 16px;
+        }
+
+        .runtime-skill-details {
+            display: flex;
+            max-width: 100%;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .runtime-skill-reference,
+        .runtime-skill-history {
+            max-width: 100%;
+            margin: 0;
+            line-height: 1.35;
+            text-align: center;
+        }
+
+        .runtime-skill-reference {
+            color: #526c8b;
+            font-size: calc(21px * var(--font-scale));
+            font-weight: 700;
+        }
+
+        .runtime-skill-history {
+            padding-top: 8px;
+            border-top: 1px solid #e4edf8;
+            color: #71839a;
+            font-size: calc(20px * var(--font-scale));
+            font-weight: 600;
+        }
+
+        .runtime-module-connection {
+            position: relative;
+            display: grid;
+            place-items: center;
+            color: #2868c3;
+            font-family: "DM Sans", sans-serif;
+            font-size: calc(42px * var(--font-scale));
+            font-weight: 600;
+            line-height: 1;
+        }
+
+        .runtime-module-connection::before {
+            position: absolute;
+            right: 8px;
+            left: 8px;
+            height: 2px;
+            background: #8fb3e6;
+            content: "";
+        }
+
+        .runtime-module-connection span {
+            position: relative;
+            z-index: 1;
+            padding: 0 5px;
+            background: #ffffff;
+        }
+
+        .runtime-module-runtime + .runtime-module-connection span {
+            background: #eef4ff;
+        }
+
+        .runtime-return-line {
+            position: absolute;
+            right: 15.1%;
+            bottom: 46px;
+            left: 15.1%;
+            height: 2px;
+            background: #8fb3e6;
+        }
+
+        .runtime-return-left,
+        .runtime-return-right {
+            position: absolute;
+            top: 260px;
+            bottom: 46px;
+            width: 2px;
+            background: #8fb3e6;
+        }
+
+        .runtime-return-left {
+            left: 15.1%;
+        }
+
+        .runtime-return-left::before {
+            position: absolute;
+            top: -1px;
+            left: -6px;
+            width: 0;
+            height: 0;
+            border-right: 7px solid transparent;
+            border-bottom: 10px solid #3976ca;
+            border-left: 7px solid transparent;
+            content: "";
+        }
+
+        .runtime-return-right {
+            right: 15.1%;
+        }
+
+        .retrieval-copy {
+            position: absolute;
+            inset: 0;
+            color: #1b1b1b;
+            font-family: "Noto Sans SC", "DM Sans", sans-serif;
+            --retrieval-font-scale: calc(var(--font-scale) * 1.2);
+        }
+
+        .retrieval-copy .intro-section-label {
+            font-size: calc(26px * var(--retrieval-font-scale));
+        }
+
+        .retrieval-copy .intro-page-number {
+            font-size: calc(18px * var(--retrieval-font-scale));
+        }
+
+        .retrieval-title {
+            position: absolute;
+            top: 132px;
+            right: 104px;
+            left: 104px;
+            margin: 0;
+            color: #171717;
+            font-size: calc(60px * var(--retrieval-font-scale));
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            line-height: 1.18;
+            white-space: nowrap;
+        }
+
+        .retrieval-board {
+            position: absolute;
+            top: 260px;
+            right: 104px;
+            left: 104px;
+            height: 548px;
+        }
+
+        .retrieval-columns {
+            display: grid;
+            height: 548px;
+            grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.9fr) minmax(0, 1.18fr);
+            gap: 44px;
+        }
+
+        .retrieval-panel {
+            position: relative;
+            min-width: 0;
+            height: 548px;
+            padding: 20px;
+            overflow: hidden;
+            border: 1px solid #dfe8f4;
+            border-radius: 18px;
+            background: #ffffff;
+            box-shadow: 0 8px 22px rgba(31, 69, 120, 0.07);
+        }
+
+        .retrieval-panel-center {
+            border-color: #c9dbf2;
+            background: linear-gradient(145deg, #fbfdff, #f3f7ff);
+            box-shadow: 0 12px 30px rgba(31, 69, 120, 0.1);
+        }
+
+        .retrieval-panel-heading {
+            display: flex;
+            min-width: 0;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .retrieval-panel-title {
+            margin: 0;
+            color: #1d3657;
+            font-size: calc(24px * var(--retrieval-font-scale));
+            font-weight: 750;
+            line-height: 1.2;
+            white-space: nowrap;
+        }
+
+        .retrieval-panel-center .retrieval-panel-title {
+            color: #104ba6;
+            font-size: calc(27px * var(--retrieval-font-scale));
+        }
+
+        .retrieval-panel-tag {
+            display: inline-flex;
+            min-height: 26px;
+            align-items: center;
+            padding: 4px 9px;
+            border: 1px solid #d8e4f4;
+            border-radius: 999px;
+            color: #577092;
+            background: #f7faff;
+            font-size: calc(13px * var(--retrieval-font-scale));
+            font-weight: 650;
+            line-height: 1;
+            white-space: nowrap;
+        }
+
+        .retrieval-data-steps {
+            display: flex;
+            height: calc(100% - 42px);
+            flex-direction: column;
+            justify-content: space-between;
+            margin-top: 12px;
+        }
+
+        .retrieval-data-step {
+            display: grid;
+            min-height: 74px;
+            flex: 1 1 0;
+            grid-template-columns: 28px minmax(0, 1fr);
+            align-items: center;
+            gap: 9px;
+            padding: 9px 10px;
+            border: 1px solid #e2eaf4;
+            border-radius: 12px;
+            background: #f9fbff;
+        }
+
+        .retrieval-data-number {
+            display: grid;
+            width: 26px;
+            height: 26px;
+            place-items: center;
+            border-radius: 8px;
+            color: #1450a8;
+            background: #e7f0ff;
+            font-family: "DM Sans", sans-serif;
+            font-size: calc(13px * var(--retrieval-font-scale));
+            font-weight: 750;
+        }
+
+        .retrieval-data-step-copy {
+            display: flex;
+            min-width: 0;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .retrieval-data-step-copy strong {
+            color: #304660;
+            font-size: calc(17px * var(--retrieval-font-scale));
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .retrieval-data-step-copy small {
+            color: #728197;
+            font-size: calc(14px * var(--retrieval-font-scale));
+            font-weight: 500;
+            line-height: 1.3;
+        }
+
+        .retrieval-stack-arrow {
+            display: grid;
+            height: 16px;
+            flex: 0 0 16px;
+            place-items: center;
+            color: #6a91c7;
+            font-family: "DM Sans", sans-serif;
+            font-size: calc(16px * var(--retrieval-font-scale));
+            line-height: 1;
+        }
+
+        .retrieval-middle-flow {
+            display: flex;
+            height: calc(100% - 42px);
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 4px;
+            margin-top: 10px;
+        }
+
+        .retrieval-query,
+        .retrieval-fusion,
+        .retrieval-ranking,
+        .retrieval-result-node {
+            display: flex;
+            min-height: 42px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 11px;
+            text-align: center;
+        }
+
+        .retrieval-query {
+            border: 1px solid #d7e5f6;
+            color: #23466f;
+            background: #ffffff;
+            font-size: calc(19px * var(--retrieval-font-scale));
+            font-weight: 700;
+        }
+
+        .retrieval-down-arrow {
+            display: grid;
+            height: 16px;
+            place-items: center;
+            color: #6190cb;
+            font-size: calc(18px * var(--retrieval-font-scale));
+            line-height: 1;
+        }
+
+        .retrieval-branches {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .retrieval-branch {
+            display: flex;
+            min-height: 54px;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 12px;
+            border: 1px solid #d8e5f4;
+            border-radius: 11px;
+            color: #28558e;
+            background: #f5f9ff;
+            font-size: calc(18px * var(--retrieval-font-scale));
+            font-weight: 700;
+            line-height: 1.2;
+            text-align: center;
+        }
+
+        .retrieval-merge-arrows {
+            display: grid;
+            height: 20px;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            color: #6b91c2;
+            font-size: calc(18px * var(--retrieval-font-scale));
+            line-height: 1;
+            text-align: center;
+        }
+
+        .retrieval-fusion {
+            min-height: 46px;
+            color: #ffffff;
+            background: #1552b1;
+            box-shadow: 0 5px 14px rgba(21, 82, 177, 0.18);
+            font-size: calc(20px * var(--retrieval-font-scale));
+            font-weight: 750;
+        }
+
+        .retrieval-options {
+            display: flex;
+            min-height: 52px;
+            align-items: center;
+            gap: 9px;
+            padding: 7px 10px;
+            border: 1px dashed #9bb6da;
+            border-radius: 11px;
+            background: rgba(255, 255, 255, 0.72);
+        }
+
+        .retrieval-options-label {
+            flex: 0 0 auto;
+            color: #587193;
+            font-size: calc(16px * var(--retrieval-font-scale));
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .retrieval-option-list {
+            display: flex;
+            min-width: 0;
+            flex-wrap: wrap;
+            gap: 7px;
+        }
+
+        .retrieval-option {
+            display: inline-flex;
+            min-height: 28px;
+            align-items: center;
+            padding: 4px 9px;
+            border: 1px solid #e0e8f2;
+            border-radius: 6px;
+            color: #5a6e87;
+            background: #ffffff;
+            font-family: "DM Sans", "Noto Sans SC", sans-serif;
+            font-size: calc(15px * var(--retrieval-font-scale));
+            font-weight: 600;
+            line-height: 1;
+            white-space: nowrap;
+        }
+
+        .retrieval-ranking {
+            min-height: 38px;
+            color: #345371;
+            background: #edf3fb;
+            font-size: calc(17px * var(--retrieval-font-scale));
+            font-weight: 700;
+        }
+
+        .retrieval-result-node {
+            min-height: 44px;
+            border: 1px solid #bfd5f1;
+            color: #104ba6;
+            background: #eaf2ff;
+            font-size: calc(19px * var(--retrieval-font-scale));
+            font-weight: 750;
+        }
+
+        .retrieval-eval-flow {
+            position: relative;
+            display: flex;
+            height: calc(100% - 44px);
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 4px;
+            margin-top: 14px;
+            padding-right: 30px;
+        }
+
+        .retrieval-eval-step {
+            display: flex;
+            min-height: 42px;
+            align-items: center;
+            gap: 9px;
+            padding: 7px 10px;
+            border: 1px solid #e2eaf4;
+            border-radius: 11px;
+            color: #435871;
+            background: #f9fbff;
+            font-size: calc(16px * var(--retrieval-font-scale));
+            font-weight: 650;
+            line-height: 1.3;
+        }
+
+        .retrieval-eval-index {
+            display: inline-grid;
+            flex: 0 0 24px;
+            width: 24px;
+            height: 24px;
+            place-items: center;
+            border: 1px solid #d5e3f5;
+            border-radius: 50%;
+            color: #5276a4;
+            background: #ffffff;
+            font-family: "DM Sans", sans-serif;
+            font-size: calc(12px * var(--retrieval-font-scale));
+            font-weight: 750;
+            line-height: 1;
+        }
+
+        .retrieval-eval-metrics {
+            min-height: 72px;
+            align-items: flex-start;
+            padding-top: 9px;
+            padding-bottom: 9px;
+        }
+
+        .retrieval-eval-metric-body {
+            display: grid;
+            min-width: 0;
+            gap: 5px;
+        }
+
+        .retrieval-eval-metric-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .retrieval-eval-metric {
+            display: inline-flex;
+            min-height: 23px;
+            align-items: center;
+            padding: 3px 7px;
+            border-radius: 6px;
+            color: #536c8b;
+            background: #eaf1fb;
+            font-size: calc(13px * var(--retrieval-font-scale));
+            font-weight: 650;
+            line-height: 1;
+            white-space: nowrap;
+        }
+
+        .retrieval-eval-error {
+            border-color: #c9dbf2;
+            color: #164b9d;
+            background: #eff5ff;
+        }
+
+        .retrieval-eval-error .retrieval-eval-index {
+            border-color: #bdd2ee;
+            color: #164b9d;
+            background: #ffffff;
+        }
+
+        .retrieval-eval-agent {
+            min-height: 58px;
+            border-color: #b9d1f1;
+            color: #164b9d;
+            background: linear-gradient(110deg, #eff6ff, #e5efff);
+            box-shadow: 0 4px 12px rgba(31, 81, 151, 0.08);
+        }
+
+        .retrieval-eval-agent .retrieval-eval-index {
+            border-color: #1552b1;
+            color: #ffffff;
+            background: #1552b1;
+        }
+
+        .retrieval-eval-agent-copy {
+            display: grid;
+            min-width: 0;
+            gap: 2px;
+        }
+
+        .retrieval-eval-agent-copy strong {
+            color: #164b9d;
+            font-size: calc(15px * var(--retrieval-font-scale));
+        }
+
+        .retrieval-eval-agent-copy small {
+            color: #617a9a;
+            font-size: calc(12px * var(--retrieval-font-scale));
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        .retrieval-eval-arrow {
+            display: grid;
+            height: 12px;
+            place-items: center;
+            color: #7698c2;
+            font-family: "DM Sans", sans-serif;
+            font-size: calc(15px * var(--retrieval-font-scale));
+            line-height: 1;
+        }
+
+        .retrieval-eval-return {
+            position: absolute;
+            top: 62px;
+            right: 12px;
+            bottom: 31px;
+            width: 12px;
+            border-right: 1.5px dashed #8eabd0;
+        }
+
+        .retrieval-eval-return::before {
+            position: absolute;
+            top: -1px;
+            right: -5px;
+            width: 0;
+            height: 0;
+            border-right: 5px solid transparent;
+            border-bottom: 7px solid #658ab9;
+            border-left: 5px solid transparent;
+            content: "";
+        }
+
+        .retrieval-board-arrow {
+            position: absolute;
+            top: 236px;
+            left: 25%;
+            z-index: 2;
+            display: grid;
+            width: 52px;
+            height: 30px;
+            place-items: center;
+            color: #2e6fc5;
+            font-family: "DM Sans", sans-serif;
+            font-size: calc(28px * var(--retrieval-font-scale));
+            font-weight: 700;
+            line-height: 1;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+
+        .retrieval-evolution-card {
+            position: absolute;
+            top: 836px;
+            right: 104px;
+            left: 104px;
+            display: flex;
+            height: 104px;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+            padding: 12px 24px;
+            border: 1px solid #c8dcf5;
+            border-radius: 16px;
+            background: linear-gradient(110deg, #f4f8ff, #eaf2ff);
+            box-shadow: 0 8px 22px rgba(31, 69, 120, 0.07);
+            white-space: nowrap;
+        }
+
+        .retrieval-evolution-prefix {
+            flex: 0 0 auto;
+            color: #607895;
+            font-size: calc(20px * var(--retrieval-font-scale));
+            font-weight: 700;
+        }
+
+        .retrieval-evolution-stage {
+            display: inline-flex;
+            min-width: 230px;
+            min-height: 62px;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            border: 1px solid rgba(189, 212, 243, 0.94);
+            border-radius: 14px;
+            color: #164b9d;
+            background: rgba(255, 255, 255, 0.84);
+            box-shadow: 0 3px 10px rgba(31, 69, 120, 0.05);
+            font-size: calc(25px * var(--retrieval-font-scale));
+            font-weight: 750;
+        }
+
+        .retrieval-evolution-origin {
+            gap: 12px;
+        }
+
+        .retrieval-evolution-origin span {
+            color: #607895;
+            font-size: calc(17px * var(--retrieval-font-scale));
+            font-weight: 700;
+        }
+
+        .retrieval-evolution-origin strong {
+            color: #164b9d;
+            font-size: calc(25px * var(--retrieval-font-scale));
+            font-weight: 800;
+        }
+
+        .retrieval-evolution-arrow {
+            display: inline-flex;
+            align-items: center;
+            color: #4b7fc1;
+            font-family: "DM Sans", sans-serif;
+            font-size: calc(31px * var(--retrieval-font-scale));
+            font-weight: 600;
+        }
+
+        .retrieval-evolution-highlight {
+            display: inline-flex;
+            min-width: 500px;
+            min-height: 66px;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            padding: 10px 24px;
+            border: 1px solid #1552b1;
+            border-radius: 14px;
+            color: #ffffff;
+            background: linear-gradient(110deg, #1552b1, #246bc9);
+            box-shadow: 0 6px 16px rgba(21, 82, 177, 0.2);
+        }
+
+        .retrieval-evolution-highlight strong {
+            font-size: calc(29px * var(--retrieval-font-scale));
+            font-weight: 850;
+            letter-spacing: -0.02em;
+        }
+
+        .retrieval-evolution-highlight span {
+            color: #e9f2ff;
+            font-size: calc(21px * var(--retrieval-font-scale));
+            font-weight: 650;
+        }
+
+        .retrieval-autoresearch-tag {
+            border-color: #a9c6ed;
+            color: #104ba6;
+            background: #e9f2ff;
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.72);
+        }
+
+        .retrieval-autoresearch-tag strong {
+            font-weight: 850;
+        }
+
+        .retrieval-autoresearch-word {
+            color: #0f56b6;
+            font-weight: 850;
+        }
+
+        /* === SLIDE 08: REPAIR QUESTION EVALUATION === */
+        .validation-copy {
+            position: absolute;
+            inset: 0;
+            color: #1b1b1b;
+            font-family: "Noto Sans SC", "DM Sans", sans-serif;
+        }
+
+        .validation-title {
+            position: absolute;
+            top: 132px;
+            right: 104px;
+            left: 104px;
+            margin: 0;
+            color: #171717;
+            font-size: calc(64px * var(--font-scale));
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            line-height: 1.18;
+            white-space: nowrap;
+        }
+
+        .validation-source-strip {
+            position: absolute;
+            top: 236px;
+            right: 104px;
+            left: 104px;
+            display: grid;
+            height: 84px;
+            grid-template-columns: 220px minmax(0, 1fr);
+            align-items: center;
+            gap: 20px;
+            padding: 14px 24px;
+            border: 1px solid #dce7f5;
+            border-radius: 16px;
+            background: linear-gradient(110deg, #f4f8ff, #fbfdff);
+            box-shadow: 0 6px 18px rgba(31, 69, 120, 0.05);
+        }
+
+        .validation-source-label {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            color: #164b9d;
+            font-size: calc(23px * var(--font-scale));
+            font-weight: 750;
+            white-space: nowrap;
+        }
+
+        .validation-source-label::before {
+            width: 5px;
+            height: 30px;
+            border-radius: 99px;
+            background: #1552b1;
+            content: "";
+        }
+
+        .validation-source-list {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            align-items: center;
+            gap: 14px;
+        }
+
+        .validation-source-item {
+            display: flex;
+            min-height: 46px;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 14px;
+            border: 1px solid #e0e9f5;
+            border-radius: 10px;
+            color: #344d6d;
+            background: rgba(255, 255, 255, 0.82);
+            font-size: calc(21px * var(--font-scale));
+            font-weight: 650;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .validation-section-heading {
+            position: absolute;
+            top: 350px;
+            right: 104px;
+            left: 104px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin: 0;
+            color: #164b9d;
+            font-size: calc(27px * var(--font-scale));
+            font-weight: 750;
+            line-height: 1.2;
+        }
+
+        .validation-section-heading::after {
+            height: 1px;
+            flex: 1 1 auto;
+            background: #dce6f2;
+            content: "";
+        }
+
+        .validation-gate-row {
+            position: absolute;
+            top: 411px;
+            right: 104px;
+            left: 104px;
+            display: grid;
+            height: 300px;
+            grid-template-columns: minmax(0, 1fr) 54px minmax(0, 1fr) 54px minmax(0, 1fr) 54px minmax(0, 1fr);
+            align-items: stretch;
+            gap: 8px;
+        }
+
+        .validation-gate {
+            display: flex;
+            min-width: 0;
+            flex-direction: column;
+            align-items: stretch;
+            justify-content: space-between;
+            padding: 20px 24px;
+            border: 1px solid #dce7f5;
+            border-radius: 16px;
+            background: #ffffff;
+            box-shadow: 0 8px 22px rgba(31, 69, 120, 0.07);
+        }
+
+        .validation-gate:nth-of-type(1) {
+            border-top: 4px solid #80a8df;
+        }
+
+        .validation-gate:nth-of-type(2) {
+            border-top: 4px solid #1552b1;
+            background: linear-gradient(155deg, #fbfdff, #f2f7ff);
+        }
+
+        .validation-gate:nth-of-type(3) {
+            border-top: 4px solid #80a8df;
+        }
+
+        .validation-gate:nth-of-type(4) {
+            border-top: 4px solid #1552b1;
+            background: linear-gradient(155deg, #fbfdff, #f2f7ff);
+        }
+
+        .validation-gate-topline {
+            display: flex;
+            min-width: 0;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .validation-gate-number {
+            display: inline-grid;
+            width: 36px;
+            height: 36px;
+            flex: 0 0 36px;
+            place-items: center;
+            border: 1px solid #cbdcf1;
+            border-radius: 50%;
+            color: #1552b1;
+            background: #f1f6ff;
+            font-family: "DM Sans", sans-serif;
+            font-size: calc(16px * var(--font-scale));
+            font-weight: 750;
+        }
+
+        .validation-gate-code {
+            color: #6a7f9a;
+            font-family: "DM Sans", "Noto Sans SC", sans-serif;
+            font-size: calc(17px * var(--font-scale));
+            font-weight: 750;
+            letter-spacing: 0.06em;
+        }
+
+        .validation-safety-tag {
+            padding: 5px 10px;
+            border: 1px solid #f0c9c5;
+            border-radius: 999px;
+            color: #a94038;
+            background: #fff3f1;
+            font-size: calc(15px * var(--font-scale));
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .validation-gate-question {
+            display: grid;
+            min-height: 98px;
+            align-content: center;
+            margin: 0;
+            color: #203b62;
+            font-size: calc(29px * var(--font-scale));
+            font-weight: 750;
+            line-height: 1.35;
+            text-align: center;
+        }
+
+        .validation-gate-description {
+            display: grid;
+            min-height: 60px;
+            align-content: center;
+            margin: 0;
+            padding: 11px 8px 0;
+            border-top: 1px solid #e6edf6;
+            color: #657790;
+            font-size: calc(19px * var(--font-scale));
+            font-weight: 600;
+            line-height: 1.45;
+            text-align: center;
+        }
+
+        .validation-gate-arrow {
+            display: grid;
+            place-items: center;
+            color: #3675c8;
+            font-family: "DM Sans", sans-serif;
+            font-size: calc(36px * var(--font-scale));
+            font-weight: 650;
+        }
+
+        .validation-results {
+            position: absolute;
+            top: 746px;
+            right: 104px;
+            left: 104px;
+            display: grid;
+            min-height: 112px;
+            grid-template-columns: 220px minmax(0, 1fr);
+            align-items: center;
+            gap: 20px;
+            padding: 16px 22px;
+            border: 1px solid #d7e5f8;
+            border-radius: 16px;
+            background: linear-gradient(110deg, #f5f8ff, #edf4ff);
+            box-shadow: 0 8px 22px rgba(31, 69, 120, 0.06);
+        }
+
+        .validation-results-heading {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            margin: 0;
+            color: #294b77;
+            font-size: calc(22px * var(--font-scale));
+            font-weight: 750;
+            line-height: 1.2;
+            white-space: nowrap;
+        }
+
+        .validation-results-heading::before {
+            width: 5px;
+            height: 22px;
+            flex: 0 0 5px;
+            border-radius: 99px;
+            background: #1552b1;
+            content: "";
+        }
+
+        .validation-metric-list {
+            display: grid;
+            min-width: 0;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .validation-metric {
+            display: flex;
+            min-width: 0;
+            min-height: 66px;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 10px 14px;
+            border: 1px solid #d9e5f5;
+            border-radius: 11px;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .validation-metric-label {
+            color: #536a87;
+            font-size: calc(18px * var(--font-scale));
+            font-weight: 650;
+            line-height: 1.3;
+            white-space: nowrap;
+        }
+
+        .validation-metric-value {
+            flex: 0 0 auto;
+            color: #1552b1;
+            font-family: "DM Sans", "Noto Sans SC", sans-serif;
+            font-size: calc(30px * var(--font-scale));
+            font-weight: 800;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: -0.03em;
+            white-space: nowrap;
+        }
+
+        /* === SLIDE 09: OUTCOMES, LEARNINGS, AND LIMITS === */
+        .outcome-copy {
+            position: absolute;
+            inset: 0;
+            color: #1b1b1b;
+            font-family: "Noto Sans SC", "DM Sans", sans-serif;
+        }
+
+        .outcome-title {
+            position: absolute;
+            top: 132px;
+            right: 104px;
+            left: 104px;
+            margin: 0;
+            color: #171717;
+            font-size: calc(72px * var(--font-scale));
+            font-weight: 800;
+            letter-spacing: -0.045em;
+            line-height: 1.18;
+            white-space: nowrap;
+        }
+
+        .outcome-grid {
+            position: absolute;
+            top: 248px;
+            right: 104px;
+            left: 104px;
+            display: grid;
+            height: 642px;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            grid-template-rows: repeat(2, minmax(0, 1fr));
+            gap: 28px 24px;
+        }
+
+        .outcome-card {
+            display: flex;
+            min-width: 0;
+            flex-direction: column;
+            padding: 34px 34px;
+            border: 1px solid #e2e3e5;
+            border-radius: 5px;
+            background: #f3f3f3;
+        }
+
+        .outcome-card-result {
+            position: relative;
+        }
+
+        .outcome-card-tag {
+            position: absolute;
+            top: 32px;
+            right: 34px;
+            padding: 6px 12px;
+            border: 1px solid #c7d8f5;
+            border-radius: 999px;
+            background: #eaf1fd;
+            color: #1552b1;
+            font-size: calc(18px * var(--font-scale));
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: 0.02em;
+        }
+
+        .outcome-card-heading {
+            display: grid;
+            gap: 7px;
+        }
+
+        .outcome-card-title {
+            margin: 0;
+            color: #1c1c1c;
+            font-size: calc(36px * var(--font-scale));
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .outcome-card-subtitle {
+            margin: 0;
+            color: #084bb7;
+            font-size: calc(27px * var(--font-scale));
+            font-weight: 750;
+            line-height: 1.25;
+        }
+
+        .outcome-card-copy {
+            display: flex;
+            flex: 1 1 auto;
+            flex-direction: column;
+            justify-content: center;
+            gap: 13px;
+            margin: 18px 0 0;
+            color: #626a75;
+            font-size: calc(24px * var(--font-scale));
+            font-weight: 550;
+            line-height: 1.52;
+        }
+
+        .outcome-card-copy p {
+            margin: 0;
+        }
+
+        .outcome-card-lead {
+            color: #263e61;
+            font-size: calc(28px * var(--font-scale));
+            font-weight: 700;
+            line-height: 1.4;
+        }
+
+        .outcome-metric-grid {
+            display: grid;
+            min-height: 0;
+            flex: 1 1 auto;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            grid-template-rows: repeat(2, minmax(0, 1fr));
+            gap: 12px 16px;
+            margin-top: 18px;
+        }
+
+        .outcome-metric {
+            display: flex;
+            min-width: 0;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            padding: 12px 17px;
+            border: 1px solid #e1e2e4;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.78);
+        }
+
+        .outcome-metric-value {
+            flex: 0 0 auto;
+            color: #202020;
+            font-family: "DM Sans", "Noto Sans SC", sans-serif;
+            font-size: calc(38px * var(--font-scale));
+            font-weight: 800;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: -0.03em;
+        }
+
+        .outcome-metric-label {
+            color: #6c737d;
+            font-size: calc(19px * var(--font-scale));
+            font-weight: 600;
+            line-height: 1.3;
+            text-align: right;
+        }
+
+        /* === SLIDE 10: CLOSING === */
+        .closing-copy {
+            position: absolute;
+            inset: 0;
+            color: #858b94;
+            font-family: "Noto Sans SC", "DM Sans", sans-serif;
+        }
+
+        .closing-logo {
+            position: absolute;
+            top: 54px;
+            left: 88px;
+            display: block;
+            width: auto;
+            height: 62px;
+            object-fit: contain;
+        }
+
+        .closing-rule {
+            position: absolute;
+            top: 152px;
+            left: 88px;
+            width: 144px;
+            height: 14px;
+            background: #084bb7;
+        }
+
+        .closing-proof,
+        .closing-next {
+            position: absolute;
+            right: 88px;
+            left: 88px;
+        }
+
+        .closing-proof {
+            top: 284px;
+        }
+
+        .closing-kicker,
+        .closing-next-lead {
+            margin: 0;
+            color: #084bb7;
+            font-size: calc(40px * var(--font-scale));
+            font-weight: 550;
+            line-height: 1.35;
+        }
+
+        .closing-statement,
+        .closing-next-statement {
+            margin: 20px 0 0;
+            color: #171717;
+            font-size: calc(60px * var(--font-scale));
+            font-weight: 700;
+            letter-spacing: -0.015em;
+            line-height: 1.38;
+        }
+
+        .closing-next {
+            top: 608px;
+        }
+
+        .closing-next-statement {
+            font-size: calc(54px * var(--font-scale));
+            line-height: 1.4;
+        }
+
+        .closing-author {
+            position: absolute;
+            bottom: 72px;
+            left: 116px;
+            margin: 0;
+            color: #171717;
+            font-size: calc(30px * var(--font-scale));
+            font-weight: 650;
+            line-height: 1.25;
+        }
+
+        .closing-side-rule {
+            position: absolute;
+            left: 88px;
+            bottom: 69px;
+            width: 8px;
+            height: 44px;
+            background: #084bb7;
+        }
+
+        /* === PRESENTATION CONTROLS === */
+        /* Controls stay hidden while this is the only slide. They appear as
+           soon as additional .slide sections are added to the deck. */
+        .deck-controls {
+            position: fixed;
+            left: 50%;
+            bottom: 22px;
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 12px;
+            color: var(--control-text);
+            background: var(--control-bg);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            border-radius: 999px;
+            box-shadow: 0 8px 28px rgba(14, 32, 66, 0.22);
+            transform: translateX(-50%);
+            backdrop-filter: blur(14px);
+        }
+
+        body.has-multiple-slides .deck-controls {
+            display: flex;
+        }
+
+        .deck-control-button {
+            width: 34px;
+            height: 34px;
+            padding: 0;
+            color: inherit;
+            font: inherit;
+            font-size: 20px;
+            line-height: 1;
+            background: transparent;
+            border: 0;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .deck-control-button:hover:not(:disabled) {
+            background: rgba(255, 255, 255, 0.16);
+        }
+
+        .deck-control-button:disabled {
+            opacity: 0.45;
+            cursor: default;
+        }
+
+        .deck-count {
+            min-width: 68px;
+            text-align: center;
+            font: 500 13px/1.2 ui-sans-serif, system-ui, sans-serif;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .deck-progress {
+            width: 88px;
+            height: 3px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 999px;
+        }
+
+        .deck-progress-fill {
+            width: 100%;
+            height: 100%;
+            background: var(--control-accent);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 220ms ease;
+        }
+
+        /* === TYPE ADJUSTMENT PANEL === */
+        /* This viewport-level control changes live text without touching the image. */
+        .type-adjuster {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            z-index: 1100;
+            transform: translateX(-50%);
+            color: #12213f;
+            font-family: "DM Sans", "Noto Sans SC", sans-serif;
+        }
+
+        body.has-multiple-slides .type-adjuster {
+            bottom: 76px;
+        }
+
+        .type-adjuster-toggle {
+            min-height: 38px;
+            padding: 0 15px;
+            color: #123c99;
+            font: 600 14px/1 "DM Sans", "Noto Sans SC", sans-serif;
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid rgba(35, 76, 155, 0.22);
+            border-radius: 999px;
+            box-shadow: 0 5px 18px rgba(25, 59, 112, 0.12);
+            cursor: pointer;
+            backdrop-filter: blur(12px);
+        }
+
+        .type-adjuster-toggle:hover {
+            background: #ffffff;
+            box-shadow: 0 7px 22px rgba(25, 59, 112, 0.18);
+        }
+
+        .type-panel {
+            position: absolute;
+            bottom: 48px;
+            left: 50%;
+            width: 320px;
+            padding: 18px;
+            background: rgba(255, 255, 255, 0.97);
+            border: 1px solid rgba(35, 76, 155, 0.16);
+            border-radius: 16px;
+            box-shadow: 0 16px 45px rgba(16, 42, 83, 0.2);
+            transform: translateX(-50%);
+            backdrop-filter: blur(18px);
+        }
+
+        .type-panel[hidden] {
+            display: none;
+        }
+
+        .type-panel-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .type-panel-close {
+            width: 28px;
+            height: 28px;
+            padding: 0;
+            color: #5a6880;
+            font: 400 20px/1 "DM Sans", sans-serif;
+            background: transparent;
+            border: 0;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .type-panel-close:hover {
+            color: #10295d;
+            background: #edf3ff;
+        }
+
+        .type-control-row + .type-control-row {
+            margin-top: 13px;
+        }
+
+        .type-control-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 7px;
+            color: #243552;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .type-control-label output {
+            color: #1550bd;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .type-control-input {
+            width: 100%;
+            height: 18px;
+            margin: 0;
+            accent-color: #1550bd;
+            cursor: pointer;
+        }
+
+        .type-panel-note {
+            margin: 12px 0 0;
+            color: #6c7890;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        .type-panel-reset {
+            margin-top: 13px;
+            padding: 7px 10px;
+            color: #1550bd;
+            font: 600 12px/1.2 "DM Sans", "Noto Sans SC", sans-serif;
+            background: #eef4ff;
+            border: 0;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .type-panel-reset:hover {
+            background: #e1ebff;
+        }
+
+        /* === PRINT LAYOUT === */
+        @media print {
+            html,
+            body {
+                width: 1920px;
+                height: auto;
+                overflow: visible;
+                background: #fff;
+            }
+
+            .deck-viewport {
+                position: static;
+                overflow: visible;
+                background: #fff;
+            }
+
+            .deck-stage {
+                position: static;
+                width: auto;
+                height: auto;
+                transform: none !important;
+                background: none;
+            }
+
+            .slide {
+                position: relative;
+                display: block !important;
+                visibility: visible !important;
+                opacity: 1 !important;
+                pointer-events: auto !important;
+                width: 1920px;
+                height: 1080px;
+                break-after: page;
+                page-break-after: always;
+            }
+
+            .slide:last-child {
+                break-after: auto;
+                page-break-after: auto;
+            }
+
+            .deck-controls {
+                display: none !important;
+            }
+
+            .type-adjuster {
+                display: none !important;
+            }
+        }
+
+        /* === ACCESSIBILITY === */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="deck-viewport" aria-label="演讲展示">
+        <main class="deck-stage" id="deckStage">
+            <section class="slide active visible" aria-label="第 1 页：封面">
+                <div class="cover-copy">
+                    <div class="brand-row">
+                        <div class="peninsula-brand">
+                            <img class="peninsula-logo-image" src="./peninsula-logo-from-ppt.png" alt="Peninsula 半岛医疗">
+                            <i class="brand-underline" aria-hidden="true"></i>
+                        </div>
+                        <div class="event-logos" aria-label="HiAgent 与世界人工智能大会">
+                            <span class="hiagent-mark">HiAgent</span>
+                            <i class="separator" aria-hidden="true"></i>
+                            <span class="waic-mark"><strong>WAIC</strong><small>世界人工智能大会</small></span>
+                        </div>
+                    </div>
+
+                    <p class="event-line">AI人才进阶之旅<span class="separator-dot">·</span>2026.10.17 – 18</p>
+
+                    <h1 class="cover-title">面向港口设备工业维修场景的<span>智能体平台</span></h1>
+                    <p class="cover-subtitle">从一份设备故障材料出发，构建可追溯的维修 AI 工作路径</p>
+
+                    <div class="speaker-block">
+                        <strong class="speaker-name">吴奇伟 Kiwi</strong>
+                        <span class="speaker-role">AI Agent 研发 &amp; FDE 解决方案工程师</span>
+                    </div>
+
+                    <div class="cover-footer-signature" aria-label="Peninsula Medical">
+                        <span class="cover-footer-signature-label">PENINSULA MEDICAL</span>
+                        <i class="cover-footer-signature-rule" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 逐字稿：2.这个项目是我在之前的实习里面做的一个完全个人端到端的项目。需求沟通、方案设计、开发集成、联调交付与客户培训。今天我不会介绍平台技术架构，而从一个故障报警讲起，说明我怎样发现信息断点、复用工程师经验，并用评测检查方案效果再上线交付的。 -->
+            <section class="slide" aria-label="第 2 页：个人介绍">
+                <div class="intro-copy">
+                    <i class="intro-top-rule" aria-hidden="true"></i>
+                    <div class="intro-section-label"><span>01</span><span>个人介绍</span></div>
+                    <img class="intro-brand-mark" src="./peninsula-logo-from-ppt.png" alt="Peninsula 半岛医疗">
+
+                    <h1 class="intro-title">我是谁，以及为什么讲这个项目</h1>
+
+                    <div class="intro-card-list">
+                        <article class="intro-card">
+                            <span class="intro-card-number">1</span>
+                            <h2 class="intro-card-title">我是谁</h2>
+                            <p class="intro-card-body">AI Agent 研发工程师｜HiAgent 项目 Owner</p>
+                        </article>
+
+                        <article class="intro-card">
+                            <span class="intro-card-number">2</span>
+                            <h2 class="intro-card-title">和这道菜的关系</h2>
+                            <p class="intro-card-body intro-flow" aria-label="需求沟通到方案设计到开发集成到联调交付到客户培训">
+                                <span class="intro-flow-step">需求沟通</span><span class="intro-flow-arrow" aria-hidden="true"></span>
+                                <span class="intro-flow-step">方案设计</span><span class="intro-flow-arrow" aria-hidden="true"></span>
+                                <span class="intro-flow-step">开发集成</span><span class="intro-flow-arrow" aria-hidden="true"></span>
+                                <span class="intro-flow-step">联调交付</span><span class="intro-flow-arrow" aria-hidden="true"></span>
+                                <span class="intro-flow-step">客户培训</span>
+                            </p>
+                        </article>
+
+                        <article class="intro-card">
+                            <span class="intro-card-number">3</span>
+                            <h2 class="intro-card-title">今天只讲一件事</h2>
+                            <p class="intro-card-body intro-flow" aria-label="故障报警到发现信息断点到复用工程师经验到评测效果到上线交付">
+                                <span class="intro-flow-step">故障报警</span><span class="intro-flow-arrow" aria-hidden="true"></span>
+                                <span class="intro-flow-step">发现信息断点</span><span class="intro-flow-arrow" aria-hidden="true"></span>
+                                <span class="intro-flow-step">复用工程师经验</span><span class="intro-flow-arrow" aria-hidden="true"></span>
+                                <span class="intro-flow-step">评测效果</span><span class="intro-flow-arrow" aria-hidden="true"></span>
+                                <span class="intro-flow-step">上线交付</span>
+                            </p>
+                        </article>
+                    </div>
+
+                    <i class="intro-footer-rule" aria-hidden="true"></i>
+                    <span class="intro-page-number" aria-label="第 2 页，共 10 页">02 / 10</span>
+                </div>
+            </section>
+
+            <section class="slide" aria-label="第 3 页：冠东故障排查记录">
+                <div
+                    class="troubleshooting-scroll"
+                    role="region"
+                    tabindex="0"
+                    aria-label="故障排查报告，可上下滚动查看"
+                >
+                    <img
+                        class="troubleshooting-report"
+                        src="./slide-03-troubleshooting-report.png"
+                        alt="冠东故障排查记录完整页面，包含故障事件、知识库与 PLC 程序、原理图、现场验证和结论输出。"
+                    >
+                </div>
+            </section>
+
+            <section class="slide" aria-label="第 4 页：设备资料分类">
+                <div class="library-copy">
+                    <i class="intro-top-rule" aria-hidden="true"></i>
+                    <div class="intro-section-label"><span>02</span><span>做事过程</span></div>
+                    <img class="intro-brand-mark" src="./peninsula-logo-from-ppt.png" alt="Peninsula 半岛医疗">
+
+                    <h1 class="library-title">数据多、脏乱、分散</h1>
+
+                    <div class="library-grid">
+                        <table class="library-table" aria-label="设备资料与业务数据可展示内容">
+                            <colgroup><col><col></colgroup>
+                            <thead>
+                                <tr><th scope="col">类别</th><th scope="col">数据内容</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1. 操作与维修知识</th>
+                                    <td>司机操作手册、机械 / 液压 / 电气维修手册、保养手册、培训教材</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2. 图纸与接线资料</th>
+                                    <td>电气原理图、机械图、吊具图、液压接线图、消防接线图、竣工图、安装尺寸图</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3. PLC 与控制逻辑</th>
+                                    <td>梯形图程序、故障码、PLC 地址、I/O 点位、候选逻辑路径</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">4. 元器件与产品资料</th>
+                                    <td>限位开关、编码器、重量传感器、风速仪、电缆、制动器、电机和减速箱说明书</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">5. 设备档案与参数</th>
+                                    <td>车号、工号、设备型号、额定载荷、制造商、投运日期、设备技术参数</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">6. 实时状态与告警</th>
+                                    <td>设备在线 / 离线、当前故障、故障等级和数量、故障是否重复、设备轨迹 / 位置、实时点位快照</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">7. 历史维修与状态变化</th>
+                                    <td>历史故障、维修工单、维保计划、更换日期、部件使用天数和预警记录</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">8. 备件、库存与经营数据</th>
+                                    <td>推荐备件清单、物料编码、库存数量、库位、财务经营数据</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <i class="intro-footer-rule" aria-hidden="true"></i>
+                    <span class="intro-page-number" aria-label="第 4 页，共 10 页">04 / 10</span>
+                </div>
+            </section>
+
+            <section class="slide" aria-label="第 5 页：资料、方案与用途链路">
+                <div class="solution-copy">
+                    <i class="intro-top-rule" aria-hidden="true"></i>
+                    <div class="intro-section-label"><span>02</span><span>做事过程</span></div>
+                    <img class="intro-brand-mark" src="./peninsula-logo-from-ppt.png" alt="Peninsula 半岛医疗">
+
+                    <h1 class="solution-title">40+原子化工具</h1>
+
+                    <div class="solution-process" aria-label="资料处理与评测闭环">
+                        <span class="solution-process-step"><strong>资料盘点与边界</strong></span>
+                        <span class="solution-process-arrow" aria-hidden="true">→</span>
+                        <span class="solution-process-step"><strong>按资料特征解析、结构化</strong></span>
+                        <span class="solution-process-arrow" aria-hidden="true">→</span>
+                        <span class="solution-process-step"><strong>匹配检索或查询方式</strong></span>
+                        <span class="solution-process-arrow" aria-hidden="true">→</span>
+                        <span class="solution-process-step"><strong>返回带来源的证据</strong></span>
+                        <span class="solution-process-arrow" aria-hidden="true">→</span>
+                        <span class="solution-process-step"><strong>评测与工程师复核 ↺ 修正回归</strong></span>
+                    </div>
+
+                    <div class="solution-flow">
+                        <table class="solution-table" aria-label="资料与处理方案对应关系">
+                            <colgroup><col><col></colgroup>
+                            <thead>
+                                <tr><th scope="col">资料</th><th scope="col">处理方案</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">维修手册、产品说明、故障知识</th>
+                                    <td>文档解析 + 全文/语义检索 + RAG，从长文档中定位相关处置依据</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">电气图纸、跨页接线关系</th>
+                                    <td>Skill + CLI 检索，保留页码与来源；按设备、器件、线号追踪图纸证据</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">PLC 程序、故障地址、I/O 关系</th>
+                                    <td>PLC 图谱 + 地址反查，从故障线索追到候选逻辑路径</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">设备档案、工单、维保、库存、实时状态</th>
+                                    <td>MCP 原子工具，按数据类型查询数据库或状态接口，获取精确字段、历史记录、库存及当前告警</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <i class="intro-footer-rule" aria-hidden="true"></i>
+                    <span class="intro-page-number" aria-label="第 5 页，共 10 页">05 / 10</span>
+                </div>
+            </section>
+
+            <section class="slide" aria-label="第 6 页：自研 Runtime">
+                <div class="runtime-copy">
+                    <i class="intro-top-rule" aria-hidden="true"></i>
+                    <div class="intro-section-label"><span>02</span><span>做事过程</span></div>
+                    <img class="intro-brand-mark" src="./peninsula-logo-from-ppt.png" alt="Peninsula 半岛医疗">
+
+                    <h1 class="runtime-title">自研 Runtime：把 Agent 的运行回路握在自己手里</h1>
+
+                    <div class="runtime-evolution" aria-label="Workflow 流程编排、开源框架快速验证，再到 HiAgent Runtime">
+                        <div class="runtime-evolution-stage">
+                            <p class="runtime-evolution-name">Workflow</p>
+                            <p class="runtime-evolution-caption">流程编排</p>
+                        </div>
+                        <span class="runtime-evolution-arrow" aria-hidden="true">→</span>
+                        <div class="runtime-evolution-stage">
+                            <p class="runtime-evolution-name">开源框架</p>
+                            <p class="runtime-evolution-caption">快速验证</p>
+                        </div>
+                        <span class="runtime-evolution-arrow" aria-hidden="true">→</span>
+                        <div class="runtime-evolution-stage runtime-evolution-stage-current">
+                            <p class="runtime-evolution-name">HiAgent Runtime</p>
+                            <div class="runtime-evolution-features" aria-label="过程可见、工具可控、上下文可管">
+                                <span class="runtime-evolution-feature">过程可见</span>
+                                <span class="runtime-evolution-feature">工具可控</span>
+                                <span class="runtime-evolution-feature">上下文可管</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="runtime-core" aria-label="Skill、Runtime 与 MCP 组成运行回路">
+                        <div class="runtime-core-modules">
+                            <article class="runtime-module runtime-module-skill">
+                                <h2 class="runtime-module-name">Skill</h2>
+                                <div class="runtime-skill-details">
+                                    <p class="runtime-module-description">自回归 Skill 编写 Agent</p>
+                                    <p class="runtime-skill-reference">参考 writing-great-skills · skill-creator</p>
+                                    <p class="runtime-skill-history">原流程：工程师沟通 → 技术人员代写</p>
+                                </div>
+                            </article>
+                            <div class="runtime-module-connection" aria-hidden="true"><span>↔</span></div>
+                            <article class="runtime-module runtime-module-runtime">
+                                <h2 class="runtime-module-name">Runtime</h2>
+                                <p class="runtime-module-description">加载、编排、追踪</p>
+                            </article>
+                            <div class="runtime-module-connection" aria-hidden="true"><span>↔</span></div>
+                            <article class="runtime-module">
+                                <h2 class="runtime-module-name">MCP</h2>
+                                <p class="runtime-module-description">设备、工单、PLC、图纸</p>
+                            </article>
+                        </div>
+                        <span class="runtime-return-line" aria-hidden="true"></span>
+                        <span class="runtime-return-left" aria-hidden="true"></span>
+                        <span class="runtime-return-right" aria-hidden="true"></span>
+                    </div>
+
+                    <i class="intro-footer-rule" aria-hidden="true"></i>
+                    <span class="intro-page-number" aria-label="第 6 页，共 10 页">06 / 10</span>
+                </div>
+            </section>
+
+            <section class="slide" aria-label="第 7 页：在线检索与评测闭环">
+                <div class="retrieval-copy">
+                    <i class="intro-top-rule" aria-hidden="true"></i>
+                    <div class="intro-section-label"><span>02</span><span>做事过程</span></div>
+                    <img class="intro-brand-mark" src="./peninsula-logo-from-ppt.png" alt="Peninsula 半岛医疗">
+
+                    <h1 class="retrieval-title">从资料底座到可追溯证据</h1>
+
+                    <div class="retrieval-board">
+                        <div class="retrieval-columns">
+                            <article class="retrieval-panel">
+                                <div class="retrieval-panel-heading">
+                                    <h2 class="retrieval-panel-title">资料底座</h2>
+                                </div>
+                                <div class="retrieval-data-steps">
+                                    <div class="retrieval-data-step">
+                                        <span class="retrieval-data-number">01</span>
+                                        <span class="retrieval-data-step-copy">
+                                            <strong>多格式资料</strong>
+                                            <small>PDF / Office / 表格</small>
+                                        </span>
+                                    </div>
+                                    <span class="retrieval-stack-arrow" aria-hidden="true">↓</span>
+                                    <div class="retrieval-data-step">
+                                        <span class="retrieval-data-number">02</span>
+                                        <span class="retrieval-data-step-copy">
+                                            <strong>解析归一化</strong>
+                                        </span>
+                                    </div>
+                                    <span class="retrieval-stack-arrow" aria-hidden="true">↓</span>
+                                    <div class="retrieval-data-step">
+                                        <span class="retrieval-data-number">03</span>
+                                        <span class="retrieval-data-step-copy">
+                                            <strong>四类分块</strong>
+                                            <small>General / QA / Table / One</small>
+                                        </span>
+                                    </div>
+                                    <span class="retrieval-stack-arrow" aria-hidden="true">↓</span>
+                                    <div class="retrieval-data-step">
+                                        <span class="retrieval-data-number">04</span>
+                                        <span class="retrieval-data-step-copy">
+                                            <strong>保留出处</strong>
+                                            <small>元数据+索引</small>
+                                        </span>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <article class="retrieval-panel retrieval-panel-center">
+                                <div class="retrieval-panel-heading">
+                                    <h2 class="retrieval-panel-title">在线检索</h2>
+                                    <span class="retrieval-panel-tag">核心路径</span>
+                                </div>
+                                <div class="retrieval-middle-flow">
+                                    <div class="retrieval-query">工程师问题</div>
+                                    <span class="retrieval-down-arrow" aria-hidden="true">↓</span>
+                                    <div class="retrieval-branches">
+                                        <div class="retrieval-branch">语义召回</div>
+                                        <div class="retrieval-branch">全文精确召回</div>
+                                    </div>
+                                    <div class="retrieval-merge-arrows" aria-hidden="true">
+                                        <span>↘</span><span>↙</span>
+                                    </div>
+                                    <div class="retrieval-fusion">WRRF 融合 + 结构证据排序</div>
+                                    <div class="retrieval-options">
+                                        <span class="retrieval-options-label">按策略启用</span>
+                                        <div class="retrieval-option-list">
+                                            <span class="retrieval-option">Query Rewrite</span>
+                                            <span class="retrieval-option">HyDE</span>
+                                            <span class="retrieval-option">Rerank</span>
+                                            <span class="retrieval-option">MMR</span>
+                                        </div>
+                                    </div>
+                                    <div class="retrieval-ranking">按需精排 <span aria-hidden="true">→</span> 上下文预算</div>
+                                    <span class="retrieval-down-arrow" aria-hidden="true">↓</span>
+                                    <div class="retrieval-result-node">带来源的检索结果</div>
+                                </div>
+                            </article>
+
+                            <article class="retrieval-panel">
+                                <div class="retrieval-panel-heading">
+                                    <h2 class="retrieval-panel-title">评测闭环</h2>
+                                    <span class="retrieval-panel-tag retrieval-autoresearch-tag"><strong>AutoResearch</strong><span>思想</span></span>
+                                </div>
+                                <div class="retrieval-eval-flow">
+                                    <div class="retrieval-eval-step">
+                                        <span class="retrieval-eval-index">01</span>
+                                        <span>固定题集</span>
+                                    </div>
+                                    <span class="retrieval-eval-arrow" aria-hidden="true">↓</span>
+                                    <div class="retrieval-eval-step">
+                                        <span class="retrieval-eval-index">02</span>
+                                        <span>候选策略回放</span>
+                                    </div>
+                                    <span class="retrieval-eval-arrow" aria-hidden="true">↓</span>
+                                    <div class="retrieval-eval-step retrieval-eval-metrics">
+                                        <span class="retrieval-eval-index">03</span>
+                                        <div class="retrieval-eval-metric-body">
+                                            <strong>指标与回答评估</strong>
+                                            <div class="retrieval-eval-metric-list">
+                                                <span class="retrieval-eval-metric">Hit@K</span>
+                                                <span class="retrieval-eval-metric">MRR</span>
+                                                <span class="retrieval-eval-metric">延迟</span>
+                                                <span class="retrieval-eval-metric">回答评估</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span class="retrieval-eval-arrow" aria-hidden="true">↓</span>
+                                    <div class="retrieval-eval-step retrieval-eval-error">
+                                        <span class="retrieval-eval-index">04</span>
+                                        <span>错因定位</span>
+                                    </div>
+                                    <span class="retrieval-eval-arrow" aria-hidden="true">↓</span>
+                                    <div class="retrieval-eval-step">
+                                        <span class="retrieval-eval-index">05</span>
+                                        <span>复核与回归</span>
+                                    </div>
+                                    <span class="retrieval-eval-arrow" aria-hidden="true">↓</span>
+                                    <div class="retrieval-eval-step retrieval-eval-agent">
+                                        <span class="retrieval-eval-index">06</span>
+                                        <span class="retrieval-eval-agent-copy">
+                                            <strong><span class="retrieval-autoresearch-word">AutoResearch</span> 策略优化</strong>
+                                            <small>大模型迭代筛选最优检索策略</small>
+                                        </span>
+                                    </div>
+                                    <span class="retrieval-eval-return" aria-hidden="true"></span>
+                                </div>
+                            </article>
+                        </div>
+
+                        <span class="retrieval-board-arrow" aria-hidden="true">→</span>
+
+                    </div>
+
+                    <div class="retrieval-evolution-card" aria-label="检索能力演进：开源框架 RAGFlow 到自研 RAG，再到 AutoResearch 自优化闭环">
+                        <span class="retrieval-evolution-stage retrieval-evolution-origin"><span>开源框架</span><strong>RAGFlow</strong></span>
+                        <span class="retrieval-evolution-arrow" aria-hidden="true">→</span>
+                        <span class="retrieval-evolution-stage">自研 RAG</span>
+                        <span class="retrieval-evolution-arrow" aria-hidden="true">→</span>
+                        <span class="retrieval-evolution-highlight"><strong>AutoResearch</strong><span>自优化闭环</span></span>
+                    </div>
+
+                    <i class="intro-footer-rule" aria-hidden="true"></i>
+                    <span class="intro-page-number" aria-label="第 7 页，共 10 页">07 / 10</span>
+                </div>
+            </section>
+
+            <section class="slide" aria-label="第 8 页：真实维修题评测">
+                <div class="validation-copy">
+                    <i class="intro-top-rule" aria-hidden="true"></i>
+                    <div class="intro-section-label"><span>02</span><span>做事过程</span></div>
+                    <img class="intro-brand-mark" src="./peninsula-logo-from-ppt.png" alt="Peninsula 半岛医疗">
+
+                    <h1 class="validation-title">从真实维修题出发，检验 Agent 会不会判断、执行并给出依据</h1>
+
+                    <section class="validation-source-strip" aria-label="题目来源">
+                        <h2 class="validation-source-label">题目来源</h2>
+                        <div class="validation-source-list">
+                            <span class="validation-source-item">工程师高频问题</span>
+                            <span class="validation-source-item">内部补充题</span>
+                            <span class="validation-source-item">真实对话样本</span>
+                        </div>
+                    </section>
+
+                    <h2 class="validation-section-heading">四道判断关</h2>
+
+                    <div class="validation-gate-row" aria-label="Agent 评测的四道判断关">
+                        <article class="validation-gate">
+                            <div class="validation-gate-topline">
+                                <span class="validation-gate-number">01</span>
+                                <span class="validation-gate-code">CTX</span>
+                            </div>
+                            <h3 class="validation-gate-question">上下文够不够？</h3>
+                            <p class="validation-gate-description">信息补足、追问题</p>
+                        </article>
+
+                        <span class="validation-gate-arrow" aria-hidden="true">→</span>
+
+                        <article class="validation-gate">
+                            <div class="validation-gate-topline">
+                                <span class="validation-gate-number">02</span>
+                                <span class="validation-gate-code">OOSR / OOC</span>
+                                <span class="validation-safety-tag">安全红线</span>
+                            </div>
+                            <h3 class="validation-gate-question">该不该接、<br>能不能做？</h3>
+                            <p class="validation-gate-description">边界题、能力边界题</p>
+                        </article>
+
+                        <span class="validation-gate-arrow" aria-hidden="true">→</span>
+
+                        <article class="validation-gate">
+                            <div class="validation-gate-topline">
+                                <span class="validation-gate-number">03</span>
+                                <span class="validation-gate-code">TCC</span>
+                            </div>
+                            <h3 class="validation-gate-question">工具调用<br>对不对？</h3>
+                            <p class="validation-gate-description">全链路题</p>
+                        </article>
+
+                        <span class="validation-gate-arrow" aria-hidden="true">→</span>
+
+                        <article class="validation-gate">
+                            <div class="validation-gate-topline">
+                                <span class="validation-gate-number">04</span>
+                                <span class="validation-gate-code">CNT</span>
+                            </div>
+                            <h3 class="validation-gate-question">结论有<br>依据吗？</h3>
+                            <p class="validation-gate-description">来源、准确、完整</p>
+                        </article>
+                    </div>
+
+                    <section class="validation-results" aria-label="当前评测结果">
+                        <h2 class="validation-results-heading">当前评测结果</h2>
+                        <div class="validation-metric-list">
+                            <div class="validation-metric">
+                                <span class="validation-metric-label">任务完成率</span>
+                                <strong class="validation-metric-value">88%</strong>
+                            </div>
+                            <div class="validation-metric">
+                                <span class="validation-metric-label">工具选择正确率</span>
+                                <strong class="validation-metric-value">94%</strong>
+                            </div>
+                            <div class="validation-metric">
+                                <span class="validation-metric-label">参数正确率</span>
+                                <strong class="validation-metric-value">97%</strong>
+                            </div>
+                            <div class="validation-metric">
+                                <span class="validation-metric-label">引用覆盖率</span>
+                                <strong class="validation-metric-value">100%</strong>
+                            </div>
+                        </div>
+                    </section>
+
+                    <i class="intro-footer-rule" aria-hidden="true"></i>
+                    <span class="intro-page-number" aria-label="第 8 页，共 10 页">08 / 10</span>
+                </div>
+            </section>
+
+            <section class="slide" aria-label="第 9 页：结果、收获与边界">
+                <div class="outcome-copy">
+                    <i class="intro-top-rule" aria-hidden="true"></i>
+                    <div class="intro-section-label"><span>03</span><span>成果收获</span></div>
+                    <img class="intro-brand-mark" src="./peninsula-logo-from-ppt.png" alt="Peninsula 半岛医疗">
+
+                    <h1 class="outcome-title">结果、收获，以及诚实的边界</h1>
+
+                    <div class="outcome-grid">
+                        <article class="outcome-card outcome-card-result" aria-labelledby="outcome-result-title">
+                            <div class="outcome-card-heading">
+                                <h2 class="outcome-card-title" id="outcome-result-title">结果</h2>
+                                <p class="outcome-card-subtitle">从能运行到可衡量</p>
+                            </div>
+                            <span class="outcome-card-tag">WAIC展示</span>
+                            <div class="outcome-metric-grid" aria-label="评测指标">
+                                <div class="outcome-metric">
+                                    <strong class="outcome-metric-value">88%</strong>
+                                    <span class="outcome-metric-label">任务完成率</span>
+                                </div>
+                                <div class="outcome-metric">
+                                    <strong class="outcome-metric-value">94%</strong>
+                                    <span class="outcome-metric-label">工具选择正确率</span>
+                                </div>
+                                <div class="outcome-metric">
+                                    <strong class="outcome-metric-value">97%</strong>
+                                    <span class="outcome-metric-label">参数正确率</span>
+                                </div>
+                                <div class="outcome-metric">
+                                    <strong class="outcome-metric-value">100%</strong>
+                                    <span class="outcome-metric-label">引用覆盖率</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="outcome-card" aria-labelledby="outcome-learning-title">
+                            <div class="outcome-card-heading">
+                                <h2 class="outcome-card-title" id="outcome-learning-title">收获</h2>
+                                <p class="outcome-card-subtitle">AI 落地的关键，是可靠解决问题</p>
+                            </div>
+                            <div class="outcome-card-copy">
+                                <p>成熟能力优先复用，场景差异按需改造。</p>
+                                <p>用真实问题与评测结果驱动优化，而非堆叠技术。</p>
+                            </div>
+                        </article>
+
+                        <article class="outcome-card" aria-labelledby="outcome-limit-title">
+                            <div class="outcome-card-heading">
+                                <h2 class="outcome-card-title" id="outcome-limit-title">还没做成</h2>
+                                <p class="outcome-card-subtitle">边界需要持续验证</p>
+                            </div>
+                            <div class="outcome-card-copy">
+                                <p>复杂跨系统故障仍需工程师复核。</p>
+                                <p>引用覆盖率不等于结论正确；长尾故障和安全关键操作仍需持续验证。</p>
+                            </div>
+                        </article>
+
+                        <article class="outcome-card" aria-labelledby="outcome-transfer-title">
+                            <div class="outcome-card-heading">
+                                <h2 class="outcome-card-title" id="outcome-transfer-title">可迁移</h2>
+                                <p class="outcome-card-subtitle">从工业维修到医疗设备服务</p>
+                            </div>
+                            <div class="outcome-card-copy">
+                                <p>复用多源知识整合、Skill/MCP 工具接入、证据追溯与评测闭环的方法。</p>
+                                <p>具体业务规则需重新调研验证。</p>
+                            </div>
+                        </article>
+                    </div>
+
+                    <i class="intro-footer-rule" aria-hidden="true"></i>
+                    <span class="intro-page-number" aria-label="第 9 页，共 10 页">09 / 10</span>
+                </div>
+            </section>
+
+            <section class="slide" aria-label="第 10 页：总结与下一步">
+                <div class="closing-copy">
+                    <img class="closing-logo" src="./peninsula-logo-from-ppt.png" alt="Peninsula 半岛医疗">
+                    <i class="closing-rule" aria-hidden="true"></i>
+
+                    <section class="closing-proof" aria-labelledby="closing-proof-title">
+                        <p class="closing-kicker" id="closing-proof-title">这道菜证明</p>
+                        <p class="closing-statement">我能从真实业务问题出发，发现并复用成熟能力，通过工程化集成与评测，让 AI 方案可验证、可交付。</p>
+                    </section>
+
+                    <section class="closing-next" aria-labelledby="closing-next-title">
+                        <p class="closing-next-lead" id="closing-next-title">若进入下一步，我愿意把这套方法用在</p>
+                        <p class="closing-next-statement">半岛医疗实际场景：先与业务方对齐目标，再复用开源框架或现有方案做最小可行验证；根据反馈校准需求、迭代至可交付。</p>
+                    </section>
+
+                    <p class="closing-author">吴奇伟 Kiwi</p>
+                    <i class="closing-side-rule" aria-hidden="true"></i>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <aside class="type-adjuster" aria-label="封面文字调整">
+        <button
+            class="type-adjuster-toggle"
+            id="typeAdjusterToggle"
+            type="button"
+            aria-expanded="false"
+            aria-controls="typePanel"
+        >Aa 调整文字</button>
+        <section class="type-panel" id="typePanel" aria-label="文字显示设置" hidden>
+            <div class="type-panel-heading">
+                <span>文字显示</span>
+                <button class="type-panel-close" id="typePanelClose" type="button" aria-label="关闭文字设置">×</button>
+            </div>
+
+            <div class="type-control-row">
+                <label class="type-control-label" for="fontScale">
+                    <span>字号</span>
+                    <output id="fontScaleValue" for="fontScale">100%</output>
+                </label>
+                <input class="type-control-input" id="fontScale" type="range" min="80" max="120" step="5" value="100">
+            </div>
+
+            <div class="type-control-row">
+                <label class="type-control-label" for="textClarity">
+                    <span>清晰度（字重与对比）</span>
+                    <output id="textClarityValue" for="textClarity">65%</output>
+                </label>
+                <input class="type-control-input" id="textClarity" type="range" min="0" max="100" step="5" value="65">
+            </div>
+
+            <p class="type-panel-note">文案由网页文字绘制，放大仍保持清晰。清晰度会调整字重与对比度。</p>
+            <button class="type-panel-reset" id="resetTypeSettings" type="button">恢复默认</button>
+        </section>
+    </aside>
+
+    <nav class="deck-controls" aria-label="演讲页导航">
+        <button class="deck-control-button" id="previousSlide" type="button" aria-label="上一页">‹</button>
+        <span class="deck-count" id="deckCount" aria-live="polite">01 / 01</span>
+        <div class="deck-progress" aria-hidden="true">
+            <div class="deck-progress-fill" id="deckProgress"></div>
+        </div>
+        <button class="deck-control-button" id="nextSlide" type="button" aria-label="下一页">›</button>
+    </nav>
+
+    <script>
+        /* === PRESENTATION CONTROLLER === */
+        class SlidePresentation {
+            constructor() {
+                this.viewport = document.querySelector('.deck-viewport');
+                this.stage = document.getElementById('deckStage');
+                this.slides = Array.from(this.stage.querySelectorAll('.slide'));
+                this.currentSlide = 0;
+                this.touchStartX = null;
+                this.touchStartY = null;
+                this.wheelLocked = false;
+                this.previousButton = document.getElementById('previousSlide');
+                this.nextButton = document.getElementById('nextSlide');
+                this.count = document.getElementById('deckCount');
+                this.progress = document.getElementById('deckProgress');
+
+                this.setupStageScale();
+                this.setupTypeControls();
+                this.setupKeyboardNavigation();
+                this.setupWheelNavigation();
+                this.setupTouchNavigation();
+                this.setupButtons();
+                this.showSlide(0);
+            }
+
+            setupTypeControls() {
+                const root = document.documentElement;
+                const adjuster = document.querySelector('.type-adjuster');
+                const toggle = document.getElementById('typeAdjusterToggle');
+                const panel = document.getElementById('typePanel');
+                const close = document.getElementById('typePanelClose');
+                const fontScale = document.getElementById('fontScale');
+                const fontScaleValue = document.getElementById('fontScaleValue');
+                const textClarity = document.getElementById('textClarity');
+                const textClarityValue = document.getElementById('textClarityValue');
+                const reset = document.getElementById('resetTypeSettings');
+
+                const readSavedValue = (key, fallback) => {
+                    try {
+                        const saved = window.localStorage.getItem(key);
+                        return saved === null ? fallback : saved;
+                    } catch (error) {
+                        return fallback;
+                    }
+                };
+
+                fontScale.value = readSavedValue('hiagent-cover-font-scale', '100');
+                textClarity.value = readSavedValue('hiagent-cover-text-clarity', '65');
+
+                const saveValue = (key, value) => {
+                    try {
+                        window.localStorage.setItem(key, value);
+                    } catch (error) {
+                        // Settings still apply for the current browser session.
+                    }
+                };
+
+                const applySettings = () => {
+                    const scale = Number(fontScale.value) / 100;
+                    const clarity = Number(textClarity.value) / 100;
+
+                    root.style.setProperty('--font-scale', scale.toFixed(2));
+                    root.style.setProperty('--text-contrast', (0.98 + clarity * 0.34).toFixed(2));
+                    root.style.setProperty('--text-stroke', `${(clarity * 0.28).toFixed(2)}px`);
+                    root.style.setProperty('--title-outline', `${(0.45 + clarity * 1.25).toFixed(2)}px`);
+                    root.style.setProperty('--weight-regular', String(Math.round(450 + clarity * 200)));
+                    root.style.setProperty('--weight-medium', String(Math.round(600 + clarity * 200)));
+                    root.style.setProperty('--weight-strong', String(Math.round(720 + clarity * 180)));
+                    root.style.setProperty('--weight-heavy', String(Math.round(760 + clarity * 140)));
+
+                    fontScaleValue.value = `${fontScale.value}%`;
+                    textClarityValue.value = `${textClarity.value}%`;
+                    saveValue('hiagent-cover-font-scale', fontScale.value);
+                    saveValue('hiagent-cover-text-clarity', textClarity.value);
+                };
+
+                const setPanelOpen = (open) => {
+                    panel.hidden = !open;
+                    toggle.setAttribute('aria-expanded', String(open));
+                };
+
+                fontScale.addEventListener('input', applySettings);
+                textClarity.addEventListener('input', applySettings);
+                toggle.addEventListener('click', () => setPanelOpen(panel.hidden));
+                close.addEventListener('click', () => setPanelOpen(false));
+                reset.addEventListener('click', () => {
+                    fontScale.value = '100';
+                    textClarity.value = '65';
+                    applySettings();
+                });
+
+                document.addEventListener('click', (event) => {
+                    if (!adjuster.contains(event.target)) setPanelOpen(false);
+                });
+
+                window.addEventListener('keydown', (event) => {
+                    if (event.key === 'Escape' && !panel.hidden) setPanelOpen(false);
+                });
+
+                applySettings();
+            }
+
+            setupStageScale() {
+                const scaleStage = () => {
+                    const scale = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+                    const x = (window.innerWidth - 1920 * scale) / 2;
+                    const y = (window.innerHeight - 1080 * scale) / 2;
+                    this.stage.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
+
+                    const reportScroller = this.stage.querySelector('.troubleshooting-scroll');
+                    if (reportScroller) {
+                        reportScroller.style.left = `${-x / scale}px`;
+                        reportScroller.style.top = `${-y / scale}px`;
+                        reportScroller.style.width = `${window.innerWidth / scale}px`;
+                        reportScroller.style.height = `${window.innerHeight / scale}px`;
+                    }
+                };
+
+                scaleStage();
+                window.addEventListener('resize', scaleStage, { passive: true });
+            }
+
+            setupKeyboardNavigation() {
+                window.addEventListener('keydown', (event) => {
+                    if (event.altKey || event.ctrlKey || event.metaKey) return;
+                    const reportScroller = event.target instanceof HTMLElement
+                        ? event.target.closest('.troubleshooting-scroll')
+                        : null;
+                    if (reportScroller) {
+                        const key = event.key.toLowerCase();
+                        const scrollDistance = Math.max(48, reportScroller.clientHeight * 0.82);
+                        if (key === 'arrowdown' || key === 'arrowup') {
+                            event.preventDefault();
+                            reportScroller.scrollBy({ top: key === 'arrowdown' ? 64 : -64 });
+                            return;
+                        }
+                        if (key === 'pagedown' || key === ' ') {
+                            event.preventDefault();
+                            reportScroller.scrollBy({ top: scrollDistance });
+                            return;
+                        }
+                        if (key === 'pageup') {
+                            event.preventDefault();
+                            reportScroller.scrollBy({ top: -scrollDistance });
+                            return;
+                        }
+                        if (key === 'home' || key === 'end') {
+                            event.preventDefault();
+                            reportScroller.scrollTo({ top: key === 'home' ? 0 : reportScroller.scrollHeight });
+                            return;
+                        }
+                    }
+                    if (event.target instanceof HTMLElement && event.target.closest('input, button, a, [contenteditable="true"]')) return;
+
+                    const key = event.key.toLowerCase();
+                    if (['arrowright', 'arrowdown', ' ', 'pagedown'].includes(key)) {
+                        event.preventDefault();
+                        this.showSlide(this.currentSlide + 1);
+                    } else if (['arrowleft', 'arrowup', 'pageup'].includes(key)) {
+                        event.preventDefault();
+                        this.showSlide(this.currentSlide - 1);
+                    } else if (key === 'home') {
+                        event.preventDefault();
+                        this.showSlide(0);
+                    } else if (key === 'end') {
+                        event.preventDefault();
+                        this.showSlide(this.slides.length - 1);
+                    } else if (key === 'f') {
+                        this.toggleFullscreen();
+                    }
+                });
+            }
+
+            setupWheelNavigation() {
+                window.addEventListener('wheel', (event) => {
+                    if (this.slides.length < 2 || this.wheelLocked) return;
+                    if (event.target instanceof Element && event.target.closest('.troubleshooting-scroll')) return;
+                    if (Math.abs(event.deltaY) < 24) return;
+
+                    this.wheelLocked = true;
+                    this.showSlide(this.currentSlide + (event.deltaY > 0 ? 1 : -1));
+                    window.setTimeout(() => { this.wheelLocked = false; }, 520);
+                }, { passive: true });
+            }
+
+            setupTouchNavigation() {
+                this.stage.addEventListener('touchstart', (event) => {
+                    const touch = event.changedTouches[0];
+                    this.touchStartX = touch.clientX;
+                    this.touchStartY = touch.clientY;
+                }, { passive: true });
+
+                this.stage.addEventListener('touchend', (event) => {
+                    if (this.slides.length < 2 || this.touchStartX === null) return;
+                    const touch = event.changedTouches[0];
+                    const deltaX = touch.clientX - this.touchStartX;
+                    const deltaY = touch.clientY - this.touchStartY;
+                    if (Math.abs(deltaX) > 48 && Math.abs(deltaX) > Math.abs(deltaY)) {
+                        this.showSlide(this.currentSlide + (deltaX < 0 ? 1 : -1));
+                    }
+                    this.touchStartX = null;
+                    this.touchStartY = null;
+                }, { passive: true });
+            }
+
+            setupButtons() {
+                this.previousButton.addEventListener('click', () => this.showSlide(this.currentSlide - 1));
+                this.nextButton.addEventListener('click', () => this.showSlide(this.currentSlide + 1));
+            }
+
+            showSlide(index) {
+                this.currentSlide = Math.max(0, Math.min(index, this.slides.length - 1));
+                const coverBackgroundActive = this.currentSlide === 0;
+                const closingBackgroundActive = this.currentSlide === this.slides.length - 1;
+                const troubleshootingActive = this.slides[this.currentSlide].classList.contains('troubleshooting-slide');
+                this.viewport.classList.toggle('cover-background-active', coverBackgroundActive);
+                this.viewport.classList.toggle('closing-background-active', closingBackgroundActive);
+                this.stage.classList.toggle('cover-background-active', coverBackgroundActive);
+                this.stage.classList.toggle('closing-background-active', closingBackgroundActive);
+                this.stage.classList.toggle('troubleshooting-active', troubleshootingActive);
+                this.slides.forEach((slide, slideIndex) => {
+                    const active = slideIndex === this.currentSlide;
+                    slide.classList.toggle('active', active);
+                    slide.classList.toggle('visible', active);
+                    slide.setAttribute('aria-hidden', String(!active));
+                });
+
+                document.body.classList.toggle('has-multiple-slides', this.slides.length > 1);
+                this.previousButton.disabled = this.currentSlide === 0;
+                this.nextButton.disabled = this.currentSlide === this.slides.length - 1;
+                this.count.textContent = `${String(this.currentSlide + 1).padStart(2, '0')} / ${String(this.slides.length).padStart(2, '0')}`;
+                this.progress.style.transform = `scaleX(${(this.currentSlide + 1) / this.slides.length})`;
+            }
+
+            async toggleFullscreen() {
+                try {
+                    if (document.fullscreenElement) {
+                        await document.exitFullscreen();
+                    } else {
+                        await document.documentElement.requestFullscreen();
+                    }
+                } catch (error) {
+                    // Fullscreen may be unavailable in some embedded browsers.
+                }
+            }
+        }
+
+        new SlidePresentation();
+    </script>
+</body>
+</html>
