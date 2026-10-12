@@ -2200,132 +2200,6 @@
             transition: transform 220ms ease;
         }
 
-        /* === TYPE ADJUSTMENT PANEL === */
-        /* This viewport-level control changes live text without touching the image. */
-        .type-adjuster {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            z-index: 1100;
-            transform: translateX(-50%);
-            color: #12213f;
-            font-family: "DM Sans", "Noto Sans SC", sans-serif;
-        }
-
-        body.has-multiple-slides .type-adjuster {
-            bottom: 76px;
-        }
-
-        .type-adjuster-toggle {
-            min-height: 38px;
-            padding: 0 15px;
-            color: #123c99;
-            font: 600 14px/1 "DM Sans", "Noto Sans SC", sans-serif;
-            background: rgba(255, 255, 255, 0.92);
-            border: 1px solid rgba(35, 76, 155, 0.22);
-            border-radius: 999px;
-            box-shadow: 0 5px 18px rgba(25, 59, 112, 0.12);
-            cursor: pointer;
-            backdrop-filter: blur(12px);
-        }
-
-        .type-adjuster-toggle:hover {
-            background: #ffffff;
-            box-shadow: 0 7px 22px rgba(25, 59, 112, 0.18);
-        }
-
-        .type-panel {
-            position: absolute;
-            bottom: 48px;
-            left: 50%;
-            width: 320px;
-            padding: 18px;
-            background: rgba(255, 255, 255, 0.97);
-            border: 1px solid rgba(35, 76, 155, 0.16);
-            border-radius: 16px;
-            box-shadow: 0 16px 45px rgba(16, 42, 83, 0.2);
-            transform: translateX(-50%);
-            backdrop-filter: blur(18px);
-        }
-
-        .type-panel[hidden] {
-            display: none;
-        }
-
-        .type-panel-heading {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 16px;
-            font-size: 15px;
-            font-weight: 700;
-        }
-
-        .type-panel-close {
-            width: 28px;
-            height: 28px;
-            padding: 0;
-            color: #5a6880;
-            font: 400 20px/1 "DM Sans", sans-serif;
-            background: transparent;
-            border: 0;
-            border-radius: 50%;
-            cursor: pointer;
-        }
-
-        .type-panel-close:hover {
-            color: #10295d;
-            background: #edf3ff;
-        }
-
-        .type-control-row + .type-control-row {
-            margin-top: 13px;
-        }
-
-        .type-control-label {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 7px;
-            color: #243552;
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .type-control-label output {
-            color: #1550bd;
-            font-variant-numeric: tabular-nums;
-        }
-
-        .type-control-input {
-            width: 100%;
-            height: 18px;
-            margin: 0;
-            accent-color: #1550bd;
-            cursor: pointer;
-        }
-
-        .type-panel-note {
-            margin: 12px 0 0;
-            color: #6c7890;
-            font-size: 11px;
-            line-height: 1.5;
-        }
-
-        .type-panel-reset {
-            margin-top: 13px;
-            padding: 7px 10px;
-            color: #1550bd;
-            font: 600 12px/1.2 "DM Sans", "Noto Sans SC", sans-serif;
-            background: #eef4ff;
-            border: 0;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-
-        .type-panel-reset:hover {
-            background: #e1ebff;
-        }
-
         /* === PRINT LAYOUT === */
         @media print {
             html,
@@ -2371,9 +2245,6 @@
                 display: none !important;
             }
 
-            .type-adjuster {
-                display: none !important;
-            }
         }
 
         /* === ACCESSIBILITY === */
@@ -2984,41 +2855,6 @@
         </main>
     </div>
 
-    <aside class="type-adjuster" aria-label="封面文字调整">
-        <button
-            class="type-adjuster-toggle"
-            id="typeAdjusterToggle"
-            type="button"
-            aria-expanded="false"
-            aria-controls="typePanel"
-        >Aa 调整文字</button>
-        <section class="type-panel" id="typePanel" aria-label="文字显示设置" hidden>
-            <div class="type-panel-heading">
-                <span>文字显示</span>
-                <button class="type-panel-close" id="typePanelClose" type="button" aria-label="关闭文字设置">×</button>
-            </div>
-
-            <div class="type-control-row">
-                <label class="type-control-label" for="fontScale">
-                    <span>字号</span>
-                    <output id="fontScaleValue" for="fontScale">100%</output>
-                </label>
-                <input class="type-control-input" id="fontScale" type="range" min="80" max="120" step="5" value="100">
-            </div>
-
-            <div class="type-control-row">
-                <label class="type-control-label" for="textClarity">
-                    <span>清晰度（字重与对比）</span>
-                    <output id="textClarityValue" for="textClarity">65%</output>
-                </label>
-                <input class="type-control-input" id="textClarity" type="range" min="0" max="100" step="5" value="65">
-            </div>
-
-            <p class="type-panel-note">文案由网页文字绘制，放大仍保持清晰。清晰度会调整字重与对比度。</p>
-            <button class="type-panel-reset" id="resetTypeSettings" type="button">恢复默认</button>
-        </section>
-    </aside>
-
     <nav class="deck-controls" aria-label="演讲页导航">
         <button class="deck-control-button" id="previousSlide" type="button" aria-label="上一页">‹</button>
         <span class="deck-count" id="deckCount" aria-live="polite">01 / 01</span>
@@ -3045,89 +2881,11 @@
                 this.progress = document.getElementById('deckProgress');
 
                 this.setupStageScale();
-                this.setupTypeControls();
                 this.setupKeyboardNavigation();
                 this.setupWheelNavigation();
                 this.setupTouchNavigation();
                 this.setupButtons();
                 this.showSlide(0);
-            }
-
-            setupTypeControls() {
-                const root = document.documentElement;
-                const adjuster = document.querySelector('.type-adjuster');
-                const toggle = document.getElementById('typeAdjusterToggle');
-                const panel = document.getElementById('typePanel');
-                const close = document.getElementById('typePanelClose');
-                const fontScale = document.getElementById('fontScale');
-                const fontScaleValue = document.getElementById('fontScaleValue');
-                const textClarity = document.getElementById('textClarity');
-                const textClarityValue = document.getElementById('textClarityValue');
-                const reset = document.getElementById('resetTypeSettings');
-
-                const readSavedValue = (key, fallback) => {
-                    try {
-                        const saved = window.localStorage.getItem(key);
-                        return saved === null ? fallback : saved;
-                    } catch (error) {
-                        return fallback;
-                    }
-                };
-
-                fontScale.value = readSavedValue('hiagent-cover-font-scale', '100');
-                textClarity.value = readSavedValue('hiagent-cover-text-clarity', '65');
-
-                const saveValue = (key, value) => {
-                    try {
-                        window.localStorage.setItem(key, value);
-                    } catch (error) {
-                        // Settings still apply for the current browser session.
-                    }
-                };
-
-                const applySettings = () => {
-                    const scale = Number(fontScale.value) / 100;
-                    const clarity = Number(textClarity.value) / 100;
-
-                    root.style.setProperty('--font-scale', scale.toFixed(2));
-                    root.style.setProperty('--text-contrast', (0.98 + clarity * 0.34).toFixed(2));
-                    root.style.setProperty('--text-stroke', `${(clarity * 0.28).toFixed(2)}px`);
-                    root.style.setProperty('--title-outline', `${(0.45 + clarity * 1.25).toFixed(2)}px`);
-                    root.style.setProperty('--weight-regular', String(Math.round(450 + clarity * 200)));
-                    root.style.setProperty('--weight-medium', String(Math.round(600 + clarity * 200)));
-                    root.style.setProperty('--weight-strong', String(Math.round(720 + clarity * 180)));
-                    root.style.setProperty('--weight-heavy', String(Math.round(760 + clarity * 140)));
-
-                    fontScaleValue.value = `${fontScale.value}%`;
-                    textClarityValue.value = `${textClarity.value}%`;
-                    saveValue('hiagent-cover-font-scale', fontScale.value);
-                    saveValue('hiagent-cover-text-clarity', textClarity.value);
-                };
-
-                const setPanelOpen = (open) => {
-                    panel.hidden = !open;
-                    toggle.setAttribute('aria-expanded', String(open));
-                };
-
-                fontScale.addEventListener('input', applySettings);
-                textClarity.addEventListener('input', applySettings);
-                toggle.addEventListener('click', () => setPanelOpen(panel.hidden));
-                close.addEventListener('click', () => setPanelOpen(false));
-                reset.addEventListener('click', () => {
-                    fontScale.value = '100';
-                    textClarity.value = '65';
-                    applySettings();
-                });
-
-                document.addEventListener('click', (event) => {
-                    if (!adjuster.contains(event.target)) setPanelOpen(false);
-                });
-
-                window.addEventListener('keydown', (event) => {
-                    if (event.key === 'Escape' && !panel.hidden) setPanelOpen(false);
-                });
-
-                applySettings();
             }
 
             setupStageScale() {
