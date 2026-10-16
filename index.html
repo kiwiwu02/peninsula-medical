@@ -281,7 +281,7 @@
 
         .speaker-role {
             color: #65738a;
-            font-size: calc(28px * var(--font-scale));
+            font-size: calc(27px * var(--font-scale));
             font-weight: var(--weight-regular);
             line-height: 1.4;
             -webkit-text-stroke: var(--text-stroke) currentColor;
@@ -369,80 +369,162 @@
             white-space: nowrap;
         }
 
-        .intro-card-list {
+        .intro-identity-card,
+        .intro-capability-grid,
+        .intro-summary {
             position: absolute;
-            top: 248px;
             right: 104px;
             left: 104px;
-            display: grid;
-            grid-template-rows: repeat(3, 216px);
-            gap: 20px;
         }
 
-        .intro-card {
+        .intro-identity-card {
+            top: 242px;
+            height: 166px;
             display: grid;
-            grid-template-columns: 38px minmax(0, 1fr);
-            grid-template-rows: auto 1fr;
-            column-gap: 22px;
-            row-gap: 24px;
-            padding: 28px 52px;
-            overflow: hidden;
-            border-left: 11px solid #084bb7;
-            background: #f3f3f3;
+            grid-template-columns: 560px minmax(0, 1fr);
+            align-items: center;
+            gap: 40px;
+            padding: 22px 32px;
+            background: #f3f5f8;
+            border: 1px solid #e2e8f0;
+            border-left: 8px solid #084bb7;
+            border-radius: 10px;
         }
 
-        .intro-card-number,
-        .intro-card-title {
+        .intro-identity-name {
             margin: 0;
-            color: #202020;
-            font-size: calc(32px * var(--font-scale));
-            font-weight: 750;
+            color: #171717;
+            font-size: calc(42px * var(--font-scale));
+            font-weight: 800;
             line-height: 1.2;
         }
 
-        .intro-card-number {
-            text-align: center;
-        }
-
-        .intro-card-body {
-            grid-column: 1 / -1;
-            margin: 0;
-            color: #90969f;
-            font-size: calc(42px * var(--font-scale));
-            font-weight: 400;
-            letter-spacing: 0.005em;
+        .intro-identity-role {
+            margin: 8px 0 0;
+            color: #4e5e73;
+            font-size: calc(24px * var(--font-scale));
+            font-weight: 600;
             line-height: 1.35;
             white-space: nowrap;
         }
 
-        .intro-flow {
+        .intro-participation-label {
+            margin: 0 0 12px;
+            color: #084bb7;
+            font-size: calc(21px * var(--font-scale));
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .intro-participation-flow {
             display: flex;
             align-items: center;
             gap: 10px;
+            color: #3c4c63;
+            font-size: calc(28px * var(--font-scale));
+            font-weight: 600;
+            line-height: 1.3;
+            white-space: nowrap;
         }
 
-        .intro-flow-step {
+        .intro-participation-step {
             flex: 0 0 auto;
         }
 
-        .intro-flow-arrow {
-            position: relative;
-            flex: 0 0 28px;
-            height: 2px;
-            border-radius: 2px;
-            background: linear-gradient(90deg, #9fc3f4, #1762c4);
+        .intro-participation-arrow {
+            color: #3976ca;
+            font-family: "DM Sans", sans-serif;
+            font-size: calc(28px * var(--font-scale));
+            font-weight: 500;
         }
 
-        .intro-flow-arrow::after {
-            position: absolute;
-            top: 50%;
-            right: 1px;
-            width: 8px;
-            height: 8px;
-            border-top: 2px solid #1762c4;
-            border-right: 2px solid #1762c4;
-            content: "";
-            transform: translateY(-50%) rotate(45deg);
+        .intro-capability-grid {
+            top: 432px;
+            height: 356px;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .intro-capability-card {
+            display: flex;
+            min-width: 0;
+            flex-direction: column;
+            padding: 30px 30px 26px;
+            background: #ffffff;
+            border: 1px solid #dfe8f5;
+            border-top: 6px solid #1762c4;
+            border-radius: 12px;
+        }
+
+        .intro-capability-title {
+            display: flex;
+            align-items: baseline;
+            gap: 14px;
+            margin: 0;
+            color: #084bb7;
+            font-size: calc(40px * var(--font-scale));
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .intro-capability-index {
+            color: #7b9bc9;
+            font-family: "DM Sans", sans-serif;
+            font-size: inherit;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+        }
+
+        .intro-capability-description {
+            margin: 24px 0 0;
+            color: #344258;
+            font-size: calc(30px * var(--font-scale));
+            font-weight: 500;
+            line-height: 1.5;
+        }
+
+        .intro-capability-evidence {
+            margin-top: auto;
+            padding-top: 18px;
+            border-top: 1px solid #e0e9f4;
+        }
+
+        .intro-evidence-label {
+            margin: 0 0 8px;
+            color: #6d86a8;
+            font-size: calc(20px * var(--font-scale));
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .intro-evidence-text {
+            margin: 0;
+            color: #738096;
+            font-size: calc(23px * var(--font-scale));
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        .intro-summary {
+            top: 814px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            padding: 20px 30px;
+            color: #234267;
+            font-size: calc(31px * var(--font-scale));
+            font-weight: 600;
+            line-height: 1.4;
+            background: #eaf3ff;
+            border: 1px solid #d6e6fb;
+            border-left: 8px solid #3976ca;
+            border-radius: 10px;
+        }
+
+        .intro-summary strong {
+            color: #084bb7;
+            font-weight: 800;
         }
 
         .intro-footer-rule {
@@ -534,80 +616,186 @@
             white-space: nowrap;
         }
 
-        .library-grid {
+        .library-scenario {
             position: absolute;
-            top: 238px;
+            top: 250px;
             right: 104px;
-            bottom: 92px;
             left: 104px;
-        }
-
-        .library-table {
-            width: 100%;
-            height: 100%;
-            table-layout: fixed;
-            border: 1px solid #dce6f2;
-            border-spacing: 0;
+            height: 156px;
+            display: grid;
+            grid-template-columns: minmax(0, 0.66fr) minmax(0, 1fr);
+            align-items: center;
+            padding: 24px 40px;
+            background: #f0f6ff;
+            border: 1px solid #d8e6fa;
+            border-left: 8px solid #3976ca;
             border-radius: 16px;
-            overflow: hidden;
-            background: #ffffff;
-            box-shadow: 0 10px 28px rgba(31, 69, 120, 0.08);
-            color: #253750;
-            font-family: "Noto Sans SC", "DM Sans", sans-serif;
+            box-shadow: 0 10px 28px rgba(31, 69, 120, 0.07);
         }
 
-        .library-table col:first-child {
-            width: 360px;
-        }
-
-        .library-table th,
-        .library-table td {
-            padding: 13px 22px;
-            border-bottom: 1px solid #e5ebf3;
-            text-align: left;
-            vertical-align: middle;
-        }
-
-        .library-table thead th {
-            height: 62px;
-            color: #ffffff;
-            background: #164bb8;
-            font-size: calc(22px * var(--font-scale));
-            font-weight: 750;
-            letter-spacing: 0.02em;
-        }
-
-        .library-table tbody tr:last-child th,
-        .library-table tbody tr:last-child td {
-            border-bottom: 0;
-        }
-
-        .library-table tbody th {
-            color: #16468f;
-            background: #f1f6ff;
+        .library-scenario-kicker {
+            margin: 0 0 10px;
+            color: #3976ca;
             font-size: calc(22px * var(--font-scale));
             font-weight: 700;
-            line-height: 1.35;
+            letter-spacing: 0.08em;
+            line-height: 1.2;
+        }
+
+        .library-scenario-headline {
+            margin: 0;
+            color: #084bb7;
+            font-size: calc(42px * var(--font-scale));
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
             white-space: nowrap;
         }
 
-        .library-table tbody td {
-            color: #42536b;
+        .library-scenario-copy {
+            margin: 0;
+            padding-left: 24px;
+            color: #394a61;
+            font-size: calc(28px * var(--font-scale));
+            font-weight: 550;
+            line-height: 1.5;
+            white-space: nowrap;
+            border-left: 1px solid #c9d9ee;
+        }
+
+        .library-problem-row {
+            position: absolute;
+            top: 452px;
+            right: 104px;
+            left: 104px;
+            height: 326px;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 72px minmax(0, 1fr) 72px minmax(0, 1fr);
+            align-items: stretch;
+        }
+
+        .library-problem-card {
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            padding: 30px 32px 32px;
             background: #ffffff;
-            font-size: calc(22px * var(--font-scale));
-            font-weight: 520;
-            line-height: 1.42;
+            border: 1px solid #dfe8f5;
+            border-top: 6px solid #1762c4;
+            border-radius: 14px;
+            box-shadow: 0 10px 28px rgba(31, 69, 120, 0.07);
         }
 
-        .library-table tbody tr:nth-child(even) td {
-            background: #fbfcff;
+        .library-problem-topline {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 64px;
         }
 
-        .library-business-note {
+        .library-problem-heading {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            min-width: 0;
+        }
+
+        .library-problem-index {
+            color: #3976ca;
+            font-family: "DM Sans", sans-serif;
+            font-size: calc(40px * var(--font-scale));
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            line-height: 1.25;
+        }
+
+        .library-problem-icon {
+            width: 62px;
+            height: 62px;
+            display: grid;
+            place-items: center;
+            color: #1762c4;
+            background: #f0f6ff;
+            border: 1px solid #dbe8fb;
+            border-radius: 13px;
+        }
+
+        .library-problem-icon svg {
             display: block;
-            margin-top: 6px;
-            color: #16468f;
+            width: 38px;
+            height: 38px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2.25;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .library-problem-title {
+            margin: 0;
+            color: #084bb7;
+            font-size: calc(40px * var(--font-scale));
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            line-height: 1.25;
+        }
+
+        .library-problem-description {
+            margin: 20px 0 0;
+            color: #394a61;
+            font-size: calc(29px * var(--font-scale));
+            font-weight: 500;
+            line-height: 1.55;
+        }
+
+        .library-problem-arrow {
+            display: grid;
+            place-items: center;
+            color: #3976ca;
+            font-family: "DM Sans", sans-serif;
+            font-size: calc(48px * var(--font-scale));
+            font-weight: 500;
+        }
+
+        .library-core-question {
+            position: absolute;
+            top: 814px;
+            right: 104px;
+            left: 104px;
+            height: 112px;
+            display: grid;
+            grid-template-columns: max-content 1px minmax(0, 1fr);
+            column-gap: 24px;
+            align-items: center;
+            padding: 20px 34px;
+            background: #eaf3ff;
+            border: 1px solid #d6e6fb;
+            border-left: 8px solid #3976ca;
+            border-radius: 12px;
+        }
+
+        .library-core-question-label {
+            margin: 0;
+            color: #084bb7;
+            font-size: calc(30px * var(--font-scale));
+            font-weight: 800;
+            line-height: 1.3;
+            white-space: nowrap;
+        }
+
+        .library-core-question-divider {
+            width: 1px;
+            height: 38px;
+            background: #aeb8c5;
+        }
+
+        .library-core-question-text {
+            margin: 0;
+            color: #243a57;
+            font-size: calc(30px * var(--font-scale));
             font-weight: 650;
+            line-height: 1.4;
+            white-space: nowrap;
         }
 
         .solution-copy {
@@ -631,118 +819,401 @@
             white-space: nowrap;
         }
 
-        .solution-flow {
+        .solution-subtitle {
             position: absolute;
-            top: 320px;
+            top: 210px;
             right: 104px;
-            bottom: 92px;
             left: 104px;
+            margin: 0;
+            color: #53647a;
+            font-size: calc(25px * var(--font-scale));
+            font-weight: 550;
+            line-height: 1.35;
         }
 
-        .solution-process {
+        .solution-decisions {
             position: absolute;
-            top: 224px;
+            top: 220px;
             right: 104px;
             left: 104px;
             display: grid;
-            height: 72px;
-            grid-template-columns: minmax(0, 1.05fr) 30px minmax(0, 1.35fr) 30px minmax(0, 1.2fr) 30px minmax(0, 1.05fr) 30px minmax(0, 1.55fr);
-            align-items: center;
-            gap: 8px;
+            height: 661px;
+            grid-template-rows: 221px 198px 210px;
+            gap: 16px;
         }
 
-        .solution-process-step {
+        .solution-decision-card {
+            display: grid;
+            min-width: 0;
+            min-height: 0;
+            grid-template-columns: 270px minmax(0, 1fr) 30px minmax(0, 1.18fr);
+            grid-template-rows: minmax(0, 1fr);
+            align-items: stretch;
+            gap: 12px;
+            padding: 12px;
+            border: 1px solid #dce6f2;
+            border-radius: 14px;
+            background: #ffffff;
+            box-shadow: 0 5px 15px rgba(31, 69, 120, 0.055);
+        }
+
+        .solution-decision-topic {
             display: flex;
             min-width: 0;
-            min-height: 58px;
-            align-items: center;
+            min-height: 0;
+            flex-direction: column;
+            align-items: flex-start;
             justify-content: center;
-            padding: 10px 12px;
-            border: 1px solid #dbe7f6;
-            border-radius: 12px;
-            color: #214c84;
-            background: linear-gradient(135deg, #f7faff, #edf4ff);
-            box-shadow: 0 4px 12px rgba(31, 69, 120, 0.06);
-            font-size: calc(20px * var(--font-scale));
-            line-height: 1.3;
-            text-align: center;
+            padding: 12px 14px;
+            border-left: 4px solid #3976ca;
         }
 
-        .solution-process-step strong {
+        .solution-decision-index {
+            color: #1555b7;
+            font-family: "DM Sans", sans-serif;
+            font-size: calc(17px * var(--font-scale));
+            font-weight: 800;
+            letter-spacing: 0.06em;
+        }
+
+        .solution-decision-topic h2 {
+            margin: 7px 0 0;
+            color: #204d87;
+            font-size: calc(23px * var(--font-scale));
+            font-weight: 800;
+            line-height: 1.24;
+        }
+
+        .solution-decision-topic p {
+            margin: 7px 0 0;
+            color: #74849a;
+            font-size: calc(17px * var(--font-scale));
+            font-weight: 600;
+            line-height: 1.25;
+        }
+
+        .solution-decision-explore,
+        .solution-decision-final {
+            display: flex;
+            min-width: 0;
+            min-height: 0;
+            flex-direction: column;
+            justify-content: center;
+            gap: 7px;
+            padding: 10px 18px;
+            border: 1px solid #e7ebf0;
+            border-radius: 11px;
+        }
+
+        .solution-decision-explore {
+            background: #f5f6f8;
+        }
+
+        .solution-decision-final {
+            border-color: #d9e7fa;
+            background: #eef5ff;
+        }
+
+        .solution-decision-panel-label {
+            color: #76859a;
+            font-size: calc(16px * var(--font-scale));
             font-weight: 750;
+            line-height: 1.2;
         }
 
-        .solution-process-arrow {
+        .solution-explore-title,
+        .solution-final-heading {
+            display: flex;
+            min-width: 0;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            color: #263c59;
+            font-size: calc(21px * var(--font-scale));
+            font-weight: 800;
+            line-height: 1.25;
+        }
+
+        .solution-explore-status,
+        .solution-final-status {
+            display: inline-flex;
+            flex: 0 0 auto;
+            align-items: center;
+            padding: 4px 8px;
+            border-radius: 999px;
+            color: #6b7788;
+            background: #e9edf2;
+            font-size: calc(15px * var(--font-scale));
+            font-weight: 700;
+            line-height: 1.1;
+            white-space: nowrap;
+        }
+
+        .solution-explore-copy,
+        .solution-final-copy {
+            margin: 0;
+            color: #44546a;
+            font-size: calc(19px * var(--font-scale));
+            font-weight: 550;
+            line-height: 1.38;
+        }
+
+        .solution-decision-arrow {
             display: grid;
             place-items: center;
             color: #3976ca;
             font-family: "DM Sans", sans-serif;
-            font-size: calc(28px * var(--font-scale));
-            font-weight: 700;
-            line-height: 1;
-        }
-
-        .solution-table {
-            width: 100%;
-            height: 100%;
-            table-layout: fixed;
-            border: 1px solid #dce6f2;
-            border-spacing: 0;
-            border-radius: 16px;
-            overflow: hidden;
-            background: #ffffff;
-            box-shadow: 0 10px 28px rgba(31, 69, 120, 0.08);
-            color: #253750;
-            font-family: "Noto Sans SC", "DM Sans", sans-serif;
-        }
-
-        .solution-table col:first-child {
-            width: 32%;
-        }
-
-        .solution-table th,
-        .solution-table td {
-            padding: 16px 24px;
-            border-bottom: 1px solid #e5ebf3;
-            text-align: left;
-            vertical-align: middle;
-        }
-
-        .solution-table thead th {
-            height: 62px;
-            color: #ffffff;
-            background: #164bb8;
-            font-size: calc(22px * var(--font-scale));
+            font-size: calc(30px * var(--font-scale));
             font-weight: 750;
-            letter-spacing: 0.02em;
         }
 
-        .solution-table tbody tr:last-child th,
-        .solution-table tbody tr:last-child td {
-            border-bottom: 0;
+        .solution-final-heading {
+            color: #0d4eae;
         }
 
-        .solution-table tbody th {
-            color: #16468f;
-            background: #f1f6ff;
-            font-size: calc(24px * var(--font-scale));
+        .solution-final-split {
+            display: flex;
+            min-width: 0;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .solution-final-block {
+            display: flex;
+            min-width: 0;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .solution-final-kicker {
+            color: #0d4eae;
+            font-size: calc(16px * var(--font-scale));
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .solution-final-text {
+            margin: 0;
+            color: #314b6a;
+            font-size: calc(18px * var(--font-scale));
             font-weight: 600;
-            line-height: 1.45;
-            text-align: left;
-            vertical-align: middle;
+            line-height: 1.28;
         }
 
-        .solution-table tbody td {
-            color: #183c70;
-            background: #ffffff;
-            font-size: calc(24px * var(--font-scale));
+        .solution-final-divider {
+            width: 100%;
+            height: 1px;
+            background: #cbdcf1;
+        }
+
+        .solution-decision-card:nth-child(3) .solution-decision-final {
+            gap: 4px;
+            padding: 10px 14px;
+        }
+
+        .solution-decision-card:nth-child(3) .solution-final-split {
+            gap: 8px;
+        }
+
+        .solution-decision-card:nth-child(3) .solution-final-block {
+            gap: 4px;
+        }
+
+        .solution-decision-card:nth-child(3) .solution-final-kicker {
+            font-size: calc(15px * var(--font-scale));
+        }
+
+        .solution-decision-card:nth-child(3) .solution-final-text {
+            font-size: calc(17px * var(--font-scale));
+            line-height: 1.22;
+        }
+
+        .solution-decision-card:nth-child(3) .solution-decision-topic p {
+            font-size: calc(16px * var(--font-scale));
+            letter-spacing: -0.01em;
+        }
+
+        .solution-decision-card:nth-child(3) .solution-tech-tag {
+            padding: 3px 7px;
+            font-size: calc(15px * var(--font-scale));
+        }
+
+        .solution-decision-card:first-child .solution-decision-final {
+            gap: 3px;
+            padding: 10px 14px;
+        }
+
+        .solution-decision-card:first-child .solution-final-split {
+            gap: 3px;
+        }
+
+        .solution-decision-card:first-child .solution-final-block {
+            gap: 2px;
+        }
+
+        .solution-decision-card:first-child .solution-final-kicker {
+            font-size: calc(15px * var(--font-scale));
+        }
+
+        .solution-reference-list {
+            display: flex;
+            min-width: 0;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .solution-reference-item {
+            margin: 0;
+            color: #314b6a;
+            font-size: calc(16px * var(--font-scale));
+            font-weight: 600;
+            line-height: 1.18;
+            white-space: nowrap;
+        }
+
+        .solution-reference-item strong {
+            color: #0d4eae;
+            font-weight: 800;
+        }
+
+        .solution-decision-card:first-child .solution-final-summary {
+            margin: 0;
+            color: #314b6a;
+            font-size: calc(16px * var(--font-scale));
+            font-weight: 650;
+            line-height: 1.2;
+        }
+
+        .solution-adaptive-label {
+            display: inline-block;
+            margin-right: 6px;
+            padding: 2px 7px;
+            border: 1px solid #b9d0ef;
+            border-radius: 999px;
+            color: #104ba6;
+            background: #e5f0ff;
+            font-size: calc(14px * var(--font-scale));
+            font-weight: 850;
+            line-height: 1.25;
+            white-space: nowrap;
+            vertical-align: 1px;
+        }
+
+        .solution-decision-card:first-child .solution-tech-tags {
+            gap: 5px;
+        }
+
+        .solution-decision-card:first-child .solution-tech-tag {
+            padding: 3px 7px;
+            font-size: calc(15px * var(--font-scale));
+        }
+
+        .solution-final-path {
+            color: #0d4eae;
+            font-size: calc(20px * var(--font-scale));
+            font-weight: 800;
+            line-height: 1.24;
+        }
+
+        .solution-tech-tags {
+            display: flex;
+            min-width: 0;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .solution-tech-tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 10px;
+            border: 1px solid #d5e4f7;
+            border-radius: 8px;
+            color: #204d87;
+            background: rgba(255, 255, 255, 0.82);
+            font-size: calc(17px * var(--font-scale));
             font-weight: 700;
-            line-height: 1.45;
-            vertical-align: middle;
+            line-height: 1.2;
+            white-space: nowrap;
         }
 
-        .solution-table tbody tr:nth-child(even) td {
-            background: #fbfcff;
+        .solution-decision-points {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            color: #204d87;
+            font-size: calc(18px * var(--font-scale));
+            font-weight: 650;
+            line-height: 1.22;
+        }
+
+        .solution-decision-point {
+            position: relative;
+            padding-left: 16px;
+        }
+
+        .solution-decision-point::before {
+            position: absolute;
+            top: 0.48em;
+            left: 2px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #3976ca;
+            content: "";
+        }
+
+        .solution-evaluation {
+            position: absolute;
+            top: 897px;
+            right: 104px;
+            left: 104px;
+            display: grid;
+            height: 72px;
+            grid-template-columns: max-content minmax(0, 1fr) max-content;
+            align-items: center;
+            gap: 24px;
+            padding: 12px 22px;
+            border: 1px solid #d9e7fa;
+            border-radius: 12px;
+            color: #314760;
+            background: #f1f6ff;
+        }
+
+        .solution-evaluation-title {
+            color: #0d4eae;
+            font-size: calc(20px * var(--font-scale));
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .solution-evaluation-flow {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #263f61;
+            font-size: calc(20px * var(--font-scale));
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .solution-evaluation-arrow {
+            color: #3976ca;
+            font-family: "DM Sans", sans-serif;
+            font-size: calc(23px * var(--font-scale));
+            font-weight: 800;
+        }
+
+        .solution-evaluation-methods {
+            color: #687991;
+            font-size: calc(17px * var(--font-scale));
+            font-weight: 650;
+            white-space: nowrap;
+        }
+
+        .solution-evaluation-methods strong {
+            margin-right: 8px;
+            color: #526984;
+            font-weight: 800;
         }
 
         .runtime-copy {
@@ -1011,6 +1482,743 @@
 
         .runtime-return-right {
             right: 15.1%;
+        }
+
+        .runtime-subtitle {
+            position: absolute;
+            top: 208px;
+            right: 104px;
+            left: 104px;
+            margin: 0;
+            color: #53647a;
+            font-size: calc(24px * var(--font-scale));
+            font-weight: 550;
+            line-height: 1.35;
+        }
+
+        .runtime-redesign-layout {
+            position: absolute;
+            top: 230px;
+            right: 104px;
+            left: 104px;
+            display: grid;
+            height: 750px;
+            grid-template-rows: 476px 264px;
+            gap: 10px;
+        }
+
+        .runtime-redesign-top {
+            display: grid;
+            min-height: 0;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            gap: 24px;
+        }
+
+        .runtime-engine-card {
+            display: grid;
+            min-width: 0;
+            min-height: 0;
+            grid-template-rows: auto auto minmax(0, 1fr) auto;
+            align-content: stretch;
+            gap: 9px;
+            padding: 18px 20px;
+            border: 1px solid #dce6f2;
+            border-radius: 16px;
+            background: #ffffff;
+            box-shadow: 0 7px 20px rgba(31, 69, 120, 0.065);
+        }
+
+        .runtime-redesign-card-title {
+            display: flex;
+            min-width: 0;
+            align-items: baseline;
+            gap: 10px;
+            margin: 0;
+            color: #123f7b;
+            font-size: calc(27px * var(--font-scale));
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .runtime-redesign-card-title span {
+            color: #123f7b;
+            font-family: inherit;
+            font-size: inherit;
+            letter-spacing: inherit;
+            white-space: nowrap;
+        }
+
+        .runtime-reference-tags {
+            display: flex;
+            min-width: 0;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .runtime-reference-chip {
+            display: inline-flex;
+            min-height: 29px;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border: 1px solid #e1e8f1;
+            border-radius: 8px;
+            color: #556a84;
+            background: #f7f9fc;
+            font-size: calc(17px * var(--font-scale));
+            font-weight: 650;
+            line-height: 1.2;
+        }
+
+        .runtime-reference-chip strong {
+            color: #7a8ca3;
+            font-size: calc(16px * var(--font-scale));
+            font-weight: 750;
+        }
+
+        .runtime-analysis {
+            display: grid;
+            min-width: 0;
+            align-content: center;
+            gap: 8px;
+        }
+
+        .runtime-analysis-block {
+            display: grid;
+            min-width: 0;
+            grid-template-columns: 106px minmax(0, 1fr);
+            align-items: start;
+            gap: 10px;
+        }
+
+        .runtime-analysis-label {
+            color: #71829a;
+            font-size: calc(18px * var(--font-scale));
+            font-weight: 800;
+            line-height: 1.4;
+        }
+
+        .runtime-analysis-copy {
+            margin: 0;
+            color: #44546a;
+            font-size: calc(19px * var(--font-scale));
+            font-weight: 550;
+            line-height: 1.34;
+        }
+
+        .runtime-engine-outcome {
+            display: flex;
+            min-width: 0;
+            flex-direction: column;
+            justify-content: center;
+            gap: 7px;
+            min-height: 146px;
+            padding: 15px 18px 14px;
+            border: 1px solid #d5e5fa;
+            border-radius: 12px;
+            background: #eef5ff;
+        }
+
+        .runtime-engine-card-harness .runtime-engine-outcome {
+            gap: 8px;
+            padding: 15px 12px 14px;
+        }
+
+        .runtime-harness-capabilities {
+            display: grid;
+            grid-template-columns: 1.6fr 1fr 1fr;
+            gap: 6px;
+        }
+
+        .runtime-harness-capability {
+            display: flex;
+            min-width: 0;
+            min-height: 26px;
+            align-items: center;
+            padding: 4px 8px;
+            border: 1px solid rgba(213, 229, 250, 0.9);
+            border-radius: 7px;
+            color: #315984;
+            background: rgba(255, 255, 255, 0.9);
+            font-size: calc(16px * var(--font-scale));
+            font-weight: 700;
+            line-height: 1.15;
+        }
+
+        .runtime-harness-capability:last-child {
+            grid-column: 2 / 4;
+        }
+
+        .runtime-outcome-heading {
+            display: flex;
+            min-width: 0;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .runtime-outcome-label {
+            color: #3976ca;
+            font-size: calc(17px * var(--font-scale));
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .runtime-outcome-name {
+            margin: 0;
+            color: #0d4eae;
+            font-size: calc(24px * var(--font-scale));
+            font-weight: 850;
+            line-height: 1.2;
+        }
+
+        .runtime-outcome-tags {
+            display: flex;
+            min-width: 0;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .runtime-outcome-tags-detail {
+            flex-wrap: nowrap;
+            gap: 6px;
+        }
+
+        .runtime-outcome-tags-detail .runtime-outcome-tag {
+            min-height: 25px;
+            padding: 4px 7px;
+            font-size: calc(15px * var(--font-scale));
+        }
+
+        .runtime-outcome-tag {
+            display: inline-flex;
+            min-height: 26px;
+            align-items: center;
+            padding: 4px 9px;
+            border-radius: 7px;
+            color: #315984;
+            background: rgba(255, 255, 255, 0.9);
+            font-size: calc(17px * var(--font-scale));
+            font-weight: 700;
+            line-height: 1.15;
+            white-space: nowrap;
+        }
+
+        .runtime-outcome-takeaway {
+            margin: 0;
+            color: #536981;
+            font-size: calc(17px * var(--font-scale));
+            font-weight: 650;
+            line-height: 1.25;
+        }
+
+        .runtime-skill-card {
+            display: grid;
+            min-width: 0;
+            grid-template-rows: auto auto minmax(0, 1fr);
+            gap: 8px;
+            padding: 14px 20px;
+            border: 1px solid #dce6f2;
+            border-radius: 16px;
+            background: #ffffff;
+            box-shadow: 0 7px 20px rgba(31, 69, 120, 0.065);
+        }
+
+        .runtime-skill-heading {
+            display: flex;
+            min-width: 0;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 12px;
+        }
+
+        .runtime-skill-card-title {
+            display: flex;
+            min-width: 0;
+            align-items: baseline;
+            gap: 10px;
+            margin: 0;
+            color: #123f7b;
+            font-size: calc(27px * var(--font-scale));
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .runtime-skill-card-title span {
+            color: #123f7b;
+            white-space: nowrap;
+        }
+
+        .runtime-skill-motivation {
+            min-width: 0;
+            margin: 0;
+            color: #5b6f88;
+            font-size: calc(18px * var(--font-scale));
+            font-weight: 600;
+            line-height: 1.2;
+            white-space: nowrap;
+        }
+
+        .runtime-skill-summary {
+            display: grid;
+            min-width: 0;
+            grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+            align-items: center;
+            gap: 16px;
+        }
+
+        .runtime-skill-flow {
+            display: grid;
+            min-width: 0;
+            width: 100%;
+            grid-template-columns: minmax(0, 1fr) 44px minmax(0, 1fr) 44px minmax(0, 1fr);
+            align-items: stretch;
+            gap: 8px;
+        }
+
+        .runtime-skill-stage {
+            display: flex;
+            min-width: 0;
+            flex-direction: column;
+            justify-content: center;
+            gap: 6px;
+            padding: 10px 12px;
+            border: 1px solid #e1e9f3;
+            border-radius: 11px;
+            background: #f8fafc;
+        }
+
+        .runtime-skill-stage-final {
+            border-color: #cbdcf4;
+            background: #eef5ff;
+        }
+
+        .runtime-skill-stage-label {
+            color: #174f9f;
+            font-size: calc(17px * var(--font-scale));
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .runtime-skill-stage-copy {
+            margin: 0;
+            color: #435873;
+            font-size: calc(19px * var(--font-scale));
+            font-weight: 650;
+            line-height: 1.25;
+        }
+
+        .runtime-skill-stage-copy strong {
+            color: #174f9f;
+            font-weight: 800;
+        }
+
+        .runtime-skill-context-copy {
+            white-space: nowrap;
+        }
+
+        .runtime-skill-stage-note {
+            margin: 0;
+            color: #667b95;
+            font-size: calc(17px * var(--font-scale));
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        .runtime-skill-stage-label-row {
+            display: flex;
+            min-width: 0;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .runtime-skill-method-tag {
+            flex: none;
+            padding: 3px 7px;
+            border-radius: 6px;
+            color: #607895;
+            background: #eaf0f8;
+            font-size: calc(14px * var(--font-scale));
+            font-weight: 750;
+            line-height: 1.1;
+        }
+
+        .runtime-skill-output-tags {
+            color: #315984;
+            font-size: calc(16px * var(--font-scale));
+            font-weight: 750;
+            line-height: 1.2;
+        }
+
+        .runtime-skill-stage-final .runtime-skill-stage-copy strong {
+            color: #0d4eae;
+        }
+
+        .runtime-skill-stage-final .runtime-skill-stage-copy {
+            color: #2c4f79;
+            font-size: calc(17px * var(--font-scale));
+            line-height: 1.2;
+            white-space: nowrap;
+        }
+
+        .runtime-skill-arrow {
+            display: grid;
+            place-items: center;
+            color: #3976ca;
+            font-family: "DM Sans", sans-serif;
+            font-size: calc(34px * var(--font-scale));
+            font-weight: 700;
+        }
+
+        .runtime-skill-iteration {
+            display: flex;
+            min-width: 0;
+            min-height: 34px;
+            width: max-content;
+            max-width: 100%;
+            justify-self: end;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 12px;
+            border: 1px solid #d7e6fa;
+            border-radius: 7px;
+            color: #315984;
+            background: #f1f6ff;
+            font-size: calc(17px * var(--font-scale));
+            font-weight: 700;
+            line-height: 1.15;
+            white-space: nowrap;
+        }
+
+        .runtime-skill-iteration strong {
+            flex: none;
+            color: #174f9f;
+            font-weight: 850;
+        }
+
+        .runtime-skill-iteration-flow {
+            color: #425f82;
+        }
+
+        .execution-copy {
+            position: absolute;
+            inset: 0;
+            color: #1b1b1b;
+            font-family: "Noto Sans SC", "DM Sans", sans-serif;
+            --execution-font-scale: calc(var(--font-scale) * 1.08);
+        }
+
+        .execution-copy .intro-section-label {
+            font-size: calc(25px * var(--execution-font-scale));
+        }
+
+        .execution-copy .intro-page-number {
+            font-size: calc(18px * var(--execution-font-scale));
+        }
+
+        .execution-title {
+            position: absolute;
+            top: 132px;
+            right: 104px;
+            left: 104px;
+            margin: 0;
+            color: #171717;
+            font-size: calc(56px * var(--execution-font-scale));
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            line-height: 1.18;
+            white-space: nowrap;
+        }
+
+        .execution-case-strip {
+            position: absolute;
+            top: 224px;
+            right: 104px;
+            left: 104px;
+            display: grid;
+            height: 100px;
+            grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
+            align-items: center;
+            gap: 28px;
+            padding: 14px 24px;
+            border: 1px solid #d7e5f8;
+            border-left: 7px solid #3976ca;
+            border-radius: 14px;
+            background: #f2f7ff;
+        }
+
+        .execution-case-identity {
+            display: flex;
+            min-width: 0;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .execution-eyebrow {
+            color: #597598;
+            font-size: calc(17px * var(--execution-font-scale));
+            font-weight: 800;
+            line-height: 1.15;
+        }
+
+        .execution-case-name {
+            color: #164d9e;
+            font-size: calc(30px * var(--execution-font-scale));
+            font-weight: 850;
+            line-height: 1.18;
+            white-space: nowrap;
+        }
+
+        .execution-case-evidence {
+            display: flex;
+            min-width: 0;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .execution-evidence-heading {
+            color: #597598;
+            font-size: calc(16px * var(--execution-font-scale));
+            font-weight: 750;
+        }
+
+        .execution-evidence-list {
+            display: flex;
+            min-width: 0;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .execution-evidence-tag {
+            display: inline-flex;
+            min-height: 30px;
+            align-items: center;
+            padding: 4px 9px;
+            border: 1px solid #d8e5f5;
+            border-radius: 7px;
+            color: #345574;
+            background: rgba(255, 255, 255, 0.8);
+            font-size: calc(16px * var(--execution-font-scale));
+            font-weight: 650;
+            line-height: 1.15;
+            white-space: nowrap;
+        }
+
+        .execution-flow-heading {
+            position: absolute;
+            top: 350px;
+            right: 104px;
+            left: 104px;
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        .execution-flow-title {
+            color: #174f9f;
+            font-size: calc(23px * var(--execution-font-scale));
+            font-weight: 850;
+        }
+
+        .execution-flow-note {
+            color: #78869a;
+            font-size: calc(16px * var(--execution-font-scale));
+            font-weight: 600;
+        }
+
+        .execution-flow {
+            position: absolute;
+            top: 390px;
+            right: 104px;
+            left: 104px;
+            display: grid;
+            height: 388px;
+            grid-template-columns: minmax(0, 1fr) 38px minmax(0, 1fr) 38px minmax(0, 1fr) 38px minmax(0, 1fr);
+            align-items: stretch;
+            gap: 8px;
+        }
+
+        .execution-step-card {
+            display: flex;
+            min-width: 0;
+            min-height: 0;
+            flex-direction: column;
+            padding: 24px 24px 20px;
+            border: 1px solid #dce6f2;
+            border-top: 5px solid #6d96d3;
+            border-radius: 14px;
+            background: #ffffff;
+            box-shadow: 0 6px 18px rgba(31, 69, 120, 0.06);
+        }
+
+        .execution-step-card:nth-of-type(3) {
+            border-top-color: #1552b1;
+            background: #f7faff;
+        }
+
+        .execution-step-heading {
+            display: flex;
+            min-width: 0;
+            align-items: center;
+            gap: 14px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid #e5ebf3;
+        }
+
+        .execution-step-index {
+            display: grid;
+            width: 38px;
+            height: 38px;
+            flex: 0 0 38px;
+            place-items: center;
+            border-radius: 50%;
+            color: #1555b7;
+            background: #eaf2ff;
+            font-family: "DM Sans", sans-serif;
+            font-size: calc(17px * var(--execution-font-scale));
+            font-weight: 850;
+        }
+
+        .execution-step-heading h2 {
+            min-width: 0;
+            margin: 0;
+            color: #204d87;
+            font-size: calc(25px * var(--execution-font-scale));
+            font-weight: 850;
+            line-height: 1.2;
+        }
+
+        .execution-step-fields {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            margin-top: 18px;
+        }
+
+        .execution-step-field {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .execution-field-label {
+            color: #78869a;
+            font-size: calc(15px * var(--execution-font-scale));
+            font-weight: 800;
+            line-height: 1.15;
+        }
+
+        .execution-field-copy {
+            margin: 0;
+            color: #3f526c;
+            font-size: calc(19px * var(--execution-font-scale));
+            font-weight: 600;
+            line-height: 1.42;
+        }
+
+        .execution-step-output {
+            display: flex;
+            min-height: 64px;
+            flex-direction: column;
+            justify-content: center;
+            gap: 3px;
+            margin-top: auto;
+            padding: 11px 14px;
+            border: 1px solid #d4e3f7;
+            border-radius: 9px;
+            background: #eff5ff;
+        }
+
+        .execution-step-output span {
+            color: #6a83a3;
+            font-size: calc(14px * var(--execution-font-scale));
+            font-weight: 750;
+            line-height: 1.1;
+        }
+
+        .execution-step-output strong {
+            color: #0d4eae;
+            font-size: calc(18px * var(--execution-font-scale));
+            font-weight: 850;
+            line-height: 1.2;
+        }
+
+        .execution-step-capability {
+            align-self: flex-start;
+            margin-top: 10px;
+            padding: 4px 8px;
+            border-radius: 999px;
+            color: #45678f;
+            background: #f0f4fa;
+            font-size: calc(14px * var(--execution-font-scale));
+            font-weight: 700;
+            line-height: 1.1;
+        }
+
+        .execution-step-arrow {
+            display: grid;
+            place-items: center;
+            color: #3976ca;
+            font-family: "DM Sans", sans-serif;
+            font-size: calc(30px * var(--execution-font-scale));
+            font-weight: 800;
+        }
+
+        .execution-responsibilities {
+            position: absolute;
+            top: 816px;
+            right: 104px;
+            left: 104px;
+            display: grid;
+            height: 122px;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .execution-responsibility {
+            display: flex;
+            min-width: 0;
+            flex-direction: column;
+            justify-content: center;
+            gap: 8px;
+            padding: 16px 22px;
+            border: 1px solid #dce6f2;
+            border-radius: 12px;
+            background: #ffffff;
+        }
+
+        .execution-responsibility-agent {
+            border-color: #d4e3f7;
+            background: #eef5ff;
+        }
+
+        .execution-responsibility-heading {
+            display: flex;
+            align-items: baseline;
+            gap: 14px;
+        }
+
+        .execution-responsibility-heading strong {
+            color: #0d4eae;
+            font-size: calc(21px * var(--execution-font-scale));
+            font-weight: 850;
+        }
+
+        .execution-responsibility-heading span {
+            color: #627894;
+            font-size: calc(16px * var(--execution-font-scale));
+            font-weight: 700;
+        }
+
+        .execution-responsibility p {
+            margin: 0;
+            color: #3f526c;
+            font-size: calc(19px * var(--execution-font-scale));
+            font-weight: 600;
+            line-height: 1.3;
         }
 
         .retrieval-copy {
@@ -1594,6 +2802,540 @@
             font-weight: 850;
         }
 
+        /* === SLIDE 08: REAL-WORLD EVALUATION AND ITERATION === */
+        .quality-eval-copy {
+            position: absolute;
+            inset: 0;
+            color: #1b1b1b;
+            font-family: "Noto Sans SC", "DM Sans", sans-serif;
+        }
+
+        .quality-eval-title {
+            position: absolute;
+            top: 132px;
+            right: 104px;
+            left: 104px;
+            margin: 0;
+            color: #171717;
+            font-size: calc(58px * var(--font-scale));
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            line-height: 1.18;
+            white-space: nowrap;
+        }
+
+        .quality-eval-subtitle {
+            position: absolute;
+            top: 214px;
+            right: 104px;
+            left: 104px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            margin: 0;
+            color: #52647d;
+            font-size: calc(22px * var(--font-scale));
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .quality-design-tag,
+        .quality-protocol-tag {
+            flex: 0 0 auto;
+            padding: 6px 12px;
+            border: 1px solid #cbdcf2;
+            border-radius: 999px;
+            color: #1552a8;
+            background: #edf4ff;
+            font-size: calc(16px * var(--font-scale));
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .quality-dataset-grid {
+            position: absolute;
+            top: 258px;
+            right: 104px;
+            left: 104px;
+            display: grid;
+            height: 158px;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .quality-dataset-card {
+            display: flex;
+            min-width: 0;
+            flex-direction: column;
+            padding: 14px 18px 12px;
+            border: 1px solid #dce6f2;
+            border-top: 4px solid #3976ca;
+            border-radius: 12px;
+            background: linear-gradient(145deg, #ffffff, #f8fbff);
+            box-shadow: 0 5px 15px rgba(31, 69, 120, 0.045);
+        }
+
+        .quality-dataset-heading {
+            display: flex;
+            min-width: 0;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 12px;
+            margin: 0;
+            color: #164b9d;
+            font-size: calc(25px * var(--font-scale));
+            font-weight: 850;
+            line-height: 1.2;
+        }
+
+        .quality-dataset-english {
+            color: #7486a0;
+            font-family: "DM Sans", sans-serif;
+            font-size: calc(15px * var(--font-scale));
+            font-weight: 750;
+            white-space: nowrap;
+        }
+
+        .quality-dataset-purpose {
+            margin: 7px 0 3px;
+            color: #253f65;
+            font-size: calc(21px * var(--font-scale));
+            font-weight: 800;
+            line-height: 1.25;
+        }
+
+        .quality-dataset-description,
+        .quality-dataset-use {
+            margin: 0;
+            color: #5a6d84;
+            font-size: calc(16px * var(--font-scale));
+            font-weight: 550;
+            line-height: 1.35;
+        }
+
+        .quality-dataset-use {
+            margin-top: auto;
+            padding-top: 5px;
+            color: #315982;
+            font-weight: 750;
+        }
+
+        .quality-eval-columns {
+            position: absolute;
+            top: 434px;
+            right: 104px;
+            left: 104px;
+            display: grid;
+            height: 324px;
+            grid-template-columns: minmax(0, 1.52fr) minmax(0, 1fr);
+            gap: 24px;
+        }
+
+        .quality-eval-section {
+            position: relative;
+            min-width: 0;
+            padding: 14px 16px;
+            border: 1px solid #dce6f2;
+            border-radius: 13px;
+            background: #ffffff;
+            box-shadow: 0 5px 15px rgba(31, 69, 120, 0.045);
+        }
+
+        .quality-section-heading {
+            display: flex;
+            min-height: 30px;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            margin: 0 0 11px;
+            color: #164b9d;
+            font-size: calc(23px * var(--font-scale));
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .quality-gate-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 8px;
+        }
+
+        .quality-gate-chip {
+            display: flex;
+            min-width: 0;
+            align-items: center;
+            gap: 7px;
+            min-height: 46px;
+            padding: 5px 8px;
+            border: 1px solid #e0e9f5;
+            border-radius: 8px;
+            color: #536a87;
+            background: #f8fbff;
+            font-size: calc(15px * var(--font-scale));
+            font-weight: 650;
+            line-height: 1.2;
+        }
+
+        .quality-gate-chip strong {
+            flex: 0 0 auto;
+            color: #1552b1;
+            font-family: "DM Sans", sans-serif;
+            font-size: calc(14px * var(--font-scale));
+            font-weight: 850;
+        }
+
+        .quality-protocol-cards {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .quality-protocol-card {
+            display: flex;
+            min-width: 0;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 74px;
+            padding: 8px 12px;
+            border: 1px solid #dce6f2;
+            border-radius: 9px;
+            background: #fbfcfe;
+        }
+
+        .quality-protocol-card strong {
+            color: #203b62;
+            font-size: calc(18px * var(--font-scale));
+            font-weight: 800;
+            line-height: 1.25;
+        }
+
+        .quality-protocol-card span {
+            margin-top: 3px;
+            color: #687b93;
+            font-size: calc(14px * var(--font-scale));
+            font-weight: 550;
+            line-height: 1.25;
+        }
+
+        .quality-review-title {
+            margin: 13px 0 6px;
+            color: #315982;
+            font-size: calc(16px * var(--font-scale));
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .quality-review-chain {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 8px;
+        }
+
+        .quality-review-stage {
+            min-width: 0;
+            padding: 9px 9px;
+            border-radius: 8px;
+            background: #f1f6fd;
+        }
+
+        .quality-review-stage strong {
+            display: block;
+            color: #164b9d;
+            font-size: calc(15px * var(--font-scale));
+            font-weight: 850;
+            line-height: 1.15;
+        }
+
+        .quality-review-stage span {
+            display: block;
+            margin-top: 3px;
+            color: #687b93;
+            font-size: calc(15px * var(--font-scale));
+            font-weight: 550;
+            line-height: 1.2;
+        }
+
+        .quality-metric-grid {
+            display: grid;
+            height: 218px;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            grid-template-rows: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+        }
+
+        .quality-metric-card {
+            display: flex;
+            min-width: 0;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            padding: 10px 13px;
+            border: 1px solid #d8e5f5;
+            border-radius: 10px;
+            background: linear-gradient(145deg, #ffffff, #f8fbff);
+        }
+
+        .quality-metric-label {
+            color: #536a87;
+            font-size: calc(17px * var(--font-scale));
+            font-weight: 700;
+            line-height: 1.25;
+        }
+
+        .quality-metric-value {
+            color: #1552b1;
+            font-family: "DM Sans", "Noto Sans SC", sans-serif;
+            font-size: calc(44px * var(--font-scale));
+            font-weight: 850;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: -0.04em;
+            line-height: 1;
+            white-space: nowrap;
+        }
+
+        .quality-loop {
+            position: absolute;
+            top: 776px;
+            right: 104px;
+            left: 104px;
+            height: 184px;
+            padding: 14px 18px 10px;
+            border: 1px solid #d5e4f7;
+            border-radius: 14px;
+            background: linear-gradient(105deg, #f3f7ff, #eaf2ff);
+        }
+
+        .quality-loop-heading {
+            display: flex;
+            min-height: 29px;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 10px;
+        }
+
+        .quality-loop-title {
+            margin: 0;
+            color: #164b9d;
+            font-size: calc(22px * var(--font-scale));
+            font-weight: 850;
+            white-space: nowrap;
+        }
+
+        .quality-method-reference {
+            color: #61758f;
+            font-size: calc(15px * var(--font-scale));
+            font-weight: 650;
+            text-align: right;
+        }
+
+        .quality-loop-steps {
+            display: grid;
+            height: 46px;
+            grid-template-columns: minmax(0, 1fr) 36px minmax(0, 1fr) 36px minmax(0, 1fr) 36px minmax(0, 1.12fr);
+            align-items: stretch;
+            gap: 7px;
+        }
+
+        .quality-loop-step {
+            display: grid;
+            min-width: 0;
+            place-items: center;
+            padding: 6px 10px;
+            border: 1px solid #d5e2f3;
+            border-radius: 9px;
+            color: #294c78;
+            background: rgba(255, 255, 255, 0.88);
+            font-size: calc(18px * var(--font-scale));
+            font-weight: 750;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .quality-loop-step:last-child {
+            border-color: #b8d0ef;
+            color: #104ba6;
+            background: #f7faff;
+        }
+
+        .quality-loop-arrow {
+            display: grid;
+            place-items: center;
+            color: #3976ca;
+            font-family: "DM Sans", sans-serif;
+            font-size: calc(25px * var(--font-scale));
+            font-weight: 750;
+        }
+
+        .quality-loop-routes {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .quality-loop-route {
+            display: grid;
+            min-width: 0;
+            height: 36px;
+            grid-template-columns: 170px minmax(0, 1fr);
+            align-items: center;
+            gap: 12px;
+        }
+
+        .quality-loop-route-label {
+            color: #164b9d;
+            font-size: calc(17px * var(--font-scale));
+            font-weight: 850;
+            white-space: nowrap;
+        }
+
+        .quality-loop-route-steps {
+            display: grid;
+            min-width: 0;
+            height: 36px;
+            align-items: stretch;
+            gap: 6px;
+        }
+
+        .quality-loop-route:first-child .quality-loop-route-steps {
+            grid-template-columns: minmax(0, 1fr) 28px minmax(0, 1fr) 28px minmax(0, 1fr);
+        }
+
+        .quality-loop-route:last-child .quality-loop-route-steps {
+            grid-template-columns: minmax(0, 1fr) 28px minmax(0, 1fr) 28px minmax(0, 1fr) 28px minmax(0, 1fr);
+        }
+
+        .quality-loop-route-step {
+            display: grid;
+            min-width: 0;
+            place-items: center;
+            padding: 5px 9px;
+            border: 1px solid #d5e2f3;
+            border-radius: 9px;
+            color: #294c78;
+            background: rgba(255, 255, 255, 0.88);
+            font-size: calc(17px * var(--font-scale));
+            font-weight: 750;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .quality-loop-route:last-child .quality-loop-route-step {
+            border-color: #c6d9f2;
+            color: #104ba6;
+            background: #f7faff;
+        }
+
+        .quality-loop-route-arrow {
+            display: grid;
+            place-items: center;
+            color: #3976ca;
+            font-family: "DM Sans", sans-serif;
+            font-size: calc(23px * var(--font-scale));
+            font-weight: 800;
+        }
+
+        .quality-loop-note {
+            margin: 6px 0 0;
+            color: #61758f;
+            font-size: calc(15px * var(--font-scale));
+            font-weight: 600;
+            line-height: 1.25;
+            white-space: nowrap;
+        }
+
+        .quality-trace-scope {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            min-height: 44px;
+            margin-top: 18px;
+            color: #315982;
+            font-size: calc(14px * var(--font-scale));
+            font-weight: 650;
+            white-space: nowrap;
+        }
+
+        .quality-trace-scope-label {
+            flex: 0 0 auto;
+            color: #164b9d;
+            font-size: calc(15px * var(--font-scale));
+            font-weight: 850;
+        }
+
+        .quality-trace-tag {
+            padding: 5px 9px;
+            border: 1px solid #d0dff2;
+            border-radius: 999px;
+            color: #315982;
+            background: rgba(255, 255, 255, 0.8);
+            font-size: calc(14px * var(--font-scale));
+            font-weight: 750;
+        }
+
+        .quality-trace-scope-note {
+            overflow: hidden;
+            margin-left: auto;
+            color: #718198;
+            font-size: calc(15px * var(--font-scale));
+            font-weight: 550;
+            text-overflow: ellipsis;
+        }
+
+        .quality-reference-row {
+            position: absolute;
+            right: 300px;
+            bottom: 24px;
+            left: 104px;
+            display: flex;
+            height: 19px;
+            align-items: center;
+            gap: 12px;
+            color: #718198;
+            font-size: calc(15px * var(--font-scale));
+            font-weight: 600;
+            line-height: 1.25;
+            white-space: nowrap;
+        }
+
+        .quality-reference-group {
+            display: flex;
+            min-width: 0;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .quality-reference-group-final {
+            padding-left: 0;
+        }
+
+        .quality-reference-row > span[aria-hidden="true"] {
+            display: none;
+        }
+
+        .quality-reference-label {
+            flex: 0 0 auto;
+            color: #61758f;
+            font-weight: 750;
+        }
+
+        .quality-reference-link {
+            color: #718198;
+            text-decoration: underline dotted #a4b3c6;
+            text-underline-offset: 3px;
+        }
+
+        .quality-reference-link:hover,
+        .quality-reference-link:focus-visible {
+            color: #1552b1;
+        }
+
+        .quality-reference-separator {
+            color: #a0afc2;
+        }
+
         /* === SLIDE 08: REPAIR QUESTION EVALUATION === */
         .validation-copy {
             position: absolute;
@@ -1909,7 +3651,7 @@
             left: 104px;
             margin: 0;
             color: #171717;
-            font-size: calc(72px * var(--font-scale));
+            font-size: calc(64px * var(--font-scale));
             font-weight: 800;
             letter-spacing: -0.045em;
             line-height: 1.18;
@@ -1932,10 +3674,17 @@
             display: flex;
             min-width: 0;
             flex-direction: column;
-            padding: 34px 34px;
-            border: 1px solid #e2e3e5;
-            border-radius: 5px;
-            background: #f3f3f3;
+            padding: 28px 32px;
+            border: 1px solid #dce6f2;
+            border-top: 4px solid #7fa6dc;
+            border-radius: 14px;
+            background: linear-gradient(150deg, #ffffff, #f8faff);
+            box-shadow: 0 6px 18px rgba(31, 69, 120, 0.055);
+        }
+
+        .outcome-card:nth-child(2),
+        .outcome-card:nth-child(3) {
+            border-top-color: #1552b1;
         }
 
         .outcome-card-result {
@@ -1959,40 +3708,82 @@
 
         .outcome-card-heading {
             display: grid;
-            gap: 7px;
+            gap: 9px;
         }
 
         .outcome-card-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
             margin: 0;
             color: #1c1c1c;
-            font-size: calc(36px * var(--font-scale));
+            font-size: calc(32px * var(--font-scale));
             font-weight: 800;
             line-height: 1.2;
+        }
+
+        .outcome-card-index {
+            display: inline-grid;
+            width: 34px;
+            height: 34px;
+            flex: 0 0 34px;
+            place-items: center;
+            border: 1px solid #cadbf1;
+            border-radius: 50%;
+            color: #1552b1;
+            background: #f1f6ff;
+            font-family: "DM Sans", sans-serif;
+            font-size: calc(15px * var(--font-scale));
+            font-weight: 800;
         }
 
         .outcome-card-subtitle {
             margin: 0;
             color: #084bb7;
-            font-size: calc(27px * var(--font-scale));
+            font-size: calc(25px * var(--font-scale));
             font-weight: 750;
-            line-height: 1.25;
+            line-height: 1.32;
         }
 
         .outcome-card-copy {
             display: flex;
             flex: 1 1 auto;
             flex-direction: column;
-            justify-content: center;
-            gap: 13px;
-            margin: 18px 0 0;
+            justify-content: flex-start;
+            gap: 10px;
+            margin: 16px 0 0;
             color: #626a75;
-            font-size: calc(24px * var(--font-scale));
+            font-size: calc(22px * var(--font-scale));
             font-weight: 550;
-            line-height: 1.52;
+            line-height: 1.45;
         }
 
         .outcome-card-copy p {
             margin: 0;
+        }
+
+        .outcome-boundary-list {
+            display: grid;
+            gap: 8px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .outcome-boundary-list li {
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .outcome-boundary-list li::before {
+            position: absolute;
+            top: 0.62em;
+            left: 1px;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #4c7fc5;
+            content: "";
         }
 
         .outcome-card-lead {
@@ -2000,6 +3791,60 @@
             font-size: calc(28px * var(--font-scale));
             font-weight: 700;
             line-height: 1.4;
+        }
+
+        .outcome-card-transfer-copy {
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .outcome-transfer-summary {
+            color: #59697c;
+            font-size: calc(20px * var(--font-scale));
+            line-height: 1.36;
+        }
+
+        .outcome-transfer-flow {
+            display: flex;
+            min-width: 0;
+            align-items: center;
+            gap: 10px;
+            padding: 7px 12px;
+            border: 1px solid #d7e5fa;
+            border-radius: 9px;
+            color: #174f9f;
+            background: #f0f6ff;
+            font-size: calc(18px * var(--font-scale));
+            font-weight: 750;
+            line-height: 1.2;
+            white-space: nowrap;
+        }
+
+        .outcome-transfer-step {
+            flex: 0 0 auto;
+        }
+
+        .outcome-transfer-arrow {
+            color: #5b8bd1;
+            font-family: "DM Sans", sans-serif;
+            font-size: calc(20px * var(--font-scale));
+            font-weight: 700;
+        }
+
+        .outcome-transfer-scenario {
+            color: #56677b;
+            font-size: calc(18px * var(--font-scale));
+            line-height: 1.35;
+        }
+
+        .outcome-transfer-boundary {
+            margin-top: auto !important;
+            padding-top: 7px;
+            border-top: 1px solid #e1e8f2;
+            color: #718096;
+            font-size: calc(16px * var(--font-scale));
+            font-weight: 600;
+            line-height: 1.3;
         }
 
         .outcome-metric-grid {
@@ -2046,7 +3891,7 @@
         .closing-copy {
             position: absolute;
             inset: 0;
-            color: #858b94;
+            color: #171717;
             font-family: "Noto Sans SC", "DM Sans", sans-serif;
         }
 
@@ -2069,43 +3914,85 @@
             background: #084bb7;
         }
 
-        .closing-proof,
+        .closing-proof {
+            position: absolute;
+            left: 88px;
+            right: 88px;
+        }
+
+        .closing-proof {
+            top: 258px;
+        }
+
+        .closing-kicker {
+            margin: 0;
+            color: #084bb7;
+            font-size: calc(34px * var(--font-scale));
+            font-weight: 650;
+            line-height: 1.42;
+        }
+
+        .closing-statement {
+            margin: 20px 0 0;
+            color: #171717;
+            font-size: calc(76px * var(--font-scale));
+            font-weight: 700;
+            letter-spacing: -0.025em;
+            line-height: 1.4;
+        }
+
+        .closing-statement-line {
+            display: block;
+        }
+
+        .closing-emphasis {
+            color: #084bb7;
+        }
+
         .closing-next {
             position: absolute;
+            top: 592px;
             right: 88px;
             left: 88px;
         }
 
-        .closing-proof {
-            top: 284px;
-        }
-
-        .closing-kicker,
         .closing-next-lead {
             margin: 0;
+            color: #3c4a5e;
+            font-size: calc(34px * var(--font-scale));
+            font-weight: 650;
+            line-height: 1.42;
+        }
+
+        .closing-steps {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 76px minmax(0, 1fr) 76px minmax(0, 1fr);
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .closing-step {
+            display: flex;
+            min-height: 86px;
+            align-items: center;
+            justify-content: center;
+            padding: 18px 24px;
+            border: 1.5px solid rgba(8, 75, 183, 0.24);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.62);
             color: #084bb7;
-            font-size: calc(40px * var(--font-scale));
-            font-weight: 550;
-            line-height: 1.35;
+            font-size: calc(30px * var(--font-scale));
+            font-weight: 650;
+            line-height: 1.25;
+            text-align: center;
         }
 
-        .closing-statement,
-        .closing-next-statement {
-            margin: 20px 0 0;
-            color: #171717;
-            font-size: calc(60px * var(--font-scale));
-            font-weight: 700;
-            letter-spacing: -0.015em;
-            line-height: 1.38;
-        }
-
-        .closing-next {
-            top: 608px;
-        }
-
-        .closing-next-statement {
-            font-size: calc(54px * var(--font-scale));
-            line-height: 1.4;
+        .closing-step-arrow {
+            color: #6f9bd7;
+            font-family: "DM Sans", sans-serif;
+            font-size: calc(38px * var(--font-scale));
+            font-weight: 500;
+            text-align: center;
         }
 
         .closing-author {
@@ -2116,7 +4003,19 @@
             color: #171717;
             font-size: calc(30px * var(--font-scale));
             font-weight: 650;
-            line-height: 1.25;
+            line-height: 1.4;
+        }
+
+        .closing-thanks {
+            position: absolute;
+            right: 104px;
+            bottom: 142px;
+            margin: 0;
+            color: #084bb7;
+            font-size: calc(30px * var(--font-scale));
+            font-weight: 650;
+            letter-spacing: 0.04em;
+            line-height: 1.4;
         }
 
         .closing-side-rule {
@@ -2128,76 +4027,208 @@
             background: #084bb7;
         }
 
-        /* === PRESENTATION CONTROLS === */
-        /* Controls stay hidden while this is the only slide. They appear as
-           soon as additional .slide sections are added to the deck. */
-        .deck-controls {
-            position: fixed;
-            left: 50%;
-            bottom: 22px;
-            z-index: 1000;
-            display: none;
-            align-items: center;
-            gap: 12px;
-            padding: 8px 12px;
-            color: var(--control-text);
-            background: var(--control-bg);
-            border: 1px solid rgba(255, 255, 255, 0.22);
-            border-radius: 999px;
-            box-shadow: 0 8px 28px rgba(14, 32, 66, 0.22);
-            transform: translateX(-50%);
-            backdrop-filter: blur(14px);
+        .closing-page-number {
+            position: absolute;
+            right: 104px;
+            bottom: 34px;
+            margin: 0;
+            color: #858b94;
+            font-family: "DM Sans", "Noto Sans SC", sans-serif;
+            font-size: calc(18px * var(--font-scale));
+            font-variant-numeric: tabular-nums;
+            letter-spacing: 0.12em;
+            line-height: 1.2;
         }
 
-        body.has-multiple-slides .deck-controls {
+        /* === CARD HOVER INTERACTION === */
+        .intro-identity-card,
+        .intro-capability-card,
+        .library-problem-card,
+        .solution-decision-card,
+        .runtime-module,
+        .runtime-engine-card,
+        .runtime-skill-card,
+        .execution-step-card,
+        .execution-responsibility,
+        .quality-dataset-card,
+        .quality-protocol-card,
+        .quality-metric-card,
+        .outcome-card {
+            outline: 1px solid transparent;
+            outline-offset: -1px;
+            transition:
+                transform 180ms ease-out,
+                outline-color 180ms ease-out,
+                box-shadow 180ms ease-out,
+                background-color 180ms ease-out;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .deck-stage .slide.active :is(
+                .intro-identity-card,
+                .intro-capability-card,
+                .library-problem-card,
+                .solution-decision-card,
+                .runtime-module,
+                .runtime-engine-card,
+                .runtime-skill-card,
+                .execution-step-card,
+                .execution-responsibility,
+                .quality-dataset-card,
+                .quality-protocol-card,
+                .quality-metric-card,
+                .outcome-card
+            ):hover {
+                transform: translateY(-4px);
+                outline: 1px solid rgba(21, 82, 177, 0.3);
+                outline-offset: -1px;
+                box-shadow:
+                    inset 0 0 0 999px rgba(21, 82, 177, 0.04),
+                    0 12px 28px rgba(31, 69, 120, 0.15);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .deck-stage .slide.active :is(
+                .intro-identity-card,
+                .intro-capability-card,
+                .library-problem-card,
+                .solution-decision-card,
+                .runtime-module,
+                .runtime-engine-card,
+                .runtime-skill-card,
+                .execution-step-card,
+                .execution-responsibility,
+                .quality-dataset-card,
+                .quality-protocol-card,
+                .quality-metric-card,
+                .outcome-card
+            ):hover {
+                transform: none;
+            }
+        }
+
+        /* === PER-SLIDE NAVIGATION === */
+        .slide-navigation {
+            position: absolute;
+            right: 104px;
+            bottom: 24px;
+            z-index: 50;
             display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 3px 5px;
+            border: 1px solid rgba(177, 195, 219, 0.72);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.94);
+            box-shadow: 0 3px 10px rgba(24, 57, 102, 0.08);
+            backdrop-filter: blur(8px);
         }
 
-        .deck-control-button {
-            width: 34px;
-            height: 34px;
+        .slide-navigation-button {
+            display: grid;
+            width: 32px;
+            height: 32px;
+            place-items: center;
             padding: 0;
-            color: inherit;
-            font: inherit;
-            font-size: 20px;
-            line-height: 1;
-            background: transparent;
             border: 0;
             border-radius: 50%;
+            color: #1552b1;
+            background: transparent;
+            font: 700 24px/1 "DM Sans", sans-serif;
             cursor: pointer;
         }
 
-        .deck-control-button:hover:not(:disabled) {
-            background: rgba(255, 255, 255, 0.16);
+        .slide-navigation-button:hover:not(:disabled) {
+            background: #edf4ff;
         }
 
-        .deck-control-button:disabled {
-            opacity: 0.45;
+        .slide-navigation-button:focus-visible {
+            outline: 2px solid #3976ca;
+            outline-offset: 1px;
+        }
+
+        .slide-navigation-button:disabled {
+            color: #9aa9bc;
             cursor: default;
         }
 
-        .deck-count {
-            min-width: 68px;
-            text-align: center;
-            font: 500 13px/1.2 ui-sans-serif, system-ui, sans-serif;
-            font-variant-numeric: tabular-nums;
-        }
-
-        .deck-progress {
-            width: 88px;
-            height: 3px;
-            overflow: hidden;
-            background: rgba(255, 255, 255, 0.25);
+        .slide-navigation-count {
+            display: grid;
+            min-width: 66px;
+            height: 32px;
+            place-items: center;
+            padding: 0 7px;
+            border: 0;
             border-radius: 999px;
+            color: #65758b;
+            background: transparent;
+            font: 600 calc(16px * var(--font-scale))/1 "DM Sans", sans-serif;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: 0.08em;
+            text-align: center;
+            white-space: nowrap;
+            cursor: pointer;
         }
 
-        .deck-progress-fill {
-            width: 100%;
-            height: 100%;
-            background: var(--control-accent);
-            transform: scaleX(0);
-            transform-origin: left center;
-            transition: transform 220ms ease;
+        .slide-navigation-count:hover,
+        .slide-navigation-count[aria-expanded="true"] {
+            color: #1552b1;
+            background: #edf4ff;
+        }
+
+        .slide-navigation-count:focus-visible,
+        .slide-page-option:focus-visible {
+            outline: 2px solid #3976ca;
+            outline-offset: 2px;
+        }
+
+        .slide-page-picker {
+            position: absolute;
+            left: 50%;
+            bottom: calc(100% + 12px);
+            z-index: 60;
+            display: grid;
+            grid-template-columns: repeat(5, 40px);
+            gap: 8px;
+            padding: 12px;
+            border: 1px solid rgba(177, 195, 219, 0.82);
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 12px 30px rgba(24, 57, 102, 0.18);
+            backdrop-filter: blur(10px);
+            transform: translateX(-50%);
+        }
+
+        .slide-page-picker[hidden] {
+            display: none;
+        }
+
+        .slide-page-option {
+            display: grid;
+            width: 40px;
+            height: 36px;
+            place-items: center;
+            padding: 0;
+            border: 1px solid #dce7f5;
+            border-radius: 9px;
+            color: #405979;
+            background: #f8fbff;
+            font: 700 14px/1 "DM Sans", sans-serif;
+            font-variant-numeric: tabular-nums;
+            cursor: pointer;
+        }
+
+        .slide-page-option:hover {
+            border-color: #9bbcf0;
+            color: #1552b1;
+            background: #edf4ff;
+        }
+
+        .slide-page-option[aria-current="page"] {
+            border-color: #1552b1;
+            color: #fff;
+            background: #1552b1;
         }
 
         /* === PRINT LAYOUT === */
@@ -2241,7 +4272,7 @@
                 page-break-after: auto;
             }
 
-            .deck-controls {
+            .slide-navigation {
                 display: none !important;
             }
 
@@ -2278,11 +4309,11 @@
                     <p class="event-line">AI人才进阶之旅<span class="separator-dot">·</span>2026.10.17 – 18</p>
 
                     <h1 class="cover-title">面向港口设备工业维修场景的<span>智能体平台</span></h1>
-                    <p class="cover-subtitle">从一份设备故障材料出发，构建可追溯、可验证的维修 AI 工作路径</p>
+                    <p class="cover-subtitle">从一次设备故障报警出发，构建可追溯、可验证的维修 AI 工作路径</p>
 
                     <div class="speaker-block">
                         <strong class="speaker-name">吴奇伟 Kiwi</strong>
-                        <span class="speaker-role">AI Agent 研发 &amp; FDE 解决方案工程师</span>
+                        <span class="speaker-role">Agent 研发 &amp; FDE 工程师</span>
                     </div>
 
                     <div class="cover-footer-signature" aria-label="Peninsula Medical">
@@ -2293,44 +4324,62 @@
             </section>
 
             <!-- 逐字稿：2.这个项目是我在之前的实习里面做的一个完全个人端到端的项目。需求沟通、方案设计、开发集成、联调交付与客户培训。今天我不会介绍平台技术架构，而从一个故障报警讲起，说明我怎样发现信息断点、复用工程师经验，并用评测检查方案效果再上线交付的。 -->
-            <section class="slide" aria-label="第 2 页：个人介绍">
+            <section class="slide" aria-label="第 2 页：我是谁与能力证明">
                 <div class="intro-copy">
                     <i class="intro-top-rule" aria-hidden="true"></i>
-                    <div class="intro-section-label"><span>01</span><span>个人介绍</span></div>
+                    <div class="intro-section-label"><span>01</span><span>个人介绍 · 核心能力</span></div>
                     <img class="intro-brand-mark" src="./peninsula-logo-from-ppt.png" alt="Peninsula 半岛医疗">
 
-                    <h1 class="intro-title">我是谁，以及为什么讲这个项目</h1>
+                    <h1 class="intro-title">我是谁，以及这道菜证明什么</h1>
 
-                    <div class="intro-card-list">
-                        <article class="intro-card">
-                            <span class="intro-card-number">1</span>
-                            <h2 class="intro-card-title">我是谁</h2>
-                            <p class="intro-card-body">AI Agent 研发工程师｜HiAgent 项目 Owner</p>
+                    <section class="intro-identity-card" aria-label="个人身份与项目参与范围">
+                        <div class="intro-identity-person">
+                            <h2 class="intro-identity-name">吴奇伟</h2>
+                            <p class="intro-identity-role">HiAgent 项目 Owner</p>
+                        </div>
+                        <div class="intro-participation">
+                            <p class="intro-participation-label">参与链路</p>
+                            <div class="intro-participation-flow" aria-label="需求沟通、方案设计、开发集成、联调交付、客户培训">
+                                <span class="intro-participation-step">需求沟通</span><span class="intro-participation-arrow" aria-hidden="true">→</span>
+                                <span class="intro-participation-step">方案设计</span><span class="intro-participation-arrow" aria-hidden="true">→</span>
+                                <span class="intro-participation-step">开发集成</span><span class="intro-participation-arrow" aria-hidden="true">→</span>
+                                <span class="intro-participation-step">联调交付</span><span class="intro-participation-arrow" aria-hidden="true">→</span>
+                                <span class="intro-participation-step">客户培训</span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="intro-capability-grid" aria-label="三项核心能力">
+                        <article class="intro-capability-card">
+                            <h2 class="intro-capability-title"><span class="intro-capability-index">01</span><span>发现业务问题</span></h2>
+                            <p class="intro-capability-description">识别工业维修中跨系统、跨资料的信息断点。</p>
+                            <div class="intro-capability-evidence">
+                                <p class="intro-evidence-label">项目证据</p>
+                                <p class="intro-evidence-text">故障事件、PLC、图纸与维修知识关联。</p>
+                            </div>
                         </article>
 
-                        <article class="intro-card">
-                            <span class="intro-card-number">2</span>
-                            <h2 class="intro-card-title">和这道菜的关系</h2>
-                            <p class="intro-card-body intro-flow" aria-label="需求沟通到方案设计到开发集成到联调交付到客户培训">
-                                <span class="intro-flow-step">需求沟通</span><span class="intro-flow-arrow" aria-hidden="true"></span>
-                                <span class="intro-flow-step">方案设计</span><span class="intro-flow-arrow" aria-hidden="true"></span>
-                                <span class="intro-flow-step">开发集成</span><span class="intro-flow-arrow" aria-hidden="true"></span>
-                                <span class="intro-flow-step">联调交付</span><span class="intro-flow-arrow" aria-hidden="true"></span>
-                                <span class="intro-flow-step">客户培训</span>
-                            </p>
+                        <article class="intro-capability-card">
+                            <h2 class="intro-capability-title"><span class="intro-capability-index">02</span><span>发现与复用</span></h2>
+                            <p class="intro-capability-description">优先使用已有框架与工具，按需补充关键能力。</p>
+                            <div class="intro-capability-evidence">
+                                <p class="intro-evidence-label">项目证据</p>
+                                <p class="intro-evidence-text">RAGFlow、Skill/MCP、Runtime。</p>
+                            </div>
                         </article>
 
-                        <article class="intro-card">
-                            <span class="intro-card-number">3</span>
-                            <h2 class="intro-card-title">今天只讲一件事</h2>
-                            <p class="intro-card-body intro-flow" aria-label="故障报警到发现信息断点到复用工程师经验到评测效果到上线交付">
-                                <span class="intro-flow-step">故障报警</span><span class="intro-flow-arrow" aria-hidden="true"></span>
-                                <span class="intro-flow-step">发现信息断点</span><span class="intro-flow-arrow" aria-hidden="true"></span>
-                                <span class="intro-flow-step">复用工程师经验</span><span class="intro-flow-arrow" aria-hidden="true"></span>
-                                <span class="intro-flow-step">评测效果</span><span class="intro-flow-arrow" aria-hidden="true"></span>
-                                <span class="intro-flow-step">上线交付</span>
-                            </p>
+                        <article class="intro-capability-card">
+                            <h2 class="intro-capability-title"><span class="intro-capability-index">03</span><span>评测与交付</span></h2>
+                            <p class="intro-capability-description">用真实问题检验 Agent 执行、证据与边界。</p>
+                            <div class="intro-capability-evidence">
+                                <p class="intro-evidence-label">项目证据</p>
+                                <p class="intro-evidence-text">固定题集、证据溯源、人工复核。</p>
+                            </div>
                         </article>
+                    </section>
+
+                    <div class="intro-summary" aria-label="今天只讲一件事：一次设备故障报警，如何变成可追溯、可核验的 AI 排查流程。">
+                        <span><strong>今天只讲一件事：</strong>一次设备故障报警，如何变成可追溯、可核验的 AI 排查流程。</span>
                     </div>
 
                     <i class="intro-footer-rule" aria-hidden="true"></i>
@@ -2353,167 +4402,309 @@
                 </div>
             </section>
 
-            <section class="slide" aria-label="第 4 页：设备资料分类">
+            <section class="slide" aria-label="第 4 页：问题与场景">
                 <div class="library-copy">
                     <i class="intro-top-rule" aria-hidden="true"></i>
-                    <div class="intro-section-label"><span>02</span><span>做事过程</span></div>
+                    <div class="intro-section-label"><span>02</span><span>做事过程 · 问题与场景</span></div>
                     <img class="intro-brand-mark" src="./peninsula-logo-from-ppt.png" alt="Peninsula 半岛医疗">
 
-                    <h1 class="library-title">数据多、脏乱、分散</h1>
+                    <h1 class="library-title">一次设备报警，为什么不能直接让 AI 给出维修结论？</h1>
 
-                    <div class="library-grid">
-                        <table class="library-table" aria-label="设备资料与业务数据可展示内容">
-                            <colgroup><col><col></colgroup>
-                            <thead>
-                                <tr><th scope="col">类别</th><th scope="col">数据内容</th></tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">1. 操作与维修知识</th>
-                                    <td>司机操作手册、机械 / 液压 / 电气维修手册、保养手册、培训教材</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2. 图纸与接线资料</th>
-                                    <td>电气原理图、机械图、吊具图、液压接线图、消防接线图、竣工图、安装尺寸图</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3. PLC 与控制逻辑</th>
-                                    <td>梯形图程序、故障码、PLC 地址、I/O 点位、候选逻辑路径</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">4. 元器件与产品资料</th>
-                                    <td>限位开关、编码器、重量传感器、风速仪、电缆、制动器、电机和减速箱说明书</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">5. 设备档案与参数</th>
-                                    <td>车号、工号、设备型号、额定载荷、制造商、投运日期、设备技术参数</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">6. 实时状态与告警</th>
-                                    <td>设备在线 / 离线、当前故障、故障等级和数量、故障是否重复、设备轨迹 / 位置、实时点位快照</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">7. 历史维修与状态变化</th>
-                                    <td>历史故障、维修工单、维保计划、更换日期、部件使用天数和预警记录</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">8. 备件、库存与经营数据</th>
-                                    <td>推荐备件清单、物料编码、库存数量、库位、财务经营数据</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    <section class="library-scenario" aria-label="真实故障场景：280 设备的 MB17278 故障报警">
+                        <div>
+                            <p class="library-scenario-kicker">真实场景</p>
+                            <p class="library-scenario-headline">280 设备 · MB17278 故障报警</p>
+                        </div>
+                        <p class="library-scenario-copy">工程师需要关联事件记录、设备资料与控制逻辑，找到有依据的检查方向。</p>
+                    </section>
+
+                    <section class="library-problem-row" aria-label="维修排查中的三个问题">
+                        <article class="library-problem-card">
+                            <div class="library-problem-topline">
+                                <div class="library-problem-heading">
+                                    <span class="library-problem-index">01</span>
+                                    <h2 class="library-problem-title">资料分散</h2>
+                                </div>
+                                <span class="library-problem-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 64 64"><path d="M18 11h21l9 9v31a3 3 0 0 1-3 3H18a3 3 0 0 1-3-3V14a3 3 0 0 1 3-3Z"/><path d="M39 11v10h9M23 30h19M23 38h19M23 46h12"/><path d="M11 18v34a3 3 0 0 0 3 3h26"/></svg>
+                                </span>
+                            </div>
+                            <p class="library-problem-description">事件记录、维修手册、PLC 程序、电气原理图以及备件/库存信息分散在不同数据源。</p>
+                        </article>
+
+                        <div class="library-problem-arrow" aria-hidden="true">→</div>
+
+                        <article class="library-problem-card">
+                            <div class="library-problem-topline">
+                                <div class="library-problem-heading">
+                                    <span class="library-problem-index">02</span>
+                                    <h2 class="library-problem-title">线索关联困难</h2>
+                                </div>
+                                <span class="library-problem-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 64 64"><circle cx="16" cy="18" r="6"/><circle cx="48" cy="18" r="6"/><circle cx="32" cy="46" r="6"/><path d="M22 18h10a8 8 0 0 1 8 8v1M42 23 35 38M26 42 19 24"/></svg>
+                                </span>
+                            </div>
+                            <p class="library-problem-description">需要把报警、PLC 地址、控制逻辑、电气原理图、相关元器件及备件信息串联起来。</p>
+                        </article>
+
+                        <div class="library-problem-arrow" aria-hidden="true">→</div>
+
+                        <article class="library-problem-card">
+                            <div class="library-problem-topline">
+                                <div class="library-problem-heading">
+                                    <span class="library-problem-index">03</span>
+                                    <h2 class="library-problem-title">结论需要核验</h2>
+                                </div>
+                                <span class="library-problem-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 64 64"><rect x="15" y="12" width="34" height="42" rx="4"/><path d="M24 12v-3h16v3M23 27l4 4 8-9M23 42h17"/><path d="M43 40a8 8 0 1 1-2 10"/><path d="M40 38v5h5"/></svg>
+                                </span>
+                            </div>
+                            <p class="library-problem-description">历史快照和资料检索结果不等于实时状态，不能把推测直接当作维修结论。</p>
+                        </article>
+                    </section>
+
+                    <section class="library-core-question" aria-label="核心问题总结">
+                        <h2 class="library-core-question-label">核心问题</h2>
+                        <span class="library-core-question-divider" aria-hidden="true"></span>
+                        <p class="library-core-question-text">如何让 AI 跨数据源找到证据、建立关联，并生成工程师能够复核的检查路径？</p>
+                    </section>
 
                     <i class="intro-footer-rule" aria-hidden="true"></i>
                     <span class="intro-page-number" aria-label="第 4 页，共 10 页">04 / 10</span>
                 </div>
             </section>
 
-            <section class="slide" aria-label="第 5 页：资料、方案与用途链路">
+            <section class="slide" aria-label="第 5 页：发现与复用">
                 <div class="solution-copy">
                     <i class="intro-top-rule" aria-hidden="true"></i>
-                    <div class="intro-section-label"><span>02</span><span>做事过程</span></div>
+                    <div class="intro-section-label"><span>02</span><span>做事过程 · 发现与复用</span></div>
                     <img class="intro-brand-mark" src="./peninsula-logo-from-ppt.png" alt="Peninsula 半岛医疗">
 
-                    <h1 class="solution-title">40+原子化工具</h1>
+                    <h1 class="solution-title">先验证现成方案，再为不同资料选择检索路径</h1>
+                    <div class="solution-decisions" aria-label="三类资料的检索技术发现、验证与取舍">
+                        <article class="solution-decision-card">
+                            <div class="solution-decision-topic">
+                                <span class="solution-decision-index">01</span>
+                                <h2>多格式文档与知识检索</h2>
+                                <p>维修手册 · 产品资料 · 表格等</p>
+                            </div>
+                            <section class="solution-decision-explore" aria-label="探索方案与取舍理由">
+                                <span class="solution-decision-panel-label">探索与取舍</span>
+                                <div class="solution-explore-title">RAGFlow <span class="solution-explore-status">前期方案验证</span></div>
+                                <p class="solution-explore-copy">在项目真实数据集上，目标证据检索与排序效果未达预期；不同格式资料需要差异化的解析、分块和检索策略。</p>
+                            </section>
+                            <span class="solution-decision-arrow" aria-hidden="true">→</span>
+                            <section class="solution-decision-final" aria-label="参考复用与自己补齐">
+                                <div class="solution-final-split">
+                                    <div class="solution-final-block">
+                                        <span class="solution-final-kicker">参考 / 实际复用</span>
+                                        <div class="solution-reference-list">
+                                            <p class="solution-reference-item"><strong>文档解析</strong> 方法参考 MinerU 的多格式文档解析方案。</p>
+                                            <p class="solution-reference-item"><strong>分块策略</strong> 参考 RAGFlow 的四类分块方式：General / QA / Table / One。</p>
+                                            <p class="solution-reference-item"><strong>检索策略</strong> 借鉴 RAGFlow 检索架构与融合排序方法。</p>
+                                        </div>
+                                    </div>
+                                    <div class="solution-final-divider" aria-hidden="true"></div>
+                                    <div class="solution-final-block">
+                                        <span class="solution-final-kicker">自己补齐</span>
+                                        <p class="solution-final-summary"><span class="solution-adaptive-label">自适应策略优化</span>结合自定义知识库与评测集，自动探索、评测候选检索配置并择优推荐。</p>
+                                        <div class="solution-tech-tags">
+                                            <span class="solution-tech-tag">结构化证据加权 + 分层 RRF</span>
+                                            <span class="solution-tech-tag">MMR + 上下文预算</span>
+                                            <span class="solution-tech-tag">断崖判定动态 Top-K</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </article>
 
-                    <div class="solution-process" aria-label="资料处理与评测闭环">
-                        <span class="solution-process-step"><strong>资料盘点与边界</strong></span>
-                        <span class="solution-process-arrow" aria-hidden="true">→</span>
-                        <span class="solution-process-step"><strong>按资料特征解析、结构化</strong></span>
-                        <span class="solution-process-arrow" aria-hidden="true">→</span>
-                        <span class="solution-process-step"><strong>匹配检索或查询方式</strong></span>
-                        <span class="solution-process-arrow" aria-hidden="true">→</span>
-                        <span class="solution-process-step"><strong>返回带来源的证据</strong></span>
-                        <span class="solution-process-arrow" aria-hidden="true">→</span>
-                        <span class="solution-process-step"><strong>评测与工程师复核 ↺ 修正回归</strong></span>
+                        <article class="solution-decision-card">
+                            <div class="solution-decision-topic">
+                                <span class="solution-decision-index">02</span>
+                                <h2>Skill + CLI<br>复杂文档检索</h2>
+                                <p>领域知识 · 检索策略</p>
+                            </div>
+                            <section class="solution-decision-explore" aria-label="探索方案与取舍理由">
+                                <span class="solution-decision-panel-label">探索与取舍</span>
+                                <div class="solution-explore-title">CLI（如 grep）+ 文档处理</div>
+                                <p class="solution-explore-copy">CLI 能精确定位已解析文本，但缺少领域背景、跨页规则与检索策略，因此不单独承担完整领域检索。</p>
+                            </section>
+                            <span class="solution-decision-arrow" aria-hidden="true">→</span>
+                            <section class="solution-decision-final" aria-label="参考复用与自己补齐">
+                                <div class="solution-final-split">
+                                    <div class="solution-final-block">
+                                        <span class="solution-final-kicker">参考 / 实际复用</span>
+                                        <p class="solution-final-text">复用 CLI 文本检索；借鉴 Skill 的领域知识与执行流程组织方式。</p>
+                                    </div>
+                                    <div class="solution-final-divider" aria-hidden="true"></div>
+                                    <div class="solution-final-block">
+                                        <span class="solution-final-kicker">自己补齐</span>
+                                        <p class="solution-final-text"><strong class="solution-final-heading">Skill + CLI：</strong>补充设备知识、检索策略及电气原理图跨页关联查询规则。</p>
+                                    </div>
+                                </div>
+                            </section>
+                        </article>
+
+                        <article class="solution-decision-card">
+                            <div class="solution-decision-topic">
+                                <span class="solution-decision-index">03</span>
+                                <h2>EPLAN 图纸<br>与 PLC 关联反查</h2>
+                                <p>设备/端子·跨页跳转·PLC地址</p>
+                            </div>
+                            <section class="solution-decision-explore" aria-label="探索方案与取舍理由">
+                                <span class="solution-decision-panel-label">探索与取舍</span>
+                                <div class="solution-explore-title">GraphRAG <span class="solution-explore-status">评估后未采用</span></div>
+                                <p class="solution-explore-copy">EPLAN 与 PLC 导出资料已有可靠结构关系。保留知识图谱建模，不引入 GraphRAG 检索链路，优先采用确定性建图与反查。</p>
+                            </section>
+                            <span class="solution-decision-arrow" aria-hidden="true">→</span>
+                            <section class="solution-decision-final" aria-label="参考复用与自己补齐">
+                                <div class="solution-final-split">
+                                    <div class="solution-final-block">
+                                        <span class="solution-final-kicker">参考 / 实际复用</span>
+                                        <p class="solution-final-text">借鉴实体—关系建模；复用 EPLAN PDF 设备树、端子、页码。<br>并用文本坐标、跨页跳转及 TIA Portal 离线 PLC 地址/变量/程序关系。</p>
+                                    </div>
+                                    <div class="solution-final-divider" aria-hidden="true"></div>
+                                    <div class="solution-final-block">
+                                        <span class="solution-final-kicker">自己补齐</span>
+                                        <p class="solution-final-text">Python/CLI 确定性建节点/边图谱，仅纳可验证关系。<br>跨页与 PLC 反查；留存来源/坐标/证据状态，冲突/多解进 QA，不猜边。</p>
+                                    </div>
+                                </div>
+                            </section>
+                        </article>
                     </div>
 
-                    <div class="solution-flow">
-                        <table class="solution-table" aria-label="资料与处理方案对应关系">
-                            <colgroup><col><col></colgroup>
-                            <thead>
-                                <tr><th scope="col">资料</th><th scope="col">处理方案</th></tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">维修手册、产品说明、故障知识</th>
-                                    <td>文档解析 + 全文/语义检索 + RAG，从长文档中定位相关处置依据</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">电气图纸、跨页接线关系</th>
-                                    <td>Skill + CLI 检索，保留页码与来源；按设备、器件、线号追踪图纸证据</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">PLC 程序、故障地址、I/O 关系</th>
-                                    <td>PLC 图谱 + 地址反查，从故障线索追到候选逻辑路径</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">设备档案、工单、维保、库存、实时状态</th>
-                                    <td>MCP 原子工具，按数据类型查询数据库或状态接口，获取精确字段、历史记录、库存及当前告警</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    <section class="solution-evaluation" aria-label="评测驱动优化">
+                        <div class="solution-evaluation-title">评测驱动优化</div>
+                        <div class="solution-evaluation-flow">
+                            <span>固定题集</span><span class="solution-evaluation-arrow" aria-hidden="true">→</span>
+                            <span>失败样本归因</span><span class="solution-evaluation-arrow" aria-hidden="true">→</span>
+                            <span>检索策略调整</span>
+                        </div>
+                        <div class="solution-evaluation-methods"><strong>方法借鉴</strong>RAGAS · LLM-as-a-Judge · AutoResearch</div>
+                    </section>
 
                     <i class="intro-footer-rule" aria-hidden="true"></i>
                     <span class="intro-page-number" aria-label="第 5 页，共 10 页">05 / 10</span>
                 </div>
             </section>
 
-            <section class="slide" aria-label="第 6 页：自研 Runtime">
+            <section class="slide" aria-label="第 6 页：工程能力复用">
                 <div class="runtime-copy">
                     <i class="intro-top-rule" aria-hidden="true"></i>
-                    <div class="intro-section-label"><span>02</span><span>做事过程</span></div>
+                    <div class="intro-section-label"><span>02</span><span>做事过程 · 工程能力复用</span></div>
                     <img class="intro-brand-mark" src="./peninsula-logo-from-ppt.png" alt="Peninsula 半岛医疗">
 
-                    <h1 class="runtime-title">自研 Runtime：把 Agent 的运行回路握在自己手里</h1>
-
-                    <div class="runtime-evolution" aria-label="Workflow 流程编排、开源框架快速验证，再到 HiAgent Runtime">
-                        <div class="runtime-evolution-stage">
-                            <p class="runtime-evolution-name">Workflow</p>
-                            <p class="runtime-evolution-caption">流程编排</p>
-                        </div>
-                        <span class="runtime-evolution-arrow" aria-hidden="true">→</span>
-                        <div class="runtime-evolution-stage">
-                            <p class="runtime-evolution-name">开源框架</p>
-                            <p class="runtime-evolution-caption">快速验证</p>
-                        </div>
-                        <span class="runtime-evolution-arrow" aria-hidden="true">→</span>
-                        <div class="runtime-evolution-stage runtime-evolution-stage-current">
-                            <p class="runtime-evolution-name">HiAgent Runtime</p>
-                            <div class="runtime-evolution-features" aria-label="过程可见、工具可控、上下文可管">
-                                <span class="runtime-evolution-feature">过程可见</span>
-                                <span class="runtime-evolution-feature">工具可控</span>
-                                <span class="runtime-evolution-feature">上下文可管</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="runtime-core" aria-label="Skill、Runtime 与 MCP 组成运行回路">
-                        <div class="runtime-core-modules">
-                            <article class="runtime-module runtime-module-skill">
-                                <h2 class="runtime-module-name">Skill</h2>
-                                <div class="runtime-skill-details">
-                                    <p class="runtime-module-description">自回归 Skill 编写 Agent</p>
-                                    <p class="runtime-skill-reference">参考 writing-great-skills · skill-creator</p>
-                                    <p class="runtime-skill-history">原流程：工程师沟通 → 技术人员代写</p>
+                    <h1 class="runtime-title">复用成熟能力，构建可控、可连接、可沉淀的 Agent</h1>
+                    <div class="runtime-redesign-layout">
+                        <div class="runtime-redesign-top">
+                            <article class="runtime-engine-card runtime-engine-card-harness" aria-label="Agent Harness：运行过程可控">
+                                <h2 class="runtime-redesign-card-title"><span>01 ·</span> Agent Harness｜运行过程可控</h2>
+                                <div class="runtime-reference-tags" aria-label="框架探索和设计参考">
+                                    <span class="runtime-reference-chip"><strong>框架探索</strong> LangChain / LangGraph</span>
+                                    <span class="runtime-reference-chip"><strong>设计参考</strong> Claude Code / pi-agent</span>
+                                </div>
+                                <div class="runtime-analysis">
+                                    <div class="runtime-analysis-block">
+                                        <span class="runtime-analysis-label">为什么调整</span>
+                                        <p class="runtime-analysis-copy">项目实践中，多层封装与部分隐式 Prompt 增加调试及 Token 开销；框架版本迭代带来适配成本，也提高关键链路定制难度，因此需要更透明、可控的运行机制。</p>
+                                    </div>
+                                    <div class="runtime-analysis-block">
+                                        <span class="runtime-analysis-label">参考 / 复用</span>
+                                        <p class="runtime-analysis-copy">探索 LangChain / LangGraph 的编排与工具机制；参考 Agent Loop、工具组织和上下文管理设计，结合项目记忆及运行控制需求进行场景化组合。</p>
+                                    </div>
+                                </div>
+                                <div class="runtime-engine-outcome">
+                                    <div class="runtime-outcome-heading">
+                                        <span class="runtime-outcome-label">自己补齐 · 自主组织关键运行机制</span>
+                                        <h3 class="runtime-outcome-name">HiAgent Harness</h3>
+                                    </div>
+                                    <div class="runtime-harness-capabilities" aria-label="HiAgent Harness 已实现的运行能力">
+                                        <span class="runtime-harness-capability">Agent Loop · Profile 装配 · 多轮工具调用</span>
+                                        <span class="runtime-harness-capability">上下文管理 · 长短期记忆</span>
+                                        <span class="runtime-harness-capability">流式输出 · 停止控制</span>
+                                        <span class="runtime-harness-capability">Trace 记录 · 工具过程可见</span>
+                                        <span class="runtime-harness-capability">MCP 列表失败回退 · 轮次上限 · Profile 白名单</span>
+                                    </div>
+                                    <p class="runtime-outcome-takeaway">关键取舍：借鉴成熟 Harness 设计，自主掌握关键运行控制，降低黑盒调试与深度定制成本。</p>
                                 </div>
                             </article>
-                            <div class="runtime-module-connection" aria-hidden="true"><span>↔</span></div>
-                            <article class="runtime-module runtime-module-runtime">
-                                <h2 class="runtime-module-name">Runtime</h2>
-                                <p class="runtime-module-description">加载、编排、追踪</p>
-                            </article>
-                            <div class="runtime-module-connection" aria-hidden="true"><span>↔</span></div>
-                            <article class="runtime-module">
-                                <h2 class="runtime-module-name">MCP</h2>
-                                <p class="runtime-module-description">设备、工单、PLC、图纸</p>
+
+                            <article class="runtime-engine-card" aria-label="MCP：复用已有业务能力">
+                                <h2 class="runtime-redesign-card-title"><span>02 ·</span> MCP｜复用已有业务能力</h2>
+                                <div class="runtime-reference-tags" aria-label="MCP 规范、业务接口与已有数据能力">
+                                    <span class="runtime-reference-chip"><strong>规范参考</strong> MCP</span>
+                                    <span class="runtime-reference-chip"><strong>能力复用</strong> 现有业务接口</span>
+                                    <span class="runtime-reference-chip"><strong>业务数据</strong> 设备 · PLC · 工单 · 图纸 · 库存</span>
+                                </div>
+                                <div class="runtime-analysis">
+                                    <div class="runtime-analysis-block">
+                                        <span class="runtime-analysis-label">为什么适配</span>
+                                        <p class="runtime-analysis-copy">业务数据分布在不同系统，接口方式、数据结构、参数与访问约束各异，Agent 无法用同一方式直接访问。</p>
+                                    </div>
+                                    <div class="runtime-analysis-block">
+                                        <span class="runtime-analysis-label">实际复用</span>
+                                        <p class="runtime-analysis-copy">复用 MCP 的工具调用与接口描述机制，以及已有业务数据查询和访问能力。</p>
+                                    </div>
+                                </div>
+                                <div class="runtime-engine-outcome">
+                                    <div class="runtime-outcome-heading">
+                                        <span class="runtime-outcome-label">自己补齐 · 业务适配与 Tool Schema 标准化</span>
+                                        <h3 class="runtime-outcome-name">40+ 原子化工具</h3>
+                                    </div>
+                                    <div class="runtime-outcome-tags">
+                                        <span class="runtime-outcome-tag">设备与故障事件</span>
+                                        <span class="runtime-outcome-tag">PLC 与控制信息</span>
+                                        <span class="runtime-outcome-tag">图纸检索</span>
+                                        <span class="runtime-outcome-tag">维修工单</span>
+                                        <span class="runtime-outcome-tag">备件与库存</span>
+                                    </div>
+                                    <div class="runtime-outcome-tags runtime-outcome-tags-detail" aria-label="细分原子工具能力">
+                                        <span class="runtime-outcome-tag">设备档案/参数</span>
+                                        <span class="runtime-outcome-tag">维保/更换记录</span>
+                                        <span class="runtime-outcome-tag">放线表/线号定位</span>
+                                        <span class="runtime-outcome-tag">PLC 程序/IO 追溯</span>
+                                        <span class="runtime-outcome-tag">知识库检索</span>
+                                        <span class="runtime-outcome-tag">多图视觉问答</span>
+                                    </div>
+                                    <p class="runtime-outcome-takeaway">关键取舍：工具化复用已有系统，不重复开发底层业务；40+ 为项目沉淀规模。</p>
+                                </div>
                             </article>
                         </div>
-                        <span class="runtime-return-line" aria-hidden="true"></span>
-                        <span class="runtime-return-left" aria-hidden="true"></span>
-                        <span class="runtime-return-right" aria-hidden="true"></span>
+
+                        <article class="runtime-skill-card" aria-label="Skill 编写 Agent：维修经验沉淀与复用">
+                            <div class="runtime-skill-heading">
+                                <h2 class="runtime-skill-card-title"><span>03 ·</span> Skill 编写 Agent｜将工程师经验转化为可复用 Skill</h2>
+                            </div>
+                            <div class="runtime-skill-summary">
+                                <p class="runtime-skill-motivation">人工编写 Skill 需要同时理解维修知识、工具接口与执行规则，经验整理和复用成本较高。</p>
+                                <div class="runtime-skill-iteration" aria-label="使用要求：Skill 草案经工程师复核与案例验证后，根据反馈持续迭代">
+                                    <strong>使用要求</strong>
+                                    <span class="runtime-skill-iteration-flow">Skill 草案 → 工程师复核 → 案例验证 → 反馈修订</span>
+                                </div>
+                            </div>
+                            <div class="runtime-skill-flow">
+                                <section class="runtime-skill-stage">
+                                    <div class="runtime-skill-stage-label-row">
+                                        <span class="runtime-skill-stage-label">01 · 参考成熟方法</span>
+                                        <span class="runtime-skill-method-tag">方法参考</span>
+                                    </div>
+                                    <p class="runtime-skill-stage-copy"><strong>writing-great-skills</strong> · <strong>skill-creator</strong></p>
+                                    <p class="runtime-skill-stage-note">借鉴 Skill 的结构化编写方法与组织规范。</p>
+                                </section>
+                                <span class="runtime-skill-arrow" aria-hidden="true">→</span>
+                                <section class="runtime-skill-stage">
+                                    <span class="runtime-skill-stage-label">02 · 复用业务上下文</span>
+                                    <p class="runtime-skill-stage-copy runtime-skill-context-copy"><strong>Tool Schema</strong> · 维修手册 · 领域知识 · 工程师经验</p>
+                                    <p class="runtime-skill-stage-note">明确工具、业务规则、检查步骤与执行边界。</p>
+                                </section>
+                                <span class="runtime-skill-arrow" aria-hidden="true">→</span>
+                                <section class="runtime-skill-stage runtime-skill-stage-final">
+                                    <span class="runtime-skill-stage-label">03 · 自主补齐生成能力</span>
+                                    <p class="runtime-skill-stage-copy">辅助生成：Skill 方法 + Tool Schema + 领域知识 → Skill 草案</p>
+                                    <span class="runtime-skill-output-tags">任务目标 · 执行步骤 · 工具调用 · 核验边界</span>
+                                </section>
+                            </div>
+                        </article>
                     </div>
 
                     <i class="intro-footer-rule" aria-hidden="true"></i>
@@ -2521,238 +4712,268 @@
                 </div>
             </section>
 
-            <section class="slide" aria-label="第 7 页：在线检索与评测闭环">
-                <div class="retrieval-copy">
+            <section class="slide" aria-label="第 7 页：关键实施路径">
+                <div class="execution-copy">
                     <i class="intro-top-rule" aria-hidden="true"></i>
-                    <div class="intro-section-label"><span>02</span><span>做事过程</span></div>
+                    <div class="intro-section-label"><span>02</span><span>做事过程 · 关键实施路径</span></div>
                     <img class="intro-brand-mark" src="./peninsula-logo-from-ppt.png" alt="Peninsula 半岛医疗">
 
-                    <h1 class="retrieval-title">从资料底座到可追溯证据</h1>
+                    <h1 class="execution-title">从一次真实故障报警，到工程师可核验的检查路径</h1>
 
-                    <div class="retrieval-board">
-                        <div class="retrieval-columns">
-                            <article class="retrieval-panel">
-                                <div class="retrieval-panel-heading">
-                                    <h2 class="retrieval-panel-title">资料底座</h2>
-                                </div>
-                                <div class="retrieval-data-steps">
-                                    <div class="retrieval-data-step">
-                                        <span class="retrieval-data-number">01</span>
-                                        <span class="retrieval-data-step-copy">
-                                            <strong>多格式资料</strong>
-                                            <small>PDF / Office / 表格</small>
-                                        </span>
-                                    </div>
-                                    <span class="retrieval-stack-arrow" aria-hidden="true">↓</span>
-                                    <div class="retrieval-data-step">
-                                        <span class="retrieval-data-number">02</span>
-                                        <span class="retrieval-data-step-copy">
-                                            <strong>解析归一化</strong>
-                                        </span>
-                                    </div>
-                                    <span class="retrieval-stack-arrow" aria-hidden="true">↓</span>
-                                    <div class="retrieval-data-step">
-                                        <span class="retrieval-data-number">03</span>
-                                        <span class="retrieval-data-step-copy">
-                                            <strong>四类分块</strong>
-                                            <small>General / QA / Table / One</small>
-                                        </span>
-                                    </div>
-                                    <span class="retrieval-stack-arrow" aria-hidden="true">↓</span>
-                                    <div class="retrieval-data-step">
-                                        <span class="retrieval-data-number">04</span>
-                                        <span class="retrieval-data-step-copy">
-                                            <strong>保留出处</strong>
-                                            <small>元数据+索引</small>
-                                        </span>
-                                    </div>
-                                </div>
-                            </article>
-
-                            <article class="retrieval-panel retrieval-panel-center">
-                                <div class="retrieval-panel-heading">
-                                    <h2 class="retrieval-panel-title">在线检索</h2>
-                                    <span class="retrieval-panel-tag">核心路径</span>
-                                </div>
-                                <div class="retrieval-middle-flow">
-                                    <div class="retrieval-query">工程师问题</div>
-                                    <span class="retrieval-down-arrow" aria-hidden="true">↓</span>
-                                    <div class="retrieval-branches">
-                                        <div class="retrieval-branch">语义召回</div>
-                                        <div class="retrieval-branch">全文精确召回</div>
-                                    </div>
-                                    <div class="retrieval-merge-arrows" aria-hidden="true">
-                                        <span>↘</span><span>↙</span>
-                                    </div>
-                                    <div class="retrieval-fusion">WRRF 融合 + 结构证据排序</div>
-                                    <div class="retrieval-options">
-                                        <span class="retrieval-options-label">按策略启用</span>
-                                        <div class="retrieval-option-list">
-                                            <span class="retrieval-option">Query Rewrite</span>
-                                            <span class="retrieval-option">HyDE</span>
-                                            <span class="retrieval-option">Rerank</span>
-                                            <span class="retrieval-option">MMR</span>
-                                        </div>
-                                    </div>
-                                    <div class="retrieval-ranking">按需精排 <span aria-hidden="true">→</span> 上下文预算</div>
-                                    <span class="retrieval-down-arrow" aria-hidden="true">↓</span>
-                                    <div class="retrieval-result-node">带来源的检索结果</div>
-                                </div>
-                            </article>
-
-                            <article class="retrieval-panel">
-                                <div class="retrieval-panel-heading">
-                                    <h2 class="retrieval-panel-title">评测闭环</h2>
-                                    <span class="retrieval-panel-tag retrieval-autoresearch-tag"><strong>AutoResearch</strong><span>思想</span></span>
-                                </div>
-                                <div class="retrieval-eval-flow">
-                                    <div class="retrieval-eval-step">
-                                        <span class="retrieval-eval-index">01</span>
-                                        <span>固定题集</span>
-                                    </div>
-                                    <span class="retrieval-eval-arrow" aria-hidden="true">↓</span>
-                                    <div class="retrieval-eval-step">
-                                        <span class="retrieval-eval-index">02</span>
-                                        <span>候选策略回放</span>
-                                    </div>
-                                    <span class="retrieval-eval-arrow" aria-hidden="true">↓</span>
-                                    <div class="retrieval-eval-step retrieval-eval-metrics">
-                                        <span class="retrieval-eval-index">03</span>
-                                        <div class="retrieval-eval-metric-body">
-                                            <strong>指标与回答评估</strong>
-                                            <div class="retrieval-eval-metric-list">
-                                                <span class="retrieval-eval-metric">Hit@K</span>
-                                                <span class="retrieval-eval-metric">MRR</span>
-                                                <span class="retrieval-eval-metric">延迟</span>
-                                                <span class="retrieval-eval-metric">回答评估</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <span class="retrieval-eval-arrow" aria-hidden="true">↓</span>
-                                    <div class="retrieval-eval-step retrieval-eval-error">
-                                        <span class="retrieval-eval-index">04</span>
-                                        <span>错因定位</span>
-                                    </div>
-                                    <span class="retrieval-eval-arrow" aria-hidden="true">↓</span>
-                                    <div class="retrieval-eval-step">
-                                        <span class="retrieval-eval-index">05</span>
-                                        <span>复核与回归</span>
-                                    </div>
-                                    <span class="retrieval-eval-arrow" aria-hidden="true">↓</span>
-                                    <div class="retrieval-eval-step retrieval-eval-agent">
-                                        <span class="retrieval-eval-index">06</span>
-                                        <span class="retrieval-eval-agent-copy">
-                                            <strong><span class="retrieval-autoresearch-word">AutoResearch</span> 策略优化</strong>
-                                            <small>大模型迭代筛选最优检索策略</small>
-                                        </span>
-                                    </div>
-                                    <span class="retrieval-eval-return" aria-hidden="true"></span>
-                                </div>
-                            </article>
+                    <section class="execution-case-strip" aria-label="真实案例输入：280 设备 MB17278 故障报警">
+                        <div class="execution-case-identity">
+                            <span class="execution-eyebrow">真实案例输入</span>
+                            <strong class="execution-case-name">280 设备 · MB17278 故障报警</strong>
                         </div>
+                        <div class="execution-case-evidence">
+                            <span class="execution-evidence-heading">案例中可见的资料线索</span>
+                            <div class="execution-evidence-list">
+                                <span class="execution-evidence-tag">故障事件记录</span>
+                                <span class="execution-evidence-tag">故障时上传的 PLC 快照</span>
+                                <span class="execution-evidence-tag">知识库资料</span>
+                                <span class="execution-evidence-tag">备件库存信息</span>
+                                <span class="execution-evidence-tag">报告所列静态程序 / 原理图线索</span>
+                            </div>
+                        </div>
+                    </section>
 
-                        <span class="retrieval-board-arrow" aria-hidden="true">→</span>
-
+                    <div class="execution-flow-heading">
+                        <strong class="execution-flow-title">四步执行路径</strong>
+                        <span class="execution-flow-note">路径示意：工具按问题需要调用，不代表本案固定调用顺序</span>
                     </div>
 
-                    <div class="retrieval-evolution-card" aria-label="检索能力演进：开源框架 RAGFlow 到自研 RAG，再到 AutoResearch 自优化闭环">
-                        <span class="retrieval-evolution-stage retrieval-evolution-origin"><span>开源框架</span><strong>RAGFlow</strong></span>
-                        <span class="retrieval-evolution-arrow" aria-hidden="true">→</span>
-                        <span class="retrieval-evolution-stage">自研 RAG</span>
-                        <span class="retrieval-evolution-arrow" aria-hidden="true">→</span>
-                        <span class="retrieval-evolution-highlight"><strong>AutoResearch</strong><span>自优化闭环</span></span>
+                    <div class="execution-flow" aria-label="识别问题、检索证据、组织结论、人工复核">
+                        <article class="execution-step-card">
+                            <div class="execution-step-heading">
+                                <span class="execution-step-index">01</span>
+                                <h2>识别问题</h2>
+                            </div>
+                            <div class="execution-step-fields">
+                                <div class="execution-step-field">
+                                    <span class="execution-field-label">输入</span>
+                                    <p class="execution-field-copy">280 设备 · MB17278</p>
+                                </div>
+                                <div class="execution-step-field">
+                                    <span class="execution-field-label">关键动作</span>
+                                    <p class="execution-field-copy">确认设备、报警与事件信息，标出缺失的上下文。</p>
+                                </div>
+                            </div>
+                            <div class="execution-step-output">
+                                <span>输出</span>
+                                <strong>问题描述 + 待补信息</strong>
+                            </div>
+                            <span class="execution-step-capability">问题解析</span>
+                        </article>
+                        <span class="execution-step-arrow" aria-hidden="true">→</span>
+                        <article class="execution-step-card">
+                            <div class="execution-step-heading">
+                                <span class="execution-step-index">02</span>
+                                <h2>检索证据</h2>
+                            </div>
+                            <div class="execution-step-fields">
+                                <div class="execution-step-field">
+                                    <span class="execution-field-label">输入</span>
+                                    <p class="execution-field-copy">问题描述与待补信息</p>
+                                </div>
+                                <div class="execution-step-field">
+                                    <span class="execution-field-label">关键动作</span>
+                                    <p class="execution-field-copy">按任务需要查询故障记录、知识库资料及相关技术依据。</p>
+                                </div>
+                            </div>
+                            <div class="execution-step-output">
+                                <span>输出</span>
+                                <strong>带来源的候选证据</strong>
+                            </div>
+                            <span class="execution-step-capability">知识检索 · 业务查询</span>
+                        </article>
+                        <span class="execution-step-arrow" aria-hidden="true">→</span>
+                        <article class="execution-step-card">
+                            <div class="execution-step-heading">
+                                <span class="execution-step-index">03</span>
+                                <h2>组织结论</h2>
+                            </div>
+                            <div class="execution-step-fields">
+                                <div class="execution-step-field">
+                                    <span class="execution-field-label">输入</span>
+                                    <p class="execution-field-copy">不同来源的候选证据</p>
+                                </div>
+                                <div class="execution-step-field">
+                                    <span class="execution-field-label">关键动作</span>
+                                    <p class="execution-field-copy">由 Agent Harness 管理执行流程，关联线索并标明证据来源。</p>
+                                </div>
+                            </div>
+                            <div class="execution-step-output">
+                                <span>输出</span>
+                                <strong>候选检查路径</strong>
+                            </div>
+                            <span class="execution-step-capability">流程管理 · 来源标注</span>
+                        </article>
+                        <span class="execution-step-arrow" aria-hidden="true">→</span>
+                        <article class="execution-step-card">
+                            <div class="execution-step-heading">
+                                <span class="execution-step-index">04</span>
+                                <h2>人工复核</h2>
+                            </div>
+                            <div class="execution-step-fields">
+                                <div class="execution-step-field">
+                                    <span class="execution-field-label">输入</span>
+                                    <p class="execution-field-copy">候选路径与待核验项</p>
+                                </div>
+                                <div class="execution-step-field">
+                                    <span class="execution-field-label">关键动作</span>
+                                    <p class="execution-field-copy">工程师现场核实设备状态与证据适用性，再作维修决策。</p>
+                                </div>
+                            </div>
+                            <div class="execution-step-output">
+                                <span>输出</span>
+                                <strong>由工程师确认的检查决定</strong>
+                            </div>
+                            <span class="execution-step-capability">现场核验 · 人工决策</span>
+                        </article>
                     </div>
+
+                    <section class="execution-responsibilities" aria-label="人机分工">
+                        <article class="execution-responsibility execution-responsibility-agent">
+                            <div class="execution-responsibility-heading">
+                                <strong>Agent</strong>
+                                <span>整理证据与候选路径</span>
+                            </div>
+                            <p>检索、关联并呈现带来源的线索，标出尚待核验的部分。</p>
+                        </article>
+                        <article class="execution-responsibility">
+                            <div class="execution-responsibility-heading">
+                                <strong>工程师</strong>
+                                <span>核实现场并作出决定</span>
+                            </div>
+                            <p>确认设备实时状态、证据适用性及最终检查和维修动作。</p>
+                        </article>
+                    </section>
 
                     <i class="intro-footer-rule" aria-hidden="true"></i>
                     <span class="intro-page-number" aria-label="第 7 页，共 10 页">07 / 10</span>
                 </div>
             </section>
 
-            <section class="slide" aria-label="第 8 页：真实维修题评测">
-                <div class="validation-copy">
+            <section class="slide" aria-label="第 8 页：真实问题评测与持续优化">
+                <div class="quality-eval-copy">
                     <i class="intro-top-rule" aria-hidden="true"></i>
-                    <div class="intro-section-label"><span>02</span><span>做事过程</span></div>
+                    <div class="intro-section-label"><span>02</span><span>做事过程 · 评测与优化</span></div>
                     <img class="intro-brand-mark" src="./peninsula-logo-from-ppt.png" alt="Peninsula 半岛医疗">
 
-                    <h1 class="validation-title">从真实维修题出发，检验 Agent 会不会判断、执行并给出依据</h1>
+                    <h1 class="quality-eval-title">从三类题集到 Trace 回归，让 Agent 质量可验证</h1>
+                    <p class="quality-eval-subtitle">
+                        <span>题目来源：工程师高频问题 · 内部补充题 · 真实对话与失败样本</span>
+                        <span class="quality-design-tag">评测体系设计</span>
+                    </p>
 
-                    <section class="validation-source-strip" aria-label="题目来源">
-                        <h2 class="validation-source-label">题目来源</h2>
-                        <div class="validation-source-list">
-                            <span class="validation-source-item">工程师高频问题</span>
-                            <span class="validation-source-item">内部补充题</span>
-                            <span class="validation-source-item">真实对话样本</span>
-                        </div>
+                    <section class="quality-dataset-grid" aria-label="三类评测数据集设计">
+                        <article class="quality-dataset-card">
+                            <h2 class="quality-dataset-heading"><span>01 黄金集</span><span class="quality-dataset-english">Gold Set</span></h2>
+                            <p class="quality-dataset-purpose">守住质量底线</p>
+                            <p class="quality-dataset-description">领域专家确认典型题，保留标准证据、预期行为与判定规则。</p>
+                            <p class="quality-dataset-use">用途：稳定基准评测与关键质量门槛</p>
+                        </article>
+                        <article class="quality-dataset-card">
+                            <h2 class="quality-dataset-heading"><span>02 回归集</span><span class="quality-dataset-english">Regression Set</span></h2>
+                            <p class="quality-dataset-purpose">防止版本退化</p>
+                            <p class="quality-dataset-description">沉淀通过案例与已修复失败题；Agent、模型或工具调整后重测。</p>
+                            <p class="quality-dataset-use">用途：验证已有能力没有退步</p>
+                        </article>
+                        <article class="quality-dataset-card">
+                            <h2 class="quality-dataset-heading"><span>03 挑战集</span><span class="quality-dataset-english">Challenge Set</span></h2>
+                            <p class="quality-dataset-purpose">暴露能力边界</p>
+                            <p class="quality-dataset-description">覆盖信息不足、长尾故障、跨系统矛盾与高风险场景。</p>
+                            <p class="quality-dataset-use">用途：检验新能力并发现未解问题</p>
+                        </article>
                     </section>
 
-                    <h2 class="validation-section-heading">四道判断关</h2>
-
-                    <div class="validation-gate-row" aria-label="Agent 评测的四道判断关">
-                        <article class="validation-gate">
-                            <div class="validation-gate-topline">
-                                <span class="validation-gate-number">01</span>
-                                <span class="validation-gate-code">CTX</span>
+                    <div class="quality-eval-columns">
+                        <section class="quality-eval-section quality-protocol" aria-labelledby="quality-protocol-title">
+                            <h2 class="quality-section-heading" id="quality-protocol-title">
+                                <span>评测标准与执行协议</span>
+                                <span class="quality-protocol-tag">建议协议</span>
+                            </h2>
+                            <div class="quality-gate-grid" aria-label="四道质量判断关">
+                                <span class="quality-gate-chip"><strong>CTX</strong><span>上下文完整性</span></span>
+                                <span class="quality-gate-chip"><strong>OOSR / OOC</strong><span>执行与安全边界</span></span>
+                                <span class="quality-gate-chip"><strong>TCC</strong><span>工具调用质量</span></span>
+                                <span class="quality-gate-chip"><strong>CNT</strong><span>结论证据质量</span></span>
                             </div>
-                            <h3 class="validation-gate-question">上下文够不够？</h3>
-                            <p class="validation-gate-description">信息补足、追问题</p>
-                        </article>
-
-                        <span class="validation-gate-arrow" aria-hidden="true">→</span>
-
-                        <article class="validation-gate">
-                            <div class="validation-gate-topline">
-                                <span class="validation-gate-number">02</span>
-                                <span class="validation-gate-code">OOSR / OOC</span>
-                                <span class="validation-safety-tag">安全红线</span>
+                            <div class="quality-protocol-cards">
+                                <article class="quality-protocol-card">
+                                    <strong>每题建议独立运行 4 次</strong>
+                                    <span>观察首次成功率、四次通过率与结果稳定性；不是行业统一标准。</span>
+                                </article>
+                                <article class="quality-protocol-card">
+                                    <strong>1–5 分 Rubric + 安全硬门槛</strong>
+                                    <span>任务与证据分级；越权、危险操作、无据定论单独判定，不由均分抵消。</span>
+                                </article>
                             </div>
-                            <h3 class="validation-gate-question">该不该接、<br>能不能做？</h3>
-                            <p class="validation-gate-description">边界题、能力边界题</p>
-                        </article>
-
-                        <span class="validation-gate-arrow" aria-hidden="true">→</span>
-
-                        <article class="validation-gate">
-                            <div class="validation-gate-topline">
-                                <span class="validation-gate-number">03</span>
-                                <span class="validation-gate-code">TCC</span>
+                            <h3 class="quality-review-title">分级评审：程序检查 → LLM 评审 → 人工校准</h3>
+                            <div class="quality-review-chain" aria-label="建议分级评审职责">
+                                <div class="quality-review-stage"><strong>程序</strong><span>Schema、参数、权限、引用匹配、工具状态</span></div>
+                                <div class="quality-review-stage"><strong>LLM</strong><span>相关性、完整性、证据支持度与结构评分</span></div>
+                                <div class="quality-review-stage"><strong>人工</strong><span>高风险、低分、争议及抽样任务复核</span></div>
                             </div>
-                            <h3 class="validation-gate-question">工具调用<br>对不对？</h3>
-                            <p class="validation-gate-description">全链路题</p>
-                        </article>
+                        </section>
 
-                        <span class="validation-gate-arrow" aria-hidden="true">→</span>
-
-                        <article class="validation-gate">
-                            <div class="validation-gate-topline">
-                                <span class="validation-gate-number">04</span>
-                                <span class="validation-gate-code">CNT</span>
+                        <section class="quality-eval-section quality-results" aria-labelledby="quality-metrics-title">
+                            <h2 class="quality-section-heading" id="quality-metrics-title">
+                                <span>当前评测结果</span>
+                            </h2>
+                            <div class="quality-metric-grid" aria-label="四项现有项目展示指标">
+                                <article class="quality-metric-card"><span class="quality-metric-label">任务完成率</span><strong class="quality-metric-value">88%</strong></article>
+                                <article class="quality-metric-card"><span class="quality-metric-label">工具选择正确率</span><strong class="quality-metric-value">94%</strong></article>
+                                <article class="quality-metric-card"><span class="quality-metric-label">参数正确率</span><strong class="quality-metric-value">97%</strong></article>
+                                <article class="quality-metric-card"><span class="quality-metric-label">引用覆盖率</span><strong class="quality-metric-value">100%</strong></article>
                             </div>
-                            <h3 class="validation-gate-question">结论有<br>依据吗？</h3>
-                            <p class="validation-gate-description">来源、准确、完整</p>
-                        </article>
+                        </section>
                     </div>
 
-                    <section class="validation-results" aria-label="当前评测结果">
-                        <h2 class="validation-results-heading">当前评测结果</h2>
-                        <div class="validation-metric-list">
-                            <div class="validation-metric">
-                                <span class="validation-metric-label">任务完成率</span>
-                                <strong class="validation-metric-value">88%</strong>
+                    <section class="quality-loop" aria-label="Trace 失败归因与检索策略自优化闭环">
+                        <div class="quality-loop-heading">
+                            <h2 class="quality-loop-title">Trace 归因与失败闭环</h2>
+                            <span class="quality-method-reference">方法参考：RAGAS · LLM-as-a-Judge · AutoResearch</span>
+                        </div>
+                        <div class="quality-loop-routes">
+                            <div class="quality-loop-route" aria-label="Trace 失败归因路径">
+                                <strong class="quality-loop-route-label">Trace 失败归因</strong>
+                                <div class="quality-loop-route-steps">
+                                    <span class="quality-loop-route-step">执行记录回放</span>
+                                    <span class="quality-loop-route-arrow" aria-hidden="true">→</span>
+                                    <span class="quality-loop-route-step">定位失败环节</span>
+                                    <span class="quality-loop-route-arrow" aria-hidden="true">→</span>
+                                    <span class="quality-loop-route-step">沉淀失败 Case</span>
+                                </div>
                             </div>
-                            <div class="validation-metric">
-                                <span class="validation-metric-label">工具选择正确率</span>
-                                <strong class="validation-metric-value">94%</strong>
-                            </div>
-                            <div class="validation-metric">
-                                <span class="validation-metric-label">参数正确率</span>
-                                <strong class="validation-metric-value">97%</strong>
-                            </div>
-                            <div class="validation-metric">
-                                <span class="validation-metric-label">引用覆盖率</span>
-                                <strong class="validation-metric-value">100%</strong>
+                            <div class="quality-loop-route" aria-label="检索策略自优化路径">
+                                <strong class="quality-loop-route-label">检索策略自优化</strong>
+                                <div class="quality-loop-route-steps">
+                                    <span class="quality-loop-route-step">候选策略生成</span>
+                                    <span class="quality-loop-route-arrow" aria-hidden="true">→</span>
+                                    <span class="quality-loop-route-step">自动评测对比</span>
+                                    <span class="quality-loop-route-arrow" aria-hidden="true">→</span>
+                                    <span class="quality-loop-route-step">择优推荐</span>
+                                    <span class="quality-loop-route-arrow" aria-hidden="true">→</span>
+                                    <span class="quality-loop-route-step">回归验证</span>
+                                </div>
                             </div>
                         </div>
+                        <p class="quality-loop-note">Trace 观察 Task / Plan / Tool / Evidence 执行记录；失败 Case 回流下一轮评测。</p>
                     </section>
+                    <div class="quality-reference-row" aria-label="公开 Agent 评测实践参考">
+                        <div class="quality-reference-group">
+                            <span class="quality-reference-label">公开实践参考：</span>
+                            <a class="quality-reference-link" href="https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents" target="_blank" rel="noopener noreferrer" title="Demystifying evals for AI agents · Anthropic Engineering · Published Jan 09, 2026">Anthropic Agent Evals（2026）</a>
+                            <span class="quality-reference-separator">·</span>
+                            <a class="quality-reference-link" href="https://tech.meituan.com/2026/08/07/Agent-Evaluation.html" target="_blank" rel="noopener noreferrer" title="Agent评测漫谈——由浅入深讲解Agent评测 · 美团技术团队 · 2026-08-07">美团《Agent评测漫谈》（2026）</a>
+                        </div>
+                        <span aria-hidden="true"></span>
+                        <div class="quality-reference-group quality-reference-group-final">
+                            <span class="quality-reference-separator">·</span>
+                            <a class="quality-reference-link" href="https://www.alibabacloud.com/help/zh/agentloop/user-guide/evaluator/" target="_blank" rel="noopener noreferrer" title="评估器 - Agent 观测与优化 AgentLoop · 阿里云 · Updated Aug 25, 2026">阿里云 AgentLoop 评估器（2026）</a>
+                        </div>
+                    </div>
 
                     <i class="intro-footer-rule" aria-hidden="true"></i>
                     <span class="intro-page-number" aria-label="第 8 页，共 10 页">08 / 10</span>
@@ -2765,65 +4986,62 @@
                     <div class="intro-section-label"><span>03</span><span>成果收获</span></div>
                     <img class="intro-brand-mark" src="./peninsula-logo-from-ppt.png" alt="Peninsula 半岛医疗">
 
-                    <h1 class="outcome-title">结果、收获，以及诚实的边界</h1>
+                    <h1 class="outcome-title">从技术实现到业务交付：结果、收获与边界</h1>
 
                     <div class="outcome-grid">
                         <article class="outcome-card outcome-card-result" aria-labelledby="outcome-result-title">
                             <div class="outcome-card-heading">
-                                <h2 class="outcome-card-title" id="outcome-result-title">结果</h2>
-                                <p class="outcome-card-subtitle">从能运行到可衡量</p>
+                                <h2 class="outcome-card-title" id="outcome-result-title"><span class="outcome-card-index">01</span>项目结果</h2>
+                                <p class="outcome-card-subtitle">从回答问题，到组织可追溯的检查线索</p>
                             </div>
-                            <span class="outcome-card-tag">WAIC展示</span>
-                            <div class="outcome-metric-grid" aria-label="评测指标">
-                                <div class="outcome-metric">
-                                    <strong class="outcome-metric-value">88%</strong>
-                                    <span class="outcome-metric-label">任务完成率</span>
-                                </div>
-                                <div class="outcome-metric">
-                                    <strong class="outcome-metric-value">94%</strong>
-                                    <span class="outcome-metric-label">工具选择正确率</span>
-                                </div>
-                                <div class="outcome-metric">
-                                    <strong class="outcome-metric-value">97%</strong>
-                                    <span class="outcome-metric-label">参数正确率</span>
-                                </div>
-                                <div class="outcome-metric">
-                                    <strong class="outcome-metric-value">100%</strong>
-                                    <span class="outcome-metric-label">引用覆盖率</span>
-                                </div>
+                            <div class="outcome-card-copy">
+                                <p>围绕真实设备故障报警，结合事件记录与相关技术资料，整理出带证据来源的候选检查路径。项目成果曾用于 WAIC 展示。</p>
                             </div>
                         </article>
 
                         <article class="outcome-card" aria-labelledby="outcome-learning-title">
                             <div class="outcome-card-heading">
-                                <h2 class="outcome-card-title" id="outcome-learning-title">收获</h2>
-                                <p class="outcome-card-subtitle">AI 落地的关键，是可靠解决问题</p>
+                                <h2 class="outcome-card-title" id="outcome-learning-title"><span class="outcome-card-index">02</span>核心收获</h2>
+                                <p class="outcome-card-subtitle">成熟能力优先复用，场景差异按需改造</p>
                             </div>
                             <div class="outcome-card-copy">
-                                <p>成熟能力优先复用，场景差异按需改造。</p>
-                                <p>用真实问题与评测结果驱动优化，而非堆叠技术。</p>
+                                <p>AI 落地不是堆叠框架，而是结合真实业务约束选择合适方案。</p>
+                                <p>用真实问题与评测结果持续驱动优化，而不只依靠主观判断。</p>
                             </div>
                         </article>
 
                         <article class="outcome-card" aria-labelledby="outcome-limit-title">
                             <div class="outcome-card-heading">
-                                <h2 class="outcome-card-title" id="outcome-limit-title">还没做成</h2>
-                                <p class="outcome-card-subtitle">边界需要持续验证</p>
+                                <h2 class="outcome-card-title" id="outcome-limit-title"><span class="outcome-card-index">03</span>诚实的边界</h2>
+                                <p class="outcome-card-subtitle">AI 辅助分析，不替代工程师判断</p>
                             </div>
                             <div class="outcome-card-copy">
-                                <p>复杂跨系统故障仍需工程师复核。</p>
-                                <p>引用覆盖率不等于结论正确；长尾故障和安全关键操作仍需持续验证。</p>
+                                <ul class="outcome-boundary-list">
+                                    <li>历史故障快照不等于实时状态。</li>
+                                    <li>引用覆盖不等于维修结论正确。</li>
+                                    <li>复杂跨系统故障与高风险操作仍需工程师核验。</li>
+                                </ul>
                             </div>
                         </article>
 
-                        <article class="outcome-card" aria-labelledby="outcome-transfer-title">
+                        <article class="outcome-card outcome-card-transfer" aria-labelledby="outcome-transfer-title">
                             <div class="outcome-card-heading">
-                                <h2 class="outcome-card-title" id="outcome-transfer-title">可迁移</h2>
-                                <p class="outcome-card-subtitle">从工业维修到医疗设备服务</p>
+                                <h2 class="outcome-card-title" id="outcome-transfer-title"><span class="outcome-card-index">04</span>平台泛化与能力迁移</h2>
+                                <p class="outcome-card-subtitle">复用 Agent 基座，按需装配新业务智能体</p>
                             </div>
-                            <div class="outcome-card-copy">
-                                <p>复用多源知识整合、Skill/MCP 工具接入、证据追溯与评测闭环的方法。</p>
-                                <p>具体业务规则需重新调研验证。</p>
+                            <div class="outcome-card-copy outcome-card-transfer-copy">
+                                <p class="outcome-transfer-summary">HiAgent 已沉淀通用 Agent Harness、MCP 工具接入与 Skill 体系；新业务可扩展领域 MCP 工具、配置专业 Skill 和规则，按角色与任务动态装配 Agent。</p>
+                                <div class="outcome-transfer-flow" aria-label="能力扩展逻辑：通用 Harness、扩展 MCP、配置 Skill、动态装配">
+                                    <span class="outcome-transfer-step">通用 Harness</span>
+                                    <span class="outcome-transfer-arrow" aria-hidden="true">→</span>
+                                    <span class="outcome-transfer-step">扩展 MCP</span>
+                                    <span class="outcome-transfer-arrow" aria-hidden="true">→</span>
+                                    <span class="outcome-transfer-step">配置 Skill</span>
+                                    <span class="outcome-transfer-arrow" aria-hidden="true">→</span>
+                                    <span class="outcome-transfer-step">动态装配</span>
+                                </div>
+                                <p class="outcome-transfer-scenario">医疗设备服务可考虑复用通用执行基座，接入设备知识、工单、备件信息及领域流程。</p>
+                                <p class="outcome-transfer-boundary">医疗设备相关知识、权限、安全和业务规则仍需重新适配与验证。</p>
                             </div>
                         </article>
                     </div>
@@ -2840,29 +5058,31 @@
 
                     <section class="closing-proof" aria-labelledby="closing-proof-title">
                         <p class="closing-kicker" id="closing-proof-title">这道菜证明</p>
-                        <p class="closing-statement">我能从真实业务问题出发，发现并复用成熟能力，通过工程化集成与评测，让 AI 方案可验证、可交付。</p>
+                        <p class="closing-statement">
+                            <span class="closing-statement-line">从真实问题出发，<span class="closing-emphasis">发现并复用成熟能力</span>，</span>
+                            <span class="closing-statement-line">让 AI 方案<span class="closing-emphasis">可验证、可交付</span>。</span>
+                        </p>
                     </section>
 
                     <section class="closing-next" aria-labelledby="closing-next-title">
-                        <p class="closing-next-lead" id="closing-next-title">若进入下一步，我愿意把这套方法用在</p>
-                        <p class="closing-next-statement">半岛医疗实际场景：先与业务方对齐目标，再复用开源框架或现有方案做最小可行验证；根据反馈校准需求、迭代至可交付。</p>
+                        <p class="closing-next-lead" id="closing-next-title">走进半岛医疗，我希望这样做：</p>
+                        <div class="closing-steps" role="group" aria-label="进入半岛医疗后的工作方法">
+                            <div class="closing-step">理解业务与边界</div>
+                            <span class="closing-step-arrow" aria-hidden="true">→</span>
+                            <div class="closing-step">复用已有能力</div>
+                            <span class="closing-step-arrow" aria-hidden="true">→</span>
+                            <div class="closing-step">验证并迭代交付</div>
+                        </div>
                     </section>
 
+                    <p class="closing-thanks">感谢聆听</p>
                     <p class="closing-author">吴奇伟 Kiwi</p>
                     <i class="closing-side-rule" aria-hidden="true"></i>
+                    <span class="closing-page-number" aria-label="第 10 页，共 10 页">10 / 10</span>
                 </div>
             </section>
         </main>
     </div>
-
-    <nav class="deck-controls" aria-label="演讲页导航">
-        <button class="deck-control-button" id="previousSlide" type="button" aria-label="上一页">‹</button>
-        <span class="deck-count" id="deckCount" aria-live="polite">01 / 01</span>
-        <div class="deck-progress" aria-hidden="true">
-            <div class="deck-progress-fill" id="deckProgress"></div>
-        </div>
-        <button class="deck-control-button" id="nextSlide" type="button" aria-label="下一页">›</button>
-    </nav>
 
     <script>
         /* === PRESENTATION CONTROLLER === */
@@ -2875,17 +5095,104 @@
                 this.touchStartX = null;
                 this.touchStartY = null;
                 this.wheelLocked = false;
-                this.previousButton = document.getElementById('previousSlide');
-                this.nextButton = document.getElementById('nextSlide');
-                this.count = document.getElementById('deckCount');
-                this.progress = document.getElementById('deckProgress');
+                this.slideControls = [];
 
                 this.setupStageScale();
+                this.setupSlideControls();
                 this.setupKeyboardNavigation();
                 this.setupWheelNavigation();
                 this.setupTouchNavigation();
-                this.setupButtons();
                 this.showSlide(0);
+            }
+
+            setupSlideControls() {
+                this.slideControls = this.slides.map((slide, index) => {
+                    slide.querySelector('.intro-page-number, .closing-page-number')?.remove();
+
+                    const navigation = document.createElement('nav');
+                    navigation.className = 'slide-navigation';
+                    navigation.setAttribute('aria-label', `第 ${index + 1} 页翻页控制`);
+
+                    const previousButton = document.createElement('button');
+                    previousButton.className = 'slide-navigation-button';
+                    previousButton.type = 'button';
+                    previousButton.setAttribute('aria-label', '上一页');
+                    previousButton.textContent = '‹';
+                    previousButton.addEventListener('click', () => this.showSlide(index - 1));
+
+                    const count = document.createElement('button');
+                    count.className = 'slide-navigation-count';
+                    count.type = 'button';
+                    count.setAttribute('aria-live', 'polite');
+                    count.setAttribute('aria-haspopup', 'dialog');
+                    count.setAttribute('aria-expanded', 'false');
+                    count.setAttribute('aria-controls', `slidePagePicker${index + 1}`);
+
+                    const picker = document.createElement('div');
+                    picker.className = 'slide-page-picker';
+                    picker.id = `slidePagePicker${index + 1}`;
+                    picker.setAttribute('role', 'dialog');
+                    picker.setAttribute('aria-label', '选择跳转页面');
+                    picker.hidden = true;
+
+                    this.slides.forEach((_, pageIndex) => {
+                        const pageNumber = String(pageIndex + 1).padStart(2, '0');
+                        const pageOption = document.createElement('button');
+                        pageOption.className = 'slide-page-option';
+                        pageOption.type = 'button';
+                        pageOption.textContent = pageNumber;
+                        pageOption.setAttribute('aria-label', `跳转到第 ${pageNumber} 页`);
+                        if (pageIndex === index) pageOption.setAttribute('aria-current', 'page');
+                        pageOption.addEventListener('click', () => {
+                            this.showSlide(pageIndex);
+                            this.slideControls[pageIndex]?.count.focus({ preventScroll: true });
+                        });
+                        picker.append(pageOption);
+                    });
+
+                    count.addEventListener('click', () => {
+                        const shouldOpen = picker.hidden;
+                        this.closePagePickers();
+                        picker.hidden = !shouldOpen;
+                        count.setAttribute('aria-expanded', String(shouldOpen));
+                    });
+                    count.addEventListener('keydown', (event) => {
+                        if (event.key === 'Escape' && !picker.hidden) {
+                            this.closePagePickers();
+                            count.focus({ preventScroll: true });
+                        }
+                    });
+                    picker.addEventListener('keydown', (event) => {
+                        if (event.key === 'Escape') {
+                            this.closePagePickers();
+                            count.focus({ preventScroll: true });
+                        }
+                    });
+
+                    const nextButton = document.createElement('button');
+                    nextButton.className = 'slide-navigation-button';
+                    nextButton.type = 'button';
+                    nextButton.setAttribute('aria-label', '下一页');
+                    nextButton.textContent = '›';
+                    nextButton.addEventListener('click', () => this.showSlide(index + 1));
+
+                    navigation.append(previousButton, count, nextButton, picker);
+                    slide.append(navigation);
+
+                    return { previousButton, count, nextButton, picker };
+                });
+
+                document.addEventListener('pointerdown', (event) => {
+                    if (event.target instanceof Element && event.target.closest('.slide-navigation')) return;
+                    this.closePagePickers();
+                });
+            }
+
+            closePagePickers() {
+                this.slideControls.forEach(({ count, picker }) => {
+                    picker.hidden = true;
+                    count.setAttribute('aria-expanded', 'false');
+                });
             }
 
             setupStageScale() {
@@ -2991,13 +5298,9 @@
                 }, { passive: true });
             }
 
-            setupButtons() {
-                this.previousButton.addEventListener('click', () => this.showSlide(this.currentSlide - 1));
-                this.nextButton.addEventListener('click', () => this.showSlide(this.currentSlide + 1));
-            }
-
             showSlide(index) {
                 this.currentSlide = Math.max(0, Math.min(index, this.slides.length - 1));
+                this.closePagePickers();
                 const coverBackgroundActive = this.currentSlide === 0;
                 const closingBackgroundActive = this.currentSlide === this.slides.length - 1;
                 const troubleshootingActive = this.slides[this.currentSlide].classList.contains('troubleshooting-slide');
@@ -3013,11 +5316,16 @@
                     slide.setAttribute('aria-hidden', String(!active));
                 });
 
-                document.body.classList.toggle('has-multiple-slides', this.slides.length > 1);
-                this.previousButton.disabled = this.currentSlide === 0;
-                this.nextButton.disabled = this.currentSlide === this.slides.length - 1;
-                this.count.textContent = `${String(this.currentSlide + 1).padStart(2, '0')} / ${String(this.slides.length).padStart(2, '0')}`;
-                this.progress.style.transform = `scaleX(${(this.currentSlide + 1) / this.slides.length})`;
+                this.slideControls.forEach((controls, slideIndex) => {
+                    controls.previousButton.disabled = slideIndex === 0;
+                    controls.nextButton.disabled = slideIndex === this.slides.length - 1;
+                    controls.count.textContent = `${String(slideIndex + 1).padStart(2, '0')} / ${String(this.slides.length).padStart(2, '0')}`;
+                    controls.count.setAttribute('aria-label', `当前第 ${String(slideIndex + 1).padStart(2, '0')} 页，共 ${String(this.slides.length).padStart(2, '0')} 页；点击选择跳转页面`);
+                    controls.picker.querySelectorAll('.slide-page-option').forEach((option, pageIndex) => {
+                        if (pageIndex === slideIndex) option.setAttribute('aria-current', 'page');
+                        else option.removeAttribute('aria-current');
+                    });
+                });
             }
 
             async toggleFullscreen() {
