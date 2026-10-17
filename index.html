@@ -493,7 +493,7 @@
         .intro-evidence-label {
             margin: 0 0 8px;
             color: #6d86a8;
-            font-size: calc(20px * var(--font-scale));
+            font-size: calc(17px * var(--font-scale));
             font-weight: 700;
             line-height: 1.2;
         }
@@ -636,7 +636,7 @@
         .library-scenario-kicker {
             margin: 0 0 10px;
             color: #3976ca;
-            font-size: calc(22px * var(--font-scale));
+            font-size: calc(19px * var(--font-scale));
             font-weight: 700;
             letter-spacing: 0.08em;
             line-height: 1.2;
@@ -675,6 +675,7 @@
         }
 
         .library-problem-card {
+            position: relative;
             min-width: 0;
             display: flex;
             flex-direction: column;
@@ -746,6 +747,21 @@
             font-size: calc(29px * var(--font-scale));
             font-weight: 500;
             line-height: 1.55;
+        }
+
+        .library-problem-tag {
+            position: absolute;
+            right: 28px;
+            bottom: 20px;
+            padding: 7px 14px;
+            border: 1px solid #dbe8fb;
+            border-radius: 999px;
+            color: #1762c4;
+            background: #f0f6ff;
+            font-size: calc(25px * var(--font-scale));
+            font-weight: 800;
+            line-height: 1.2;
+            white-space: nowrap;
         }
 
         .library-problem-arrow {
@@ -837,16 +853,16 @@
             right: 104px;
             left: 104px;
             display: grid;
-            height: 661px;
-            grid-template-rows: 221px 198px 210px;
-            gap: 16px;
+            height: 744px;
+            grid-template-rows: 248px 230px 230px;
+            gap: 18px;
         }
 
         .solution-decision-card {
             display: grid;
             min-width: 0;
             min-height: 0;
-            grid-template-columns: 270px minmax(0, 1fr) 30px minmax(0, 1.18fr);
+            grid-template-columns: 305px minmax(0, 1fr) 30px minmax(0, 1.111fr);
             grid-template-rows: minmax(0, 1fr);
             align-items: stretch;
             gap: 12px;
@@ -871,7 +887,7 @@
         .solution-decision-index {
             color: #1555b7;
             font-family: "DM Sans", sans-serif;
-            font-size: calc(17px * var(--font-scale));
+            font-size: calc(20px * var(--font-scale));
             font-weight: 800;
             letter-spacing: 0.06em;
         }
@@ -890,6 +906,587 @@
             font-size: calc(17px * var(--font-scale));
             font-weight: 600;
             line-height: 1.25;
+        }
+
+        .solution-preview-actions {
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: center;
+            gap: 6px;
+            margin-top: 10px;
+        }
+
+        .solution-preview-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 6px;
+            border: 1px solid #d6e5fb;
+            border-radius: 999px;
+            background: #f3f8ff;
+            color: #1555b7;
+            font: inherit;
+            font-size: calc(16px * var(--font-scale));
+            font-weight: 700;
+            line-height: 1.2;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: background-color 160ms ease, border-color 160ms ease;
+        }
+
+        .solution-preview-button:hover,
+        .solution-preview-button:focus-visible {
+            border-color: #8eb4ed;
+            background: #e8f1ff;
+        }
+
+        .solution-preview-button:focus-visible {
+            outline: 3px solid rgba(21, 85, 183, 0.22);
+            outline-offset: 2px;
+        }
+
+        .solution-decision-card:nth-child(2) .solution-preview-actions {
+            gap: 4px;
+        }
+
+        .solution-decision-card:nth-child(2) .solution-preview-button {
+            padding: 5px 6px;
+            font-size: calc(16px * var(--font-scale));
+        }
+
+        .solution-drawing-dialog {
+            width: min(94vw, 1640px);
+            max-width: none;
+            max-height: 96vh;
+            padding: 0;
+            overflow: visible;
+            border: 0;
+            background: transparent;
+        }
+
+        .solution-drawing-dialog::backdrop {
+            background: rgba(13, 26, 44, 0.72);
+            backdrop-filter: blur(3px);
+        }
+
+        .solution-drawing-panel {
+            display: grid;
+            grid-template-rows: auto minmax(0, 1fr) auto;
+            gap: 12px;
+            max-height: 96vh;
+            padding: 20px;
+            border: 1px solid rgba(221, 231, 245, 0.95);
+            border-radius: 16px;
+            background: #fff;
+            box-shadow: 0 24px 72px rgba(7, 20, 40, 0.28);
+        }
+
+        .solution-drawing-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .solution-drawing-tools {
+            display: inline-flex;
+            flex: 0 0 auto;
+            align-items: center;
+            gap: 6px;
+            margin-left: auto;
+        }
+
+        .solution-drawing-pages {
+            display: inline-flex;
+            flex: 0 0 auto;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .solution-drawing-pages[hidden] {
+            display: none;
+        }
+
+        .solution-drawing-page-button {
+            width: 36px;
+            min-width: 36px;
+            padding: 0;
+            font-size: 23px;
+        }
+
+        .solution-drawing-page-button:disabled {
+            color: #a3afbf;
+            background: #f8fafd;
+            cursor: default;
+        }
+
+        .solution-drawing-page-count {
+            min-width: 44px;
+            color: #52647c;
+            font-family: "DM Sans", sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            font-variant-numeric: tabular-nums;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .solution-drawing-zoom-button,
+        .solution-drawing-fit-button {
+            display: inline-flex;
+            min-width: 36px;
+            height: 36px;
+            align-items: center;
+            justify-content: center;
+            padding: 0 10px;
+            border: 1px solid #dce6f2;
+            border-radius: 9px;
+            background: #f6f9fd;
+            color: #244e84;
+            font: inherit;
+            font-size: 17px;
+            font-weight: 700;
+            line-height: 1;
+            cursor: pointer;
+        }
+
+        .solution-drawing-zoom-button:hover,
+        .solution-drawing-fit-button:hover,
+        .solution-drawing-zoom-button:focus-visible,
+        .solution-drawing-fit-button:focus-visible {
+            border-color: #9bb9e6;
+            background: #eaf2ff;
+            color: #1555b7;
+        }
+
+        .solution-drawing-zoom-button:focus-visible,
+        .solution-drawing-fit-button:focus-visible {
+            outline: 3px solid rgba(21, 85, 183, 0.18);
+            outline-offset: 2px;
+        }
+
+        .solution-drawing-zoom-level {
+            min-width: 52px;
+            color: #52647c;
+            font-family: "DM Sans", sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            font-variant-numeric: tabular-nums;
+            text-align: center;
+        }
+
+        .solution-drawing-title {
+            margin: 0;
+            color: #163d70;
+            font-size: 20px;
+            font-weight: 750;
+            line-height: 1.3;
+        }
+
+        .solution-drawing-close {
+            display: inline-flex;
+            width: 40px;
+            height: 40px;
+            flex: 0 0 auto;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #dce6f2;
+            border-radius: 50%;
+            background: #f6f9fd;
+            color: #41546f;
+            font: inherit;
+            font-size: 24px;
+            line-height: 1;
+            cursor: pointer;
+        }
+
+        .solution-drawing-close:hover,
+        .solution-drawing-close:focus-visible {
+            border-color: #9bb9e6;
+            background: #eaf2ff;
+            color: #1555b7;
+        }
+
+        .solution-drawing-close:focus-visible {
+            outline: 3px solid rgba(21, 85, 183, 0.22);
+            outline-offset: 2px;
+        }
+
+        .solution-drawing-image-wrap {
+            display: flex;
+            min-height: 120px;
+            max-height: calc(88vh - 92px);
+            align-items: center;
+            justify-content: center;
+            overflow: auto;
+            border: 1px solid #e3eaf3;
+            border-radius: 10px;
+            background: #f8fafd;
+            padding: 12px;
+            overscroll-behavior: contain;
+            scrollbar-color: #9aafcb #edf2f8;
+            cursor: zoom-in;
+        }
+
+        .solution-drawing-image-wrap[hidden],
+        .solution-markdown-wrap[hidden],
+        .solution-drawing-tools[hidden] {
+            display: none;
+        }
+
+        .solution-markdown-wrap {
+            min-height: 120px;
+            max-height: calc(88vh - 92px);
+            overflow: auto;
+            padding: clamp(20px, 4vw, 52px);
+            border: 1px solid #e3eaf3;
+            border-radius: 10px;
+            background: #fff;
+            color: #27384d;
+            overscroll-behavior: contain;
+        }
+
+        .manual-event-preview[hidden] {
+            display: none;
+        }
+
+        .manual-event-preview {
+            display: grid;
+            min-height: 120px;
+            max-height: calc(88vh - 92px);
+            grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+            align-items: start;
+            gap: 18px;
+            overflow: auto;
+            padding: 18px;
+            border: 1px solid #e3eaf3;
+            border-radius: 10px;
+            background: #f8fafd;
+            color: #27384d;
+            overscroll-behavior: contain;
+            scrollbar-color: #9aafcb #edf2f8;
+        }
+
+        .manual-event-context {
+            grid-column: 1 / -1;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px 12px;
+            margin: 0;
+            padding: 11px 14px;
+            border-left: 4px solid #3976ca;
+            border-radius: 8px;
+            background: #eaf2ff;
+            color: #24466f;
+            font-size: 15px;
+            font-weight: 650;
+            line-height: 1.5;
+        }
+
+        .manual-event-context strong {
+            color: #084bb7;
+        }
+
+        .manual-event-table-section {
+            min-width: 0;
+            overflow: hidden;
+            border: 1px solid #dce6f2;
+            border-radius: 9px;
+            background: #fff;
+        }
+
+        .manual-event-table-title {
+            margin: 0;
+            padding: 12px 14px 10px;
+            color: #174f9f;
+            font-size: 17px;
+            font-weight: 800;
+        }
+
+        .manual-event-table-scroll {
+            overflow: auto;
+        }
+
+        .manual-event-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            line-height: 1.45;
+            text-align: left;
+        }
+
+        .manual-event-table th,
+        .manual-event-table td {
+            padding: 8px 12px;
+            border-top: 1px solid #e5ebf3;
+            vertical-align: top;
+        }
+
+        .manual-event-table th {
+            width: 37%;
+            color: #52647c;
+            background: #f3f7fc;
+            font-weight: 750;
+        }
+
+        .manual-event-io-table th:first-child,
+        .manual-event-io-table td:first-child {
+            white-space: nowrap;
+        }
+
+        .manual-event-io-table th:last-child,
+        .manual-event-io-table td:last-child {
+            width: 94px;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .manual-event-snapshot-note {
+            margin: 0;
+            padding: 10px 14px 12px;
+            color: #6b7b90;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .manual-troubleshooting-card[data-event-preview-trigger] {
+            cursor: pointer;
+        }
+
+        .manual-troubleshooting-card[data-preview-trigger] {
+            cursor: pointer;
+            transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+        }
+
+        .manual-troubleshooting-card[data-preview-trigger]:hover {
+            transform: translateY(-3px);
+            border-color: #8eb4ed;
+            box-shadow: 0 12px 26px rgba(31, 69, 120, 0.13);
+        }
+
+        .manual-troubleshooting-card[data-event-preview-trigger]:focus-visible,
+        .manual-troubleshooting-card[data-preview-trigger]:focus-visible {
+            outline: 3px solid rgba(21, 82, 177, 0.55);
+            outline-offset: 3px;
+        }
+
+        @media (max-width: 900px) {
+            .manual-event-preview {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .manual-event-context {
+                grid-column: 1;
+            }
+        }
+
+        .solution-markdown-content {
+            width: min(100%, 920px);
+            margin: 0 auto;
+            font-size: 16px;
+            line-height: 1.75;
+        }
+
+        .solution-markdown-content h1,
+        .solution-markdown-content h2,
+        .solution-markdown-content h3,
+        .solution-markdown-content h4 {
+            margin: 1.25em 0 0.55em;
+            color: #163d70;
+            line-height: 1.3;
+        }
+
+        .solution-markdown-content h1 { font-size: 1.65em; }
+        .solution-markdown-content h2 { font-size: 1.35em; }
+        .solution-markdown-content h3 { font-size: 1.12em; }
+        .solution-markdown-content h4 { font-size: 1em; }
+        .solution-markdown-content h1:first-child { margin-top: 0; }
+
+        .solution-markdown-content p,
+        .solution-markdown-content ul,
+        .solution-markdown-content ol,
+        .solution-markdown-content blockquote {
+            margin: 0.65em 0;
+        }
+
+        .solution-markdown-content ul,
+        .solution-markdown-content ol {
+            padding-left: 1.5em;
+        }
+
+        .solution-markdown-content li + li { margin-top: 0.3em; }
+
+        .solution-markdown-content code {
+            padding: 0.12em 0.35em;
+            border-radius: 4px;
+            background: #eff4fb;
+            color: #1555b7;
+            font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+            font-size: 0.9em;
+        }
+
+        .solution-markdown-content pre {
+            overflow: auto;
+            padding: 14px 16px;
+            border: 1px solid #e3eaf3;
+            border-radius: 9px;
+            background: #f6f9fd;
+            line-height: 1.55;
+        }
+
+        .solution-markdown-content pre code {
+            padding: 0;
+            background: transparent;
+            color: #33475f;
+        }
+
+        .solution-markdown-content blockquote {
+            padding: 8px 14px;
+            border-left: 3px solid #77a5e6;
+            background: #f3f8ff;
+            color: #53647a;
+        }
+
+        .solution-markdown-table-wrap {
+            max-width: 100%;
+            margin: 1em 0;
+            overflow-x: auto;
+        }
+
+        .solution-markdown-content table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.94em;
+        }
+
+        .solution-markdown-content th,
+        .solution-markdown-content td {
+            padding: 9px 11px;
+            border: 1px solid #dce6f2;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .solution-markdown-content th {
+            background: #eef4fc;
+            color: #204d87;
+            font-weight: 750;
+        }
+
+        .solution-markdown-content td { background: #fff; }
+
+        .solution-markdown-meta {
+            display: grid;
+            gap: 7px;
+            margin-bottom: 22px;
+            padding: 14px 16px;
+            border: 1px solid #dce8f8;
+            border-radius: 9px;
+            background: #f5f9ff;
+            color: #52647c;
+            font-size: 14px;
+            line-height: 1.55;
+        }
+
+        .solution-markdown-meta strong { color: #1555b7; }
+
+        .solution-drawing-image-wrap.is-zoomed {
+            align-items: flex-start;
+            justify-content: flex-start;
+            cursor: grab;
+        }
+
+        .solution-drawing-image-wrap.is-panning {
+            cursor: grabbing;
+            user-select: none;
+        }
+
+        .solution-drawing-image {
+            display: block;
+            flex: 0 0 auto;
+            max-width: none;
+            max-height: none;
+            object-fit: fill;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+
+        .solution-drawing-image[hidden] {
+            display: none;
+        }
+
+        .solution-drawing-error {
+            max-width: 520px;
+            margin: 24px;
+            color: #6a788a;
+            font-size: 15px;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        .solution-drawing-note {
+            margin: 0;
+            color: #718096;
+            font-size: 13px;
+            line-height: 1.45;
+            text-align: right;
+        }
+
+        @media (max-width: 640px) {
+            .solution-drawing-dialog {
+                width: 96vw;
+            }
+
+            .manual-event-preview {
+                grid-template-columns: minmax(0, 1fr);
+                gap: 12px;
+                padding: 12px;
+            }
+
+            .manual-event-context {
+                grid-column: 1;
+                font-size: 13px;
+            }
+
+            .manual-event-table {
+                font-size: 12px;
+            }
+
+            .manual-event-table th,
+            .manual-event-table td {
+                padding: 7px 9px;
+            }
+
+            .solution-drawing-panel {
+                gap: 9px;
+                padding: 12px;
+            }
+
+            .solution-drawing-title {
+                font-size: 16px;
+            }
+
+            .solution-drawing-header {
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+
+            .solution-drawing-tools {
+                gap: 4px;
+            }
+
+            .solution-drawing-zoom-button,
+            .solution-drawing-fit-button {
+                min-width: 32px;
+                height: 32px;
+                padding: 0 8px;
+                font-size: 15px;
+            }
+
+            .solution-drawing-image-wrap {
+                max-height: calc(86vh - 80px);
+            }
         }
 
         .solution-decision-explore,
@@ -953,7 +1550,7 @@
         .solution-final-copy {
             margin: 0;
             color: #44546a;
-            font-size: calc(19px * var(--font-scale));
+            font-size: calc(22px * var(--font-scale));
             font-weight: 550;
             line-height: 1.38;
         }
@@ -1084,6 +1681,21 @@
             line-height: 1.2;
         }
 
+        .solution-adaptive-evaluation {
+            display: flex;
+            min-width: 0;
+            flex-direction: column;
+            gap: 2px;
+            color: #526984;
+            font-size: calc(15px * var(--font-scale));
+            font-weight: 650;
+            line-height: 1.2;
+        }
+
+        .solution-adaptive-evaluation-flow {
+            color: #314b6a;
+        }
+
         .solution-adaptive-label {
             display: inline-block;
             margin-right: 6px;
@@ -1160,60 +1772,6 @@
             border-radius: 50%;
             background: #3976ca;
             content: "";
-        }
-
-        .solution-evaluation {
-            position: absolute;
-            top: 897px;
-            right: 104px;
-            left: 104px;
-            display: grid;
-            height: 72px;
-            grid-template-columns: max-content minmax(0, 1fr) max-content;
-            align-items: center;
-            gap: 24px;
-            padding: 12px 22px;
-            border: 1px solid #d9e7fa;
-            border-radius: 12px;
-            color: #314760;
-            background: #f1f6ff;
-        }
-
-        .solution-evaluation-title {
-            color: #0d4eae;
-            font-size: calc(20px * var(--font-scale));
-            font-weight: 800;
-            white-space: nowrap;
-        }
-
-        .solution-evaluation-flow {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: #263f61;
-            font-size: calc(20px * var(--font-scale));
-            font-weight: 700;
-            white-space: nowrap;
-        }
-
-        .solution-evaluation-arrow {
-            color: #3976ca;
-            font-family: "DM Sans", sans-serif;
-            font-size: calc(23px * var(--font-scale));
-            font-weight: 800;
-        }
-
-        .solution-evaluation-methods {
-            color: #687991;
-            font-size: calc(17px * var(--font-scale));
-            font-weight: 650;
-            white-space: nowrap;
-        }
-
-        .solution-evaluation-methods strong {
-            margin-right: 8px;
-            color: #526984;
-            font-weight: 800;
         }
 
         .runtime-copy {
@@ -3565,7 +4123,7 @@
             right: 104px;
             left: 104px;
             display: grid;
-            min-height: 112px;
+            min-height: 140px;
             grid-template-columns: 220px minmax(0, 1fr);
             align-items: center;
             gap: 20px;
@@ -3664,7 +4222,7 @@
             right: 104px;
             left: 104px;
             display: grid;
-            height: 642px;
+            height: 674px;
             grid-template-columns: repeat(2, minmax(0, 1fr));
             grid-template-rows: repeat(2, minmax(0, 1fr));
             gap: 28px 24px;
@@ -3674,17 +4232,12 @@
             display: flex;
             min-width: 0;
             flex-direction: column;
-            padding: 28px 32px;
+            padding: 22px 28px;
             border: 1px solid #dce6f2;
-            border-top: 4px solid #7fa6dc;
+            border-top: 4px solid #1552b1;
             border-radius: 14px;
-            background: linear-gradient(150deg, #ffffff, #f8faff);
+            background: #fbfcff;
             box-shadow: 0 6px 18px rgba(31, 69, 120, 0.055);
-        }
-
-        .outcome-card:nth-child(2),
-        .outcome-card:nth-child(3) {
-            border-top-color: #1552b1;
         }
 
         .outcome-card-result {
@@ -3696,9 +4249,17 @@
             padding: 22px 28px;
         }
 
+        .outcome-card-transfer {
+            padding: 22px 28px 30px;
+        }
+
         .outcome-card-result .outcome-card-heading,
         .outcome-card-transfer .outcome-card-heading {
-            gap: 7px;
+            gap: 8px;
+        }
+
+        .outcome-card-result .outcome-card-heading {
+            gap: 6px;
         }
 
         .outcome-card-result .outcome-card-subtitle,
@@ -3708,35 +4269,40 @@
         }
 
         .outcome-card-result .outcome-card-copy {
-            gap: 5px;
-            margin-top: 9px;
+            gap: 0;
+            margin-top: 8px;
         }
 
         .outcome-time-comparison {
             display: grid;
-            grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+            grid-template-columns: minmax(0, 1fr) 46px minmax(0, 1fr);
+            grid-template-rows: minmax(0, 1fr);
             align-items: center;
-            gap: 14px;
-            min-height: 62px;
+            column-gap: 10px;
+            min-height: 112px;
+            padding: 4px 10px 4px;
         }
 
         .outcome-time-block {
             display: grid;
             min-width: 0;
-            gap: 2px;
+            justify-items: center;
+            gap: 8px;
         }
 
         .outcome-time-label {
-            color: #59697c;
-            font-size: calc(18px * var(--font-scale));
+            color: #657386;
+            font-size: calc(19px * var(--font-scale));
             font-weight: 650;
             line-height: 1.2;
+            text-align: center;
+            white-space: nowrap;
         }
 
         .outcome-time-value {
             display: flex;
             align-items: baseline;
-            gap: 6px;
+            gap: 7px;
             color: #56677b;
             font-family: "DM Sans", "Noto Sans SC", sans-serif;
             line-height: 1;
@@ -3744,14 +4310,14 @@
         }
 
         .outcome-time-value strong {
-            font-size: calc(40px * var(--font-scale));
+            font-size: calc(58px * var(--font-scale));
             font-weight: 800;
-            letter-spacing: -0.035em;
+            letter-spacing: -0.045em;
         }
 
         .outcome-time-value span {
             font-family: "Noto Sans SC", sans-serif;
-            font-size: calc(19px * var(--font-scale));
+            font-size: calc(21px * var(--font-scale));
             font-weight: 650;
         }
 
@@ -3759,11 +4325,43 @@
             color: #1552b1;
         }
 
+        .outcome-supporting-facts {
+            display: flex;
+            flex: 0 0 auto;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            margin: auto 0 0;
+        }
+
+        .outcome-supporting-tag {
+            display: inline-flex;
+            align-items: baseline;
+            gap: 6px;
+            padding: 5px 11px;
+            border: 1px solid #e1e8f2;
+            border-radius: 999px;
+            background: #f5f8fc;
+            color: #5f7085;
+            font-size: calc(22px * var(--font-scale));
+            font-weight: 650;
+            line-height: 1.2;
+            white-space: nowrap;
+        }
+
+        .outcome-supporting-tag strong {
+            color: inherit;
+            font-family: inherit;
+            font-size: inherit;
+            font-weight: inherit;
+        }
+
         .outcome-time-arrow {
             color: #6d92ca;
             font-family: "DM Sans", sans-serif;
-            font-size: calc(26px * var(--font-scale));
+            font-size: calc(34px * var(--font-scale));
             font-weight: 700;
+            text-align: center;
         }
 
         .outcome-result-scope,
@@ -3772,30 +4370,11 @@
             margin: 0;
         }
 
-        .outcome-result-scope {
-            color: #68798e;
-            font-size: calc(17px * var(--font-scale));
-            font-weight: 550;
-            line-height: 1.3;
-        }
-
-        .outcome-result-scope strong {
-            color: #1552b1;
-            font-weight: 750;
-        }
-
         .outcome-result-description {
             color: #59697c;
             font-size: calc(19px * var(--font-scale));
             font-weight: 550;
             line-height: 1.36;
-        }
-
-        .outcome-result-note {
-            color: #8792a0;
-            font-size: calc(17px * var(--font-scale));
-            font-weight: 600;
-            line-height: 1.2;
         }
 
         .outcome-card-tag {
@@ -3815,7 +4394,7 @@
 
         .outcome-card-heading {
             display: grid;
-            gap: 9px;
+            gap: 8px;
         }
 
         .outcome-card-title {
@@ -3847,9 +4426,9 @@
         .outcome-card-subtitle {
             margin: 0;
             color: #084bb7;
-            font-size: calc(25px * var(--font-scale));
+            font-size: calc(23px * var(--font-scale));
             font-weight: 750;
-            line-height: 1.32;
+            line-height: 1.25;
         }
 
         .outcome-card-copy {
@@ -3901,22 +4480,34 @@
         }
 
         .outcome-card-transfer-copy {
-            gap: 5px;
-            margin-top: 9px;
+            min-height: 0;
+            gap: 2px;
+            margin-top: 3px;
+        }
+
+        .outcome-card-transfer .outcome-fde-list {
+            min-height: 0;
+            flex: 1 1 auto;
+            grid-template-rows: repeat(4, minmax(0, 1fr));
+            gap: 3px;
         }
 
         .outcome-fde-list {
             display: grid;
-            gap: 2px;
+            gap: 0;
         }
 
         .outcome-fde-module {
             display: grid;
             grid-template-columns: 28px minmax(0, 1fr);
-            align-items: start;
+            align-items: center;
             gap: 9px;
-            padding: 4px 0;
+            padding: 0;
             border-bottom: 1px solid #e6ecf4;
+        }
+
+        .outcome-fde-module:last-child {
+            border-bottom: 0;
         }
 
         .outcome-fde-index {
@@ -3947,16 +4538,16 @@
 
         .outcome-fde-title {
             color: #174f9f;
-            font-size: calc(20px * var(--font-scale));
+            font-size: calc(19px * var(--font-scale));
             font-weight: 750;
-            line-height: 1.2;
+            line-height: 1.15;
         }
 
         .outcome-fde-description {
             color: #59697c;
             font-size: calc(17px * var(--font-scale));
             font-weight: 550;
-            line-height: 1.28;
+            line-height: 1.15;
         }
 
         .outcome-transfer-summary {
@@ -4003,7 +4594,7 @@
             padding-top: 7px;
             border-top: 1px solid #e1e8f2;
             color: #718096;
-            font-size: calc(16px * var(--font-scale));
+            font-size: calc(15px * var(--font-scale));
             font-weight: 600;
             line-height: 1.3;
         }
@@ -4201,10 +4792,135 @@
             line-height: 1.2;
         }
 
+        /* Slide 7's inline “01 · Title” pattern is shared by numbered modules. */
+        .presentation-inline-index {
+            display: inline;
+            width: auto;
+            height: auto;
+            min-width: 0;
+            flex: 0 0 auto;
+            place-items: unset;
+            border: 0;
+            border-radius: 0;
+            color: inherit;
+            background: transparent;
+            font-family: inherit;
+            font-size: inherit;
+            font-weight: inherit;
+            line-height: inherit;
+            letter-spacing: inherit;
+            white-space: nowrap;
+        }
+
+        .presentation-inline-index::after {
+            content: " ·";
+        }
+
+        .intro-capability-title {
+            align-items: center;
+            gap: 8px;
+        }
+
+        .intro-capability-index.presentation-inline-index {
+            color: inherit;
+        }
+
+        .manual-card-header {
+            gap: 8px;
+            color: #183f78;
+            font-size: calc(27px * var(--font-scale));
+            font-weight: 900;
+        }
+
+        .manual-card-index.presentation-inline-index {
+            display: inline;
+            width: auto;
+            height: auto;
+            flex: 0 0 auto;
+            place-items: unset;
+            border: 0;
+            border-radius: 0;
+            color: inherit;
+            background: transparent;
+            font-family: inherit;
+            font-size: inherit;
+            font-weight: inherit;
+            line-height: inherit;
+            letter-spacing: inherit;
+        }
+
+        .library-problem-heading {
+            gap: 8px;
+            color: #084bb7;
+            font-size: calc(40px * var(--font-scale));
+            font-weight: 800;
+        }
+
+        .library-problem-index.presentation-inline-index {
+            color: inherit;
+        }
+
+        .solution-decision-heading {
+            display: flex;
+            width: 100%;
+            min-width: 0;
+            align-items: center;
+            gap: 4px;
+            color: #204d87;
+            font-size: calc(23px * var(--font-scale));
+            font-weight: 800;
+        }
+
+        .solution-decision-index.presentation-inline-index {
+            color: inherit;
+        }
+
+        .solution-decision-topic h2 {
+            margin: 0;
+            min-width: 0;
+        }
+
+        .runtime-redesign-card-title,
+        .runtime-skill-card-title {
+            align-items: center;
+        }
+
+        .runtime-redesign-card-title > .presentation-inline-index,
+        .runtime-skill-card-title > .presentation-inline-index {
+            color: inherit;
+        }
+
+        .runtime-skill-stage-index.presentation-inline-index {
+            color: inherit;
+        }
+
+        .quality-dataset-heading {
+            align-items: center;
+        }
+
+        .quality-dataset-name-group {
+            display: flex;
+            min-width: 0;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .outcome-fde-module {
+            grid-template-columns: max-content minmax(0, 1fr);
+            align-items: baseline;
+        }
+
+        .outcome-fde-index.presentation-inline-index {
+            color: #174f9f;
+            font-size: calc(20px * var(--font-scale));
+            font-weight: 750;
+        }
+
         /* === CARD HOVER INTERACTION === */
         .intro-identity-card,
         .intro-capability-card,
         .library-problem-card,
+        .manual-troubleshooting-card,
         .solution-decision-card,
         .runtime-module,
         .runtime-engine-card,
@@ -4229,6 +4945,7 @@
                 .intro-identity-card,
                 .intro-capability-card,
                 .library-problem-card,
+                .manual-troubleshooting-card,
                 .solution-decision-card,
                 .runtime-module,
                 .runtime-engine-card,
@@ -4254,6 +4971,7 @@
                 .intro-identity-card,
                 .intro-capability-card,
                 .library-problem-card,
+                .manual-troubleshooting-card,
                 .solution-decision-card,
                 .runtime-module,
                 .runtime-engine-card,
@@ -4392,6 +5110,258 @@
             background: #1552b1;
         }
 
+        /* === TRADITIONAL MANUAL TROUBLESHOOTING SLIDE === */
+        .manual-troubleshooting-copy {
+            position: absolute;
+            inset: 0;
+            color: #171717;
+            font-family: "Noto Sans SC", "DM Sans", sans-serif;
+        }
+
+        .manual-troubleshooting-top-rule {
+            position: absolute;
+            top: 40px;
+            left: 104px;
+            width: 104px;
+            height: 10px;
+            border-radius: 2px;
+            background: #084bb7;
+        }
+
+        .manual-troubleshooting-section-label {
+            position: absolute;
+            top: 78px;
+            left: 104px;
+            display: flex;
+            align-items: baseline;
+            gap: 26px;
+            color: #084bb7;
+            font-size: calc(26px * var(--font-scale));
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .manual-troubleshooting-brand {
+            position: absolute;
+            top: 30px;
+            right: 104px;
+            width: auto;
+            height: 44px;
+            object-fit: contain;
+        }
+
+        .manual-troubleshooting-title {
+            position: absolute;
+            top: 132px;
+            left: 104px;
+            right: 104px;
+            margin: 0;
+            color: #171717;
+            font-size: calc(64px * var(--font-scale));
+            font-weight: 850;
+            letter-spacing: -0.04em;
+            line-height: 1.18;
+            white-space: nowrap;
+        }
+
+        .manual-process-heading {
+            position: absolute;
+            top: 232px;
+            right: 104px;
+            left: 104px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .manual-process-heading strong {
+            color: #084bb7;
+            font-size: calc(30px * var(--font-scale));
+            font-weight: 900;
+        }
+
+        .manual-troubleshooting-flow {
+            position: absolute;
+            top: 278px;
+            right: 104px;
+            left: 104px;
+            height: 500px;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            grid-template-rows: repeat(2, minmax(0, 1fr));
+            gap: 16px 24px;
+        }
+
+        .manual-troubleshooting-card {
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            padding: 18px 16px 15px;
+            border: 1px solid #d9e5f5;
+            border-top: 6px solid #3976ca;
+            border-radius: 13px;
+            background: #fff;
+            box-shadow: 0 9px 24px rgba(31, 69, 120, 0.06);
+        }
+
+        .manual-card-header {
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 0 0 10px;
+        }
+
+        .manual-card-index {
+            width: 44px;
+            height: 44px;
+            flex: 0 0 44px;
+            display: inline-grid;
+            place-items: center;
+            border: 2px solid #3976ca;
+            border-radius: 50%;
+            color: #3976ca;
+            font-family: inherit;
+            font-size: calc(27px * var(--font-scale));
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: 0;
+        }
+
+        .manual-card-title {
+            min-width: 0;
+            margin: 0;
+            color: #183f78;
+            font-size: calc(27px * var(--font-scale));
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            line-height: 1.25;
+        }
+
+        .manual-card-copy {
+            margin: 0;
+            color: #394a61;
+            font-size: calc(21px * var(--font-scale));
+            font-weight: 600;
+            line-height: 1.42;
+        }
+
+        .manual-card-copy strong {
+            color: #084bb7;
+            font-weight: 850;
+        }
+
+        .manual-card-source {
+            margin-top: auto;
+            padding-top: 9px;
+            border-top: 1px solid #e3ebf6;
+            color: #60738f;
+            font-size: calc(19px * var(--font-scale));
+            font-weight: 750;
+            line-height: 1.3;
+        }
+
+        .manual-link-chain {
+            position: absolute;
+            top: 796px;
+            right: 104px;
+            left: 104px;
+            height: 180px;
+            display: grid;
+            grid-template-columns: 430px minmax(0, 1fr);
+            align-items: center;
+            gap: 20px;
+            padding: 14px 18px;
+            border: 1px solid #d8e6fa;
+            border-radius: 13px;
+            background: #f4f8ff;
+        }
+
+        .manual-link-heading {
+            margin: 0 0 7px;
+            color: #084bb7;
+            font-size: calc(24px * var(--font-scale));
+            font-weight: 900;
+            line-height: 1.25;
+        }
+
+        .manual-link-copy {
+            margin: 0;
+            color: #526781;
+            font-size: calc(20px * var(--font-scale));
+            font-weight: 650;
+            line-height: 1.35;
+        }
+
+        .manual-link-flow {
+            min-width: 0;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 22px minmax(0, 1fr) 22px minmax(0, 1fr) 22px minmax(0, 1.16fr) 22px minmax(0, 1fr);
+            align-items: center;
+        }
+
+        .manual-link-node {
+            min-width: 0;
+            min-height: 62px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 7px 9px;
+            border: 1px solid #d4e2f6;
+            border-radius: 8px;
+            background: #fff;
+            text-align: center;
+        }
+
+        .manual-link-node strong {
+            overflow: hidden;
+            color: #184d9b;
+            font-size: calc(18px * var(--font-scale));
+            font-weight: 850;
+            line-height: 1.25;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .manual-link-node span {
+            overflow: hidden;
+            margin-top: 3px;
+            color: #586d87;
+            font-size: calc(19px * var(--font-scale));
+            font-weight: 650;
+            line-height: 1.2;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .manual-link-arrow {
+            color: #3976ca;
+            font-family: "DM Sans", sans-serif;
+            font-size: calc(25px * var(--font-scale));
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .manual-troubleshooting-footer-rule {
+            position: absolute;
+            right: 104px;
+            bottom: 74px;
+            left: 104px;
+            height: 1px;
+            background: #dedede;
+        }
+
+        .manual-troubleshooting-page-number {
+            position: absolute;
+            right: 104px;
+            bottom: 24px;
+            color: #858585;
+            font-family: "DM Sans", "Noto Sans SC", sans-serif;
+            font-size: calc(18px * var(--font-scale));
+            font-weight: 500;
+            letter-spacing: 0.12em;
+        }
+
         /* === PRINT LAYOUT === */
         @media print {
             html,
@@ -4512,7 +5482,7 @@
 
                     <section class="intro-capability-grid" aria-label="三项核心能力">
                         <article class="intro-capability-card">
-                            <h2 class="intro-capability-title"><span class="intro-capability-index">01</span><span>发现业务问题</span></h2>
+                            <h2 class="intro-capability-title"><span class="intro-capability-index presentation-inline-index">01</span><span>发现业务问题</span></h2>
                             <p class="intro-capability-description">识别工业维修中跨系统、跨资料的信息断点。</p>
                             <div class="intro-capability-evidence">
                                 <p class="intro-evidence-label">项目证据</p>
@@ -4521,7 +5491,7 @@
                         </article>
 
                         <article class="intro-capability-card">
-                            <h2 class="intro-capability-title"><span class="intro-capability-index">02</span><span>发现与复用</span></h2>
+                            <h2 class="intro-capability-title"><span class="intro-capability-index presentation-inline-index">02</span><span>发现与复用</span></h2>
                             <p class="intro-capability-description">优先使用已有框架与工具，按需补充关键能力。</p>
                             <div class="intro-capability-evidence">
                                 <p class="intro-evidence-label">项目证据</p>
@@ -4530,7 +5500,7 @@
                         </article>
 
                         <article class="intro-capability-card">
-                            <h2 class="intro-capability-title"><span class="intro-capability-index">03</span><span>评测与交付</span></h2>
+                            <h2 class="intro-capability-title"><span class="intro-capability-index presentation-inline-index">03</span><span>评测与交付</span></h2>
                             <p class="intro-capability-description">用真实问题检验 Agent 执行、证据与边界。</p>
                             <div class="intro-capability-evidence">
                                 <p class="intro-evidence-label">项目证据</p>
@@ -4548,7 +5518,75 @@
                 </div>
             </section>
 
-            <section class="slide" aria-label="第 3 页：冠东故障排查记录">
+            <section class="slide" aria-label="第 3 页：传统人工排查路径">
+                <div class="manual-troubleshooting-copy">
+                    <i class="manual-troubleshooting-top-rule" aria-hidden="true"></i>
+                    <div class="manual-troubleshooting-section-label"><span>02</span><span>做事过程 · 传统人工排查</span></div>
+                    <img class="manual-troubleshooting-brand" src="./peninsula-logo-from-ppt.png" alt="Peninsula 半岛医疗">
+
+                    <h1 class="manual-troubleshooting-title">没有智能体时，一条报警要跨多处资料核查</h1>
+
+                    <div class="manual-process-heading">
+                        <strong>典型案例：280 设备 · MB17278 报警</strong>
+                    </div>
+
+                    <section class="manual-troubleshooting-flow" aria-label="内部事件查询、维修资料与工程师经验检索、PLC 程序反查、电气原理图定位、备件库存查询、现场核验">
+                        <article class="manual-troubleshooting-card" data-event-preview-trigger role="button" tabindex="0" aria-haspopup="dialog" aria-controls="solutionDrawingDialog" aria-label="打开事件 ID 23：280 设备 MB17278 故障记录与 I/O 快照">
+                            <div class="manual-card-header"><span class="manual-card-index presentation-inline-index">01</span><h2 class="manual-card-title">查内部事件</h2></div>
+                            <p class="manual-card-copy">在公司内部事件系统按设备号与报警地址查询，确认故障名称、发生/恢复时间，并查看<strong>报警上报时的 I/O 快照</strong>。</p>
+                            <span class="manual-card-source">事件 ID 23 · 6 组 I/O 快照</span>
+                        </article>
+                        <article class="manual-troubleshooting-card">
+                            <div class="manual-card-header"><span class="manual-card-index presentation-inline-index">02</span><h2 class="manual-card-title">查资料与经验</h2></div>
+                            <p class="manual-card-copy">查产品说明书、维修手册、历史故障记录和工单；参考工程师经验笔记，必要时向熟悉设备的同事确认，补足<strong>背景与检查依据</strong>。</p>
+                            <span class="manual-card-source">资料索引覆盖 156 份 PDF</span>
+                        </article>
+                        <article class="manual-troubleshooting-card" data-preview-trigger data-preview-type="image" data-preview-src="./assets/slide-05-plc-ladder.png" data-preview-title="PLC 程序逻辑" data-preview-alt="第六页展示的 PLC 梯形图程序与扫描逻辑" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="solutionDrawingDialog" aria-label="查看 PLC 程序逻辑图">
+                            <div class="manual-card-header"><span class="manual-card-index presentation-inline-index">03</span><h2 class="manual-card-title">追 PLC 程序</h2></div>
+                            <p class="manual-card-copy">在大量程序段中搜索 <strong>MB17278</strong>；结合设备与 PLC 领域知识，沿触点、联锁和控制条件逐段追查，定位候选 IB 输入。</p>
+                            <span class="manual-card-source">读懂程序逻辑 · 依赖经验</span>
+                        </article>
+                        <article class="manual-troubleshooting-card" data-preview-trigger data-preview-type="image" data-preview-src="./assets/slide-05-eplan-electrical.png" data-preview-title="电气原理图" data-preview-alt="第六页展示的电气原理图图纸" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="solutionDrawingDialog" aria-label="查看电气原理图">
+                            <div class="manual-card-header"><span class="manual-card-index presentation-inline-index">04</span><h2 class="manual-card-title">查电气原理图</h2></div>
+                            <p class="manual-card-copy">凭候选 IB、元件号和跨页引用定位端子、线号与器件；大型图册可能有数百页，本案例资料指向<strong>第 236 / 355 页</strong>。</p>
+                            <span class="manual-card-source">凭索引和经验定位</span>
+                        </article>
+                        <article class="manual-troubleshooting-card">
+                            <div class="manual-card-header"><span class="manual-card-index presentation-inline-index">05</span><h2 class="manual-card-title">查库存备件</h2></div>
+                            <p class="manual-card-copy">需要更换或准备备件时，再到公司内部库存系统核对<strong>在库数量与可用情况</strong>，避免到现场后才发现缺件。</p>
+                            <span class="manual-card-source">库存系统 · 数量 · 可用性</span>
+                        </article>
+                        <article class="manual-troubleshooting-card">
+                            <div class="manual-card-header"><span class="manual-card-index presentation-inline-index">06</span><h2 class="manual-card-title">现场确认</h2></div>
+                            <p class="manual-card-copy">到设备旁核对<strong>当前状态、实际接线与器件动作</strong>，再由工程师决定检查方向和维修方案。</p>
+                            <span class="manual-card-source">现场状态 · 工程师决策</span>
+                        </article>
+                    </section>
+
+                    <section class="manual-link-chain" aria-label="从报警地址到现场器件的人工关联链路">
+                        <div>
+                            <h2 class="manual-link-heading">最费人工的关联段</h2>
+                            <p class="manual-link-copy">PLC 程序要懂设备逻辑，图纸需凭候选 IB、端子与跨页引用查找。熟手也要反复核对；新人更依赖请教和经验记录，流程不统一易漏线索。</p>
+                        </div>
+                        <div class="manual-link-flow">
+                            <div class="manual-link-node"><strong>MB17278</strong><span>报警点</span></div>
+                            <span class="manual-link-arrow" aria-hidden="true">→</span>
+                            <div class="manual-link-node"><strong>PLC 程序</strong><span>搜地址、追条件</span></div>
+                            <span class="manual-link-arrow" aria-hidden="true">→</span>
+                            <div class="manual-link-node"><strong>候选 IB</strong><span>输入信号线索</span></div>
+                            <span class="manual-link-arrow" aria-hidden="true">→</span>
+                            <div class="manual-link-node"><strong>电气原理图图纸</strong><span>页码、端子、线号</span></div>
+                            <span class="manual-link-arrow" aria-hidden="true">→</span>
+                            <div class="manual-link-node"><strong>现场器件</strong><span>确认状态与接线</span></div>
+                        </div>
+                    </section>
+
+                    <i class="manual-troubleshooting-footer-rule" aria-hidden="true"></i>
+                    <span class="manual-troubleshooting-page-number" aria-label="第 3 页，共 10 页">03 / 10</span>
+                </div>
+            </section>
+
+            <section class="slide" aria-label="第 4 页：冠东故障排查记录">
                 <div
                     class="troubleshooting-scroll"
                     role="region"
@@ -4563,7 +5601,7 @@
                 </div>
             </section>
 
-            <section class="slide" aria-label="第 4 页：问题与场景">
+            <section class="slide" aria-label="第 5 页：问题与场景">
                 <div class="library-copy">
                     <i class="intro-top-rule" aria-hidden="true"></i>
                     <div class="intro-section-label"><span>02</span><span>做事过程 · 问题与场景</span></div>
@@ -4583,7 +5621,7 @@
                         <article class="library-problem-card">
                             <div class="library-problem-topline">
                                 <div class="library-problem-heading">
-                                    <span class="library-problem-index">01</span>
+                                    <span class="library-problem-index presentation-inline-index">01</span>
                                     <h2 class="library-problem-title">资料分散</h2>
                                 </div>
                                 <span class="library-problem-icon" aria-hidden="true">
@@ -4591,6 +5629,7 @@
                                 </span>
                             </div>
                             <p class="library-problem-description">事件记录、维修手册、PLC 程序、电气原理图以及备件/库存信息分散在不同数据源。</p>
+                            <span class="library-problem-tag">多、脏、杂</span>
                         </article>
 
                         <div class="library-problem-arrow" aria-hidden="true">→</div>
@@ -4598,7 +5637,7 @@
                         <article class="library-problem-card">
                             <div class="library-problem-topline">
                                 <div class="library-problem-heading">
-                                    <span class="library-problem-index">02</span>
+                                    <span class="library-problem-index presentation-inline-index">02</span>
                                     <h2 class="library-problem-title">线索关联困难</h2>
                                 </div>
                                 <span class="library-problem-icon" aria-hidden="true">
@@ -4606,6 +5645,7 @@
                                 </span>
                             </div>
                             <p class="library-problem-description">需要把报警、PLC 地址、控制逻辑、电气原理图、相关元器件及备件信息串联起来。</p>
+                            <span class="library-problem-tag">逻辑乱</span>
                         </article>
 
                         <div class="library-problem-arrow" aria-hidden="true">→</div>
@@ -4613,7 +5653,7 @@
                         <article class="library-problem-card">
                             <div class="library-problem-topline">
                                 <div class="library-problem-heading">
-                                    <span class="library-problem-index">03</span>
+                                    <span class="library-problem-index presentation-inline-index">03</span>
                                     <h2 class="library-problem-title">结论需要核验</h2>
                                 </div>
                                 <span class="library-problem-icon" aria-hidden="true">
@@ -4621,21 +5661,22 @@
                                 </span>
                             </div>
                             <p class="library-problem-description">历史快照和资料检索结果不等于实时状态，不能把推测直接当作维修结论。</p>
+                            <span class="library-problem-tag">长期、稳定、可靠</span>
                         </article>
                     </section>
 
                     <section class="library-core-question" aria-label="核心问题总结">
                         <h2 class="library-core-question-label">核心问题</h2>
                         <span class="library-core-question-divider" aria-hidden="true"></span>
-                        <p class="library-core-question-text">如何让 AI 跨数据源找到证据、建立关联，并生成工程师能够复核的检查路径？</p>
+                        <p class="library-core-question-text">如何让 AI 跨多种异构数据源找到证据、建立关联，生成工程师能够复核的检查路径，并且长期稳定的工作？</p>
                     </section>
 
                     <i class="intro-footer-rule" aria-hidden="true"></i>
-                    <span class="intro-page-number" aria-label="第 4 页，共 10 页">04 / 10</span>
+                    <span class="intro-page-number" aria-label="第 5 页，共 10 页">05 / 10</span>
                 </div>
             </section>
 
-            <section class="slide" aria-label="第 5 页：发现与复用">
+            <section class="slide" aria-label="第 6 页：发现与复用">
                 <div class="solution-copy">
                     <i class="intro-top-rule" aria-hidden="true"></i>
                     <div class="intro-section-label"><span>02</span><span>做事过程 · 发现与复用</span></div>
@@ -4645,9 +5686,14 @@
                     <div class="solution-decisions" aria-label="三类资料的检索技术发现、验证与取舍">
                         <article class="solution-decision-card">
                             <div class="solution-decision-topic">
-                                <span class="solution-decision-index">01</span>
-                                <h2>多格式文档与知识检索</h2>
+                                <div class="solution-decision-heading">
+                                    <span class="solution-decision-index presentation-inline-index">01</span>
+                                    <h2>多模态自优化知识库</h2>
+                                </div>
                                 <p>维修手册 · 产品资料 · 表格等</p>
+                                <div class="solution-preview-actions" aria-label="可查看的项目页面">
+                                    <button class="solution-preview-button" type="button" data-preview-trigger data-preview-type="image" data-preview-gallery="knowledge-base" data-preview-src="./assets/slide-06-knowledge-base.jpg" data-preview-title="项目知识库页面" data-preview-alt="项目知识库管理后台的文件管理页面截图" aria-haspopup="dialog" aria-controls="solutionDrawingDialog">知识库</button>
+                                </div>
                             </div>
                             <section class="solution-decision-explore" aria-label="探索方案与取舍理由">
                                 <span class="solution-decision-panel-label">探索与取舍</span>
@@ -4663,12 +5709,16 @@
                                             <p class="solution-reference-item"><strong>文档解析</strong> 方法参考 MinerU 的多格式文档解析方案。</p>
                                             <p class="solution-reference-item"><strong>分块策略</strong> 参考 RAGFlow 的四类分块方式：General / QA / Table / One。</p>
                                             <p class="solution-reference-item"><strong>检索策略</strong> 借鉴 RAGFlow 检索架构与融合排序方法。</p>
+                                            <p class="solution-reference-item"><strong>评测方法</strong> 借鉴 RAGAS · LLM-as-a-Judge · AutoResearch。</p>
                                         </div>
                                     </div>
                                     <div class="solution-final-divider" aria-hidden="true"></div>
                                     <div class="solution-final-block">
                                         <span class="solution-final-kicker">自己补齐</span>
                                         <p class="solution-final-summary"><span class="solution-adaptive-label">自适应策略优化</span>结合自定义知识库与评测集，自动探索、评测候选检索配置并择优推荐。</p>
+                                        <div class="solution-adaptive-evaluation">
+                                            <span class="solution-adaptive-evaluation-flow">固定题集 → 失败样本归因 → 检索策略调整</span>
+                                        </div>
                                         <div class="solution-tech-tags">
                                             <span class="solution-tech-tag">结构化证据加权 + 分层 RRF</span>
                                             <span class="solution-tech-tag">MMR + 上下文预算</span>
@@ -4681,9 +5731,16 @@
 
                         <article class="solution-decision-card">
                             <div class="solution-decision-topic">
-                                <span class="solution-decision-index">02</span>
-                                <h2>Skill + CLI<br>复杂文档检索</h2>
+                                <div class="solution-decision-heading">
+                                    <span class="solution-decision-index presentation-inline-index">02</span>
+                                    <h2>Skill + CLI</h2>
+                                </div>
                                 <p>领域知识 · 检索策略</p>
+                                <div class="solution-preview-actions" aria-label="可查看的资料">
+                                    <button class="solution-preview-button" type="button" data-preview-trigger data-preview-type="image" data-preview-src="./assets/slide-05-eplan-electrical.png" data-preview-title="EPLAN 电气原理图" data-preview-alt="EPLAN 电气原理图图纸" aria-haspopup="dialog" aria-controls="solutionDrawingDialog">电气原理图</button>
+                                    <button class="solution-preview-button" type="button" data-preview-trigger data-preview-type="markdown" data-preview-src="./assets/slide-05-schematic-parsing-example.md" data-preview-title="电气原理图解析文档 · 图纸 146" aria-haspopup="dialog" aria-controls="solutionDrawingDialog">解析文档</button>
+                                    <button class="solution-preview-button" type="button" data-preview-trigger data-preview-type="markdown" data-preview-src="./assets/slide-05-electrical-schematic-skill.md" data-preview-title="电气原理图 Skill 文档" aria-haspopup="dialog" aria-controls="solutionDrawingDialog">Skill 文档</button>
+                                </div>
                             </div>
                             <section class="solution-decision-explore" aria-label="探索方案与取舍理由">
                                 <span class="solution-decision-panel-label">探索与取舍</span>
@@ -4708,48 +5765,43 @@
 
                         <article class="solution-decision-card">
                             <div class="solution-decision-topic">
-                                <span class="solution-decision-index">03</span>
-                                <h2>EPLAN 图纸<br>与 PLC 关联反查</h2>
-                                <p>设备/端子·跨页跳转·PLC地址</p>
+                                <div class="solution-decision-heading">
+                                    <span class="solution-decision-index presentation-inline-index">03</span>
+                                    <h2>PLC 关联反查</h2>
+                                </div>
+                                <p>PLC 地址 · 触点/线圈 · 梯级逻辑</p>
+                                <div class="solution-preview-actions" aria-label="可查看的资料">
+                                    <button class="solution-preview-button" type="button" data-preview-trigger data-preview-type="image" data-preview-src="./assets/slide-05-plc-ladder.png" data-preview-title="PLC 程序逻辑" data-preview-alt="PLC 梯形图程序与扫描逻辑" aria-haspopup="dialog" aria-controls="solutionDrawingDialog">PLC 程序图</button>
+                                </div>
                             </div>
                             <section class="solution-decision-explore" aria-label="探索方案与取舍理由">
                                 <span class="solution-decision-panel-label">探索与取舍</span>
-                                <div class="solution-explore-title">GraphRAG <span class="solution-explore-status">评估后未采用</span></div>
-                                <p class="solution-explore-copy">EPLAN 与 PLC 导出资料已有可靠结构关系。保留知识图谱建模，不引入 GraphRAG 检索链路，优先采用确定性建图与反查。</p>
+                                <div class="solution-explore-title">知识图谱建模思路 <span class="solution-explore-status">GraphRAG 评估未采用</span></div>
+                                <p class="solution-explore-copy">借鉴节点—关系表达，将地址、触点/线圈与梯级条件组织为可回溯路径；从 MB/OB 输出反查 IB 输入，不能只做关键词检索。</p>
                             </section>
                             <span class="solution-decision-arrow" aria-hidden="true">→</span>
-                            <section class="solution-decision-final" aria-label="参考复用与自己补齐">
+                            <section class="solution-decision-final" aria-label="JSON 数据结构与 Python CLI 实现">
                                 <div class="solution-final-split">
                                     <div class="solution-final-block">
-                                        <span class="solution-final-kicker">参考 / 实际复用</span>
-                                        <p class="solution-final-text">借鉴实体—关系建模；复用 EPLAN PDF 设备树、端子、页码。<br>并用文本坐标、跨页跳转及 TIA Portal 离线 PLC 地址/变量/程序关系。</p>
+                                        <span class="solution-final-kicker">复用：既有图谱与反查</span>
+                                        <p class="solution-final-text">沿用既有 PLC 梯形图 JSON 图谱与 Python CLI 查询脚本，支持 MB/OB 语义或地址定位，并反查到 IB 输入条件。</p>
                                     </div>
                                     <div class="solution-final-divider" aria-hidden="true"></div>
                                     <div class="solution-final-block">
-                                        <span class="solution-final-kicker">自己补齐</span>
-                                        <p class="solution-final-text">Python/CLI 确定性建节点/边图谱，仅纳可验证关系。<br>跨页与 PLC 反查；留存来源/坐标/证据状态，冲突/多解进 QA，不猜边。</p>
+                                        <span class="solution-final-kicker">为什么选 JSON + CLI</span>
+                                        <p class="solution-final-text">节点记录地址、元件、梯级和来源；边记录连接与信号关系。数据离线静态、查询路径明确，脚本遍历即可满足需求，无需另建图数据库服务。</p>
                                     </div>
                                 </div>
                             </section>
                         </article>
                     </div>
 
-                    <section class="solution-evaluation" aria-label="评测驱动优化">
-                        <div class="solution-evaluation-title">评测驱动优化</div>
-                        <div class="solution-evaluation-flow">
-                            <span>固定题集</span><span class="solution-evaluation-arrow" aria-hidden="true">→</span>
-                            <span>失败样本归因</span><span class="solution-evaluation-arrow" aria-hidden="true">→</span>
-                            <span>检索策略调整</span>
-                        </div>
-                        <div class="solution-evaluation-methods"><strong>方法借鉴</strong>RAGAS · LLM-as-a-Judge · AutoResearch</div>
-                    </section>
-
                     <i class="intro-footer-rule" aria-hidden="true"></i>
-                    <span class="intro-page-number" aria-label="第 5 页，共 10 页">05 / 10</span>
+                    <span class="intro-page-number" aria-label="第 6 页，共 10 页">06 / 10</span>
                 </div>
             </section>
 
-            <section class="slide" aria-label="第 6 页：工程能力复用">
+            <section class="slide" aria-label="第 7 页：工程能力复用">
                 <div class="runtime-copy">
                     <i class="intro-top-rule" aria-hidden="true"></i>
                     <div class="intro-section-label"><span>02</span><span>做事过程 · 工程能力复用</span></div>
@@ -4759,7 +5811,7 @@
                     <div class="runtime-redesign-layout">
                         <div class="runtime-redesign-top">
                             <article class="runtime-engine-card runtime-engine-card-harness" aria-label="Agent Harness：运行过程可控">
-                                <h2 class="runtime-redesign-card-title"><span>01 ·</span> Agent Harness｜运行过程可控</h2>
+                                <h2 class="runtime-redesign-card-title"><span class="presentation-inline-index">01</span> Agent Harness｜运行过程可控</h2>
                                 <div class="runtime-reference-tags" aria-label="框架探索和设计参考">
                                     <span class="runtime-reference-chip"><strong>框架探索</strong> LangChain / LangGraph</span>
                                     <span class="runtime-reference-chip"><strong>设计参考</strong> Claude Code / pi-agent</span>
@@ -4791,7 +5843,7 @@
                             </article>
 
                             <article class="runtime-engine-card" aria-label="MCP：复用已有业务能力">
-                                <h2 class="runtime-redesign-card-title"><span>02 ·</span> MCP｜复用已有业务能力</h2>
+                                <h2 class="runtime-redesign-card-title"><span class="presentation-inline-index">02</span> MCP｜复用已有业务能力</h2>
                                 <div class="runtime-reference-tags" aria-label="MCP 规范、业务接口与已有数据能力">
                                     <span class="runtime-reference-chip"><strong>规范参考</strong> MCP</span>
                                     <span class="runtime-reference-chip"><strong>能力复用</strong> 现有业务接口</span>
@@ -4800,11 +5852,11 @@
                                 <div class="runtime-analysis">
                                     <div class="runtime-analysis-block">
                                         <span class="runtime-analysis-label">为什么适配</span>
-                                        <p class="runtime-analysis-copy">业务数据分布在不同系统，接口方式、数据结构、参数与访问约束各异，Agent 无法用同一方式直接访问。</p>
+                                        <p class="runtime-analysis-copy">设备、故障、工单等对象及关系分布在不同系统，字段含义、参数和访问约束不一；需按业务语义适配，不重复开发底层系统。</p>
                                     </div>
                                     <div class="runtime-analysis-block">
                                         <span class="runtime-analysis-label">实际复用</span>
-                                        <p class="runtime-analysis-copy">复用 MCP 的工具调用与接口描述机制，以及已有业务数据查询和访问能力。</p>
+                                        <p class="runtime-analysis-copy">参考 Ontology 的业务对象、属性与关系建模思路；复用 MCP 工具调用机制和现有业务接口。</p>
                                     </div>
                                 </div>
                                 <div class="runtime-engine-outcome">
@@ -4812,29 +5864,22 @@
                                         <span class="runtime-outcome-label">自己补齐 · 业务适配与 Tool Schema 标准化</span>
                                         <h3 class="runtime-outcome-name">40+ 原子化工具</h3>
                                     </div>
-                                    <div class="runtime-outcome-tags">
-                                        <span class="runtime-outcome-tag">设备与故障事件</span>
-                                        <span class="runtime-outcome-tag">PLC 与控制信息</span>
-                                        <span class="runtime-outcome-tag">图纸检索</span>
-                                        <span class="runtime-outcome-tag">维修工单</span>
-                                        <span class="runtime-outcome-tag">备件与库存</span>
-                                    </div>
                                     <div class="runtime-outcome-tags runtime-outcome-tags-detail" aria-label="细分原子工具能力">
-                                        <span class="runtime-outcome-tag">设备档案/参数</span>
-                                        <span class="runtime-outcome-tag">维保/更换记录</span>
-                                        <span class="runtime-outcome-tag">放线表/线号定位</span>
-                                        <span class="runtime-outcome-tag">PLC 程序/IO 追溯</span>
-                                        <span class="runtime-outcome-tag">知识库检索</span>
-                                        <span class="runtime-outcome-tag">多图视觉问答</span>
+                                        <span class="runtime-outcome-tag">设备/故障</span>
+                                        <span class="runtime-outcome-tag">PLC/IO 追溯</span>
+                                        <span class="runtime-outcome-tag">图纸/线号</span>
+                                        <span class="runtime-outcome-tag">工单/维保</span>
+                                        <span class="runtime-outcome-tag">备件库存</span>
+                                        <span class="runtime-outcome-tag">知识库/多图问答</span>
                                     </div>
-                                    <p class="runtime-outcome-takeaway">关键取舍：工具化复用已有系统，不重复开发底层业务；40+ 为项目沉淀规模。</p>
+                                    <p class="runtime-outcome-takeaway">规则边界：参数校验、数据解释与明确业务约束由 MCP 工具代码执行；Agent 负责选工具、组织结果，不替代权威业务计算。</p>
                                 </div>
                             </article>
                         </div>
 
                         <article class="runtime-skill-card" aria-label="Skill 编写 Agent：维修经验沉淀与复用">
                             <div class="runtime-skill-heading">
-                                <h2 class="runtime-skill-card-title"><span>03 ·</span> Skill 编写 Agent｜将工程师经验转化为可复用 Skill</h2>
+                                <h2 class="runtime-skill-card-title"><span class="presentation-inline-index">03</span> Skill 编写 Agent｜将工程师经验转化为可复用 Skill</h2>
                             </div>
                             <div class="runtime-skill-summary">
                                 <p class="runtime-skill-motivation">人工编写 Skill 需要同时理解维修知识、工具接口与执行规则，经验整理和复用成本较高。</p>
@@ -4846,7 +5891,7 @@
                             <div class="runtime-skill-flow">
                                 <section class="runtime-skill-stage">
                                     <div class="runtime-skill-stage-label-row">
-                                        <span class="runtime-skill-stage-label">01 · 参考成熟方法</span>
+                                        <span class="runtime-skill-stage-label"><span class="runtime-skill-stage-index presentation-inline-index">01</span><span>参考成熟方法</span></span>
                                         <span class="runtime-skill-method-tag">方法参考</span>
                                     </div>
                                     <p class="runtime-skill-stage-copy"><strong>writing-great-skills</strong> · <strong>skill-creator</strong></p>
@@ -4854,161 +5899,19 @@
                                 </section>
                                 <span class="runtime-skill-arrow" aria-hidden="true">→</span>
                                 <section class="runtime-skill-stage">
-                                    <span class="runtime-skill-stage-label">02 · 复用业务上下文</span>
+                                    <span class="runtime-skill-stage-label"><span class="runtime-skill-stage-index presentation-inline-index">02</span><span>复用业务上下文</span></span>
                                     <p class="runtime-skill-stage-copy runtime-skill-context-copy"><strong>Tool Schema</strong> · 维修手册 · 领域知识 · 工程师经验</p>
                                     <p class="runtime-skill-stage-note">明确工具、业务规则、检查步骤与执行边界。</p>
                                 </section>
                                 <span class="runtime-skill-arrow" aria-hidden="true">→</span>
                                 <section class="runtime-skill-stage runtime-skill-stage-final">
-                                    <span class="runtime-skill-stage-label">03 · 自主补齐生成能力</span>
+                                    <span class="runtime-skill-stage-label"><span class="runtime-skill-stage-index presentation-inline-index">03</span><span>自主补齐生成能力</span></span>
                                     <p class="runtime-skill-stage-copy">辅助生成：Skill 方法 + Tool Schema + 领域知识 → Skill 草案</p>
                                     <span class="runtime-skill-output-tags">任务目标 · 执行步骤 · 工具调用 · 核验边界</span>
                                 </section>
                             </div>
                         </article>
                     </div>
-
-                    <i class="intro-footer-rule" aria-hidden="true"></i>
-                    <span class="intro-page-number" aria-label="第 6 页，共 10 页">06 / 10</span>
-                </div>
-            </section>
-
-            <section class="slide" aria-label="第 7 页：关键实施路径">
-                <div class="execution-copy">
-                    <i class="intro-top-rule" aria-hidden="true"></i>
-                    <div class="intro-section-label"><span>02</span><span>做事过程 · 关键实施路径</span></div>
-                    <img class="intro-brand-mark" src="./peninsula-logo-from-ppt.png" alt="Peninsula 半岛医疗">
-
-                    <h1 class="execution-title">从一次真实故障报警，到工程师可核验的检查路径</h1>
-
-                    <section class="execution-case-strip" aria-label="真实案例输入：280 设备 MB17278 故障报警">
-                        <div class="execution-case-identity">
-                            <span class="execution-eyebrow">真实案例输入</span>
-                            <strong class="execution-case-name">280 设备 · MB17278 故障报警</strong>
-                        </div>
-                        <div class="execution-case-evidence">
-                            <span class="execution-evidence-heading">案例中可见的资料线索</span>
-                            <div class="execution-evidence-list">
-                                <span class="execution-evidence-tag">故障事件记录</span>
-                                <span class="execution-evidence-tag">故障时上传的 PLC 快照</span>
-                                <span class="execution-evidence-tag">知识库资料</span>
-                                <span class="execution-evidence-tag">备件库存信息</span>
-                                <span class="execution-evidence-tag">报告所列静态程序 / 原理图线索</span>
-                            </div>
-                        </div>
-                    </section>
-
-                    <div class="execution-flow-heading">
-                        <strong class="execution-flow-title">四步执行路径</strong>
-                        <span class="execution-flow-note">路径示意：工具按问题需要调用，不代表本案固定调用顺序</span>
-                    </div>
-
-                    <div class="execution-flow" aria-label="识别问题、检索证据、组织结论、人工复核">
-                        <article class="execution-step-card">
-                            <div class="execution-step-heading">
-                                <span class="execution-step-index">01</span>
-                                <h2>识别问题</h2>
-                            </div>
-                            <div class="execution-step-fields">
-                                <div class="execution-step-field">
-                                    <span class="execution-field-label">输入</span>
-                                    <p class="execution-field-copy">280 设备 · MB17278</p>
-                                </div>
-                                <div class="execution-step-field">
-                                    <span class="execution-field-label">关键动作</span>
-                                    <p class="execution-field-copy">确认设备、报警与事件信息，标出缺失的上下文。</p>
-                                </div>
-                            </div>
-                            <div class="execution-step-output">
-                                <span>输出</span>
-                                <strong>问题描述 + 待补信息</strong>
-                            </div>
-                            <span class="execution-step-capability">问题解析</span>
-                        </article>
-                        <span class="execution-step-arrow" aria-hidden="true">→</span>
-                        <article class="execution-step-card">
-                            <div class="execution-step-heading">
-                                <span class="execution-step-index">02</span>
-                                <h2>检索证据</h2>
-                            </div>
-                            <div class="execution-step-fields">
-                                <div class="execution-step-field">
-                                    <span class="execution-field-label">输入</span>
-                                    <p class="execution-field-copy">问题描述与待补信息</p>
-                                </div>
-                                <div class="execution-step-field">
-                                    <span class="execution-field-label">关键动作</span>
-                                    <p class="execution-field-copy">按任务需要查询故障记录、知识库资料及相关技术依据。</p>
-                                </div>
-                            </div>
-                            <div class="execution-step-output">
-                                <span>输出</span>
-                                <strong>带来源的候选证据</strong>
-                            </div>
-                            <span class="execution-step-capability">知识检索 · 业务查询</span>
-                        </article>
-                        <span class="execution-step-arrow" aria-hidden="true">→</span>
-                        <article class="execution-step-card">
-                            <div class="execution-step-heading">
-                                <span class="execution-step-index">03</span>
-                                <h2>组织结论</h2>
-                            </div>
-                            <div class="execution-step-fields">
-                                <div class="execution-step-field">
-                                    <span class="execution-field-label">输入</span>
-                                    <p class="execution-field-copy">不同来源的候选证据</p>
-                                </div>
-                                <div class="execution-step-field">
-                                    <span class="execution-field-label">关键动作</span>
-                                    <p class="execution-field-copy">由 Agent Harness 管理执行流程，关联线索并标明证据来源。</p>
-                                </div>
-                            </div>
-                            <div class="execution-step-output">
-                                <span>输出</span>
-                                <strong>候选检查路径</strong>
-                            </div>
-                            <span class="execution-step-capability">流程管理 · 来源标注</span>
-                        </article>
-                        <span class="execution-step-arrow" aria-hidden="true">→</span>
-                        <article class="execution-step-card">
-                            <div class="execution-step-heading">
-                                <span class="execution-step-index">04</span>
-                                <h2>人工复核</h2>
-                            </div>
-                            <div class="execution-step-fields">
-                                <div class="execution-step-field">
-                                    <span class="execution-field-label">输入</span>
-                                    <p class="execution-field-copy">候选路径与待核验项</p>
-                                </div>
-                                <div class="execution-step-field">
-                                    <span class="execution-field-label">关键动作</span>
-                                    <p class="execution-field-copy">工程师现场核实设备状态与证据适用性，再作维修决策。</p>
-                                </div>
-                            </div>
-                            <div class="execution-step-output">
-                                <span>输出</span>
-                                <strong>由工程师确认的检查决定</strong>
-                            </div>
-                            <span class="execution-step-capability">现场核验 · 人工决策</span>
-                        </article>
-                    </div>
-
-                    <section class="execution-responsibilities" aria-label="人机分工">
-                        <article class="execution-responsibility execution-responsibility-agent">
-                            <div class="execution-responsibility-heading">
-                                <strong>Agent</strong>
-                                <span>整理证据与候选路径</span>
-                            </div>
-                            <p>检索、关联并呈现带来源的线索，标出尚待核验的部分。</p>
-                        </article>
-                        <article class="execution-responsibility">
-                            <div class="execution-responsibility-heading">
-                                <strong>工程师</strong>
-                                <span>核实现场并作出决定</span>
-                            </div>
-                            <p>确认设备实时状态、证据适用性及最终检查和维修动作。</p>
-                        </article>
-                    </section>
 
                     <i class="intro-footer-rule" aria-hidden="true"></i>
                     <span class="intro-page-number" aria-label="第 7 页，共 10 页">07 / 10</span>
@@ -5029,19 +5932,19 @@
 
                     <section class="quality-dataset-grid" aria-label="三类评测数据集设计">
                         <article class="quality-dataset-card">
-                            <h2 class="quality-dataset-heading"><span>01 黄金集</span><span class="quality-dataset-english">Gold Set</span></h2>
+                            <h2 class="quality-dataset-heading"><span class="quality-dataset-name-group"><span class="quality-dataset-index presentation-inline-index">01</span><span class="quality-dataset-name">黄金集</span></span><span class="quality-dataset-english">Gold Set</span></h2>
                             <p class="quality-dataset-purpose">守住质量底线</p>
                             <p class="quality-dataset-description">领域专家确认典型题，保留标准证据、预期行为与判定规则。</p>
                             <p class="quality-dataset-use">用途：稳定基准评测与关键质量门槛</p>
                         </article>
                         <article class="quality-dataset-card">
-                            <h2 class="quality-dataset-heading"><span>02 回归集</span><span class="quality-dataset-english">Regression Set</span></h2>
+                            <h2 class="quality-dataset-heading"><span class="quality-dataset-name-group"><span class="quality-dataset-index presentation-inline-index">02</span><span class="quality-dataset-name">回归集</span></span><span class="quality-dataset-english">Regression Set</span></h2>
                             <p class="quality-dataset-purpose">防止版本退化</p>
                             <p class="quality-dataset-description">沉淀通过案例与已修复失败题；Agent、模型或工具调整后重测。</p>
                             <p class="quality-dataset-use">用途：验证已有能力没有退步</p>
                         </article>
                         <article class="quality-dataset-card">
-                            <h2 class="quality-dataset-heading"><span>03 挑战集</span><span class="quality-dataset-english">Challenge Set</span></h2>
+                            <h2 class="quality-dataset-heading"><span class="quality-dataset-name-group"><span class="quality-dataset-index presentation-inline-index">03</span><span class="quality-dataset-name">挑战集</span></span><span class="quality-dataset-english">Challenge Set</span></h2>
                             <p class="quality-dataset-purpose">暴露能力边界</p>
                             <p class="quality-dataset-description">覆盖信息不足、长尾故障、跨系统矛盾与高风险场景。</p>
                             <p class="quality-dataset-use">用途：检验新能力并发现未解问题</p>
@@ -5152,11 +6055,11 @@
                     <div class="outcome-grid">
                         <article class="outcome-card outcome-card-result" aria-labelledby="outcome-result-title">
                             <div class="outcome-card-heading">
-                                <h2 class="outcome-card-title" id="outcome-result-title"><span class="outcome-card-index">01</span>项目结果</h2>
+                                <h2 class="outcome-card-title" id="outcome-result-title"><span class="outcome-card-index presentation-inline-index">01</span>项目结果</h2>
                                 <p class="outcome-card-subtitle">减少重复分析耗时，快速生成可核验的检查线索</p>
                             </div>
                             <div class="outcome-card-copy outcome-result-copy">
-                                <div class="outcome-time-comparison" aria-label="典型场景估算：传统人工处理 30 至 60 分钟，Agent 辅助处理 1 至 2 分钟">
+                                    <div class="outcome-time-comparison" aria-label="传统人工处理约 30 至 60 分钟，Agent 辅助处理约 1 至 2 分钟">
                                     <div class="outcome-time-block">
                                         <span class="outcome-time-label">传统人工处理</span>
                                         <span class="outcome-time-value"><strong>30–60</strong><span>分钟</span></span>
@@ -5167,15 +6070,17 @@
                                         <span class="outcome-time-value"><strong>1–2</strong><span>分钟</span></span>
                                     </div>
                                 </div>
-                                <p class="outcome-result-scope"><strong>典型场景估算</strong>｜仅指前期资料检索、跨源关联与线索整理，不含现场排查与维修</p>
-                                <p class="outcome-result-description">Agent 自动关联故障记录、PLC 程序与技术资料，整理带来源的候选检查路径，让工程师将更多精力投入现场核验与维修决策。</p>
-                                <p class="outcome-result-note">项目成果曾用于 WAIC 展示</p>
+                                <div class="outcome-supporting-facts" aria-label="项目应用规模">
+                                    <span class="outcome-supporting-tag">项目用户 1000+</span>
+                                    <span class="outcome-supporting-tag">百万级商用项目</span>
+                                    <span class="outcome-supporting-tag">参展世界人工智能大会</span>
+                                </div>
                             </div>
                         </article>
 
                         <article class="outcome-card" aria-labelledby="outcome-learning-title">
                             <div class="outcome-card-heading">
-                                <h2 class="outcome-card-title" id="outcome-learning-title"><span class="outcome-card-index">02</span>核心收获</h2>
+                                <h2 class="outcome-card-title" id="outcome-learning-title"><span class="outcome-card-index presentation-inline-index">02</span>核心收获</h2>
                                 <p class="outcome-card-subtitle">成熟能力优先复用，场景差异按需改造</p>
                             </div>
                             <div class="outcome-card-copy">
@@ -5186,7 +6091,7 @@
 
                         <article class="outcome-card" aria-labelledby="outcome-limit-title">
                             <div class="outcome-card-heading">
-                                <h2 class="outcome-card-title" id="outcome-limit-title"><span class="outcome-card-index">03</span>诚实的边界</h2>
+                                <h2 class="outcome-card-title" id="outcome-limit-title"><span class="outcome-card-index presentation-inline-index">03</span>诚实的边界</h2>
                                 <p class="outcome-card-subtitle">AI 辅助分析，不替代工程师判断</p>
                             </div>
                             <div class="outcome-card-copy">
@@ -5200,30 +6105,37 @@
 
                         <article class="outcome-card outcome-card-transfer" aria-labelledby="outcome-transfer-title">
                             <div class="outcome-card-heading">
-                                <h2 class="outcome-card-title" id="outcome-transfer-title"><span class="outcome-card-index">04</span>可迁移的 FDE 交付能力</h2>
-                                <p class="outcome-card-subtitle">从业务需求到系统集成，再到方案沉淀复用</p>
+                                <h2 class="outcome-card-title" id="outcome-transfer-title"><span class="outcome-card-index presentation-inline-index">04</span>可迁移的 FDE 交付能力</h2>
+                                <p class="outcome-card-subtitle">通用 Agent 基座可复用，新业务按场景装配</p>
                             </div>
                             <div class="outcome-card-copy outcome-card-transfer-copy">
                                 <div class="outcome-fde-list" aria-label="可迁移的 FDE 交付能力">
                                     <div class="outcome-fde-module">
-                                        <span class="outcome-fde-index">01</span>
+                                        <span class="outcome-fde-index presentation-inline-index">01</span>
                                         <div class="outcome-fde-module-copy">
                                             <h3 class="outcome-fde-title">业务沟通与需求拆解</h3>
-                                            <p class="outcome-fde-description">识别业务痛点，澄清真实需求、约束条件与验收标准。</p>
+                                            <p class="outcome-fde-description">识别痛点，澄清目标、约束与验收标准。</p>
                                         </div>
                                     </div>
                                     <div class="outcome-fde-module">
-                                        <span class="outcome-fde-index">02</span>
+                                        <span class="outcome-fde-index presentation-inline-index">02</span>
                                         <div class="outcome-fde-module-copy">
                                             <h3 class="outcome-fde-title">跨系统集成与能力复用</h3>
-                                            <p class="outcome-fde-description">基于 API / MCP 连接现有系统，可按需适配 OA、ERP、工单等类别。</p>
+                                            <p class="outcome-fde-description">按需适配 API / MCP，连接业务系统与数据。</p>
                                         </div>
                                     </div>
                                     <div class="outcome-fde-module">
-                                        <span class="outcome-fde-index">03</span>
+                                        <span class="outcome-fde-index presentation-inline-index">03</span>
                                         <div class="outcome-fde-module-copy">
                                             <h3 class="outcome-fde-title">方案沉淀与标准化交付</h3>
-                                            <p class="outcome-fde-description">将验证有效的工具、Skill、业务流程与规则沉淀为可复用模板。</p>
+                                            <p class="outcome-fde-description">将验证有效的工具、Skill 与流程沉淀为复用模板。</p>
+                                        </div>
+                                    </div>
+                                    <div class="outcome-fde-module">
+                                        <span class="outcome-fde-index presentation-inline-index">04</span>
+                                        <div class="outcome-fde-module-copy">
+                                            <h3 class="outcome-fde-title">新业务场景 Agent 装配</h3>
+                                            <p class="outcome-fde-description">复用 HiAgent 底座，按业务配置系统提示词、授权 MCP 工具与专属 Skill。</p>
                                         </div>
                                     </div>
                                 </div>
@@ -5269,6 +6181,78 @@
         </main>
     </div>
 
+    <dialog class="solution-drawing-dialog" id="solutionDrawingDialog" aria-labelledby="solutionDrawingTitle">
+        <div class="solution-drawing-panel">
+            <header class="solution-drawing-header">
+                <h2 class="solution-drawing-title" id="solutionDrawingTitle">图纸预览</h2>
+                <div class="solution-drawing-pages" id="solutionDrawingPages" role="group" aria-label="知识库页面翻页" hidden>
+                    <button class="solution-drawing-zoom-button solution-drawing-page-button" id="solutionDrawingPreviousPage" type="button" aria-label="上一张知识库页面" disabled>‹</button>
+                    <output class="solution-drawing-page-count" id="solutionDrawingPageCount" aria-live="polite">1 / 2</output>
+                    <button class="solution-drawing-zoom-button solution-drawing-page-button" id="solutionDrawingNextPage" type="button" aria-label="下一张知识库页面">›</button>
+                </div>
+                <div class="solution-drawing-tools" id="solutionDrawingTools" role="group" aria-label="图纸缩放控制">
+                    <button class="solution-drawing-zoom-button" id="solutionDrawingZoomOut" type="button" aria-label="缩小图纸">−</button>
+                    <output class="solution-drawing-zoom-level" id="solutionDrawingZoomLevel" aria-live="polite">100%</output>
+                    <button class="solution-drawing-zoom-button" id="solutionDrawingZoomIn" type="button" aria-label="放大图纸">+</button>
+                    <button class="solution-drawing-fit-button" id="solutionDrawingZoomFit" type="button" aria-label="适应窗口">适应</button>
+                </div>
+                <button class="solution-drawing-close" type="button" aria-label="关闭图纸预览">×</button>
+            </header>
+            <div class="solution-drawing-image-wrap" id="solutionDrawingImageWrap">
+                <img class="solution-drawing-image" id="solutionDrawingImage" alt="">
+                <p class="solution-drawing-error" id="solutionDrawingError" hidden>图纸文件暂不可用，请确认图片已放入演示项目的 assets 目录。</p>
+            </div>
+            <div class="solution-markdown-wrap" id="solutionMarkdownWrap" hidden aria-label="原理图 Markdown 解析文档预览">
+                <article class="solution-markdown-content" id="solutionMarkdownContent"></article>
+            </div>
+            <div class="manual-event-preview" id="manualEventPreview" hidden aria-label="事件记录与故障上报时 I/O 快照">
+                <p class="manual-event-context">
+                    <strong>案例上下文</strong>
+                    <span>事件 ID 23</span>
+                    <span>280 设备 · 组 2</span>
+                    <span>MB17278 故障报警</span>
+                </p>
+                <section class="manual-event-table-section" aria-labelledby="manualEventDetailsTitle">
+                    <h3 class="manual-event-table-title" id="manualEventDetailsTitle">内部事件记录</h3>
+                    <div class="manual-event-table-scroll">
+                        <table class="manual-event-table">
+                            <tbody>
+                                <tr><th scope="row">event_id</th><td>23</td></tr>
+                                <tr><th scope="row">设备 / 设备组</th><td>280 / 组 2</td></tr>
+                                <tr><th scope="row">故障号 / 等级 / 监控 bit</th><td>330441 / 3 / 441</td></tr>
+                                <tr><th scope="row">故障名称</th><td>#1 大车门腿防撞传感器（停止）</td></tr>
+                                <tr><th scope="row">发生时间 occurred_at</th><td>2026-09-13 23:48:55</td></tr>
+                                <tr><th scope="row">确认时间</th><td>无</td></tr>
+                                <tr><th scope="row">恢复时间</th><td>2026-09-14 03:42:28</td></tr>
+                                <tr><th scope="row">检测地址</th><td>MB17278 → 规范化 MB017278</td></tr>
+                                <tr><th scope="row">记忆地址</th><td>MB18278 → 规范化 MB018278<br>本轮未单独反查，记忆状态未知</td></tr>
+                                <tr><th scope="row">dwg_name 字段</th><td>H36.02（与 PLC 程序页标一致；未经原理图正文映射，不作为图纸页码使用）</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+                <section class="manual-event-table-section" aria-labelledby="manualEventSnapshotTitle">
+                    <h3 class="manual-event-table-title" id="manualEventSnapshotTitle">故障上报时的 I/O 快照</h3>
+                    <div class="manual-event-table-scroll">
+                        <table class="manual-event-table manual-event-io-table">
+                            <thead><tr><th scope="col">地址</th><th scope="col">描述</th><th scope="col">上报时记录值</th></tr></thead>
+                            <tbody>
+                                <tr><td>IB020CF</td><td>本地交流 I/O 电源正常</td><td>1</td></tr>
+                                <tr><td>IB02395</td><td>大车手柄向左</td><td>0</td></tr>
+                                <tr><td>IB02131</td><td>车道防撞传感器-1 停止</td><td>0</td></tr>
+                                <tr><td>IB023BA</td><td>联锁旁路</td><td>1</td></tr>
+                                <tr><td>IB020E0 / IB020E9</td><td>车轮转向-1 / -2 0 度</td><td>1 / 1</td></tr>
+                                <tr><td>IB02122 / IB0212B</td><td>车轮转向-3 / -4 0 度</td><td>1 / 1</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="manual-event-snapshot-note">以上仅为故障上报时 MQTT 记录值，不代表当前 PLC 状态；记忆地址本轮未单独反查。</p>
+                </section>
+            </div>
+            <p class="solution-drawing-note" id="solutionDrawingNote">滚轮或 +/- 缩放 · 放大后可拖动查看 · 按 Esc 或点击外侧区域关闭</p>
+        </div>
+    </dialog>
+
     <script>
         /* === PRESENTATION CONTROLLER === */
         class SlidePresentation {
@@ -5284,6 +6268,7 @@
 
                 this.setupStageScale();
                 this.setupSlideControls();
+                this.setupSolutionDrawingPreview();
                 this.setupKeyboardNavigation();
                 this.setupWheelNavigation();
                 this.setupTouchNavigation();
@@ -5403,6 +6388,7 @@
             setupKeyboardNavigation() {
                 window.addEventListener('keydown', (event) => {
                     if (event.altKey || event.ctrlKey || event.metaKey) return;
+                    if (document.getElementById('solutionDrawingDialog')?.open) return;
                     const reportScroller = event.target instanceof HTMLElement
                         ? event.target.closest('.troubleshooting-scroll')
                         : null;
@@ -5430,7 +6416,7 @@
                             return;
                         }
                     }
-                    if (event.target instanceof HTMLElement && event.target.closest('input, button, a, [contenteditable="true"]')) return;
+                    if (event.target instanceof HTMLElement && event.target.closest('input, button, a, [role="button"], [contenteditable="true"]')) return;
 
                     const key = event.key.toLowerCase();
                     if (['arrowright', 'arrowdown', ' ', 'pagedown'].includes(key)) {
@@ -5453,6 +6439,7 @@
 
             setupWheelNavigation() {
                 window.addEventListener('wheel', (event) => {
+                    if (document.getElementById('solutionDrawingDialog')?.open) return;
                     if (this.slides.length < 2 || this.wheelLocked) return;
                     if (event.target instanceof Element && event.target.closest('.troubleshooting-scroll')) return;
                     if (Math.abs(event.deltaY) < 24) return;
@@ -5461,6 +6448,511 @@
                     this.showSlide(this.currentSlide + (event.deltaY > 0 ? 1 : -1));
                     window.setTimeout(() => { this.wheelLocked = false; }, 520);
                 }, { passive: true });
+            }
+
+            setupSolutionDrawingPreview() {
+                const dialog = document.getElementById('solutionDrawingDialog');
+                const image = document.getElementById('solutionDrawingImage');
+                const title = document.getElementById('solutionDrawingTitle');
+                const error = document.getElementById('solutionDrawingError');
+                const imageWrap = document.getElementById('solutionDrawingImageWrap');
+                const markdownWrap = document.getElementById('solutionMarkdownWrap');
+                const markdownContent = document.getElementById('solutionMarkdownContent');
+                const eventTableWrap = document.getElementById('manualEventPreview');
+                const zoomTools = document.getElementById('solutionDrawingTools');
+                const note = document.getElementById('solutionDrawingNote');
+                const closeButton = dialog.querySelector('.solution-drawing-close');
+                const zoomOutButton = document.getElementById('solutionDrawingZoomOut');
+                const zoomInButton = document.getElementById('solutionDrawingZoomIn');
+                const zoomFitButton = document.getElementById('solutionDrawingZoomFit');
+                const zoomLevel = document.getElementById('solutionDrawingZoomLevel');
+                const pagesNavigation = document.getElementById('solutionDrawingPages');
+                const previousPageButton = document.getElementById('solutionDrawingPreviousPage');
+                const nextPageButton = document.getElementById('solutionDrawingNextPage');
+                const pageCount = document.getElementById('solutionDrawingPageCount');
+                const minZoom = 0.5;
+                const maxZoom = 4;
+                const zoomStep = 0.25;
+                const previewGalleries = {
+                    'knowledge-base': [
+                        {
+                            src: './assets/slide-06-knowledge-base.jpg',
+                            title: '知识库文件管理',
+                            alt: '项目知识库管理后台的文件管理页面截图',
+                        },
+                        {
+                            src: './assets/slide-06-knowledge-base-chunks.png',
+                            title: '知识库分块与原文预览',
+                            alt: '项目知识库管理后台的分块与索引页面及原文预览截图',
+                        },
+                    ],
+                };
+                let zoomRatio = 1;
+                let dragState = null;
+                let markdownRequestId = 0;
+                let activeGallery = null;
+                let activeGalleryIndex = 0;
+
+                const appendInlineMarkdown = (target, text) => {
+                    const tokenPattern = /(`[^`]+`|\*\*[^*]+\*\*|\*[^*]+\*)/g;
+                    let cursor = 0;
+                    for (const match of text.matchAll(tokenPattern)) {
+                        const index = match.index ?? 0;
+                        if (index > cursor) target.append(document.createTextNode(text.slice(cursor, index)));
+                        const token = match[0];
+                        let element;
+                        if (token.startsWith('`')) {
+                            element = document.createElement('code');
+                            element.textContent = token.slice(1, -1);
+                        } else if (token.startsWith('**')) {
+                            element = document.createElement('strong');
+                            element.textContent = token.slice(2, -2);
+                        } else {
+                            element = document.createElement('em');
+                            element.textContent = token.slice(1, -1);
+                        }
+                        target.append(element);
+                        cursor = index + token.length;
+                    }
+                    if (cursor < text.length) target.append(document.createTextNode(text.slice(cursor)));
+                };
+
+                const renderMarkdown = (source) => {
+                    markdownContent.replaceChildren();
+                    const frontMatter = source.match(/^---\s*\n([\s\S]*?)\n---\s*\n?/);
+                    if (frontMatter) {
+                        const meta = document.createElement('div');
+                        meta.className = 'solution-markdown-meta';
+                        for (const line of frontMatter[1].split('\n')) {
+                            const divider = line.indexOf(':');
+                            if (divider < 1) continue;
+                            const row = document.createElement('div');
+                            const label = document.createElement('strong');
+                            label.textContent = `${line.slice(0, divider).trim()}：`;
+                            row.append(label, document.createTextNode(line.slice(divider + 1).trim()));
+                            meta.append(row);
+                        }
+                        markdownContent.append(meta);
+                    }
+
+                    const markdownBody = frontMatter ? source.slice(frontMatter[0].length) : source;
+                    const lines = markdownBody.split(/\r?\n/);
+                    let paragraph = [];
+                    let list = null;
+                    let listType = '';
+                    let codeLines = null;
+
+                    const flushParagraph = () => {
+                        if (!paragraph.length) return;
+                        const block = document.createElement('p');
+                        appendInlineMarkdown(block, paragraph.join(' '));
+                        markdownContent.append(block);
+                        paragraph = [];
+                    };
+                    const endList = () => { list = null; listType = ''; };
+
+                    const parseTableCells = (line) => line.trim().replace(/^\|/, '').replace(/\|$/, '').split('|').map((cell) => cell.trim());
+                    const isTableSeparator = (line) => {
+                        const cells = parseTableCells(line);
+                        return cells.length > 1 && cells.every((cell) => /^:?-{3,}:?$/.test(cell));
+                    };
+
+                    for (let lineIndex = 0; lineIndex < lines.length; lineIndex += 1) {
+                        const rawLine = lines[lineIndex];
+                        const line = rawLine.trimEnd();
+                        const trimmed = line.trim();
+                        if (codeLines) {
+                            if (/^```/.test(trimmed)) {
+                                const pre = document.createElement('pre');
+                                const code = document.createElement('code');
+                                code.textContent = codeLines.join('\n');
+                                pre.append(code);
+                                markdownContent.append(pre);
+                                codeLines = null;
+                            } else {
+                                codeLines.push(line);
+                            }
+                            continue;
+                        }
+                        if (/^```/.test(trimmed)) {
+                            flushParagraph();
+                            endList();
+                            codeLines = [];
+                            continue;
+                        }
+                        if (!trimmed) {
+                            flushParagraph();
+                            endList();
+                            continue;
+                        }
+                        const heading = trimmed.match(/^(#{1,4})\s+(.+)$/);
+                        if (heading) {
+                            flushParagraph();
+                            endList();
+                            const element = document.createElement(`h${heading[1].length}`);
+                            appendInlineMarkdown(element, heading[2]);
+                            markdownContent.append(element);
+                            continue;
+                        }
+                        if (/^(---+|\*\*\*+)$/.test(trimmed)) {
+                            flushParagraph();
+                            endList();
+                            markdownContent.append(document.createElement('hr'));
+                            continue;
+                        }
+                        if (trimmed.startsWith('|') && isTableSeparator(lines[lineIndex + 1] || '')) {
+                            flushParagraph();
+                            endList();
+                            const tableWrap = document.createElement('div');
+                            tableWrap.className = 'solution-markdown-table-wrap';
+                            const table = document.createElement('table');
+                            const thead = document.createElement('thead');
+                            const headerRow = document.createElement('tr');
+                            for (const cellText of parseTableCells(trimmed)) {
+                                const cell = document.createElement('th');
+                                appendInlineMarkdown(cell, cellText);
+                                headerRow.append(cell);
+                            }
+                            thead.append(headerRow);
+                            table.append(thead);
+                            const tbody = document.createElement('tbody');
+                            lineIndex += 1;
+                            while (lineIndex + 1 < lines.length && lines[lineIndex + 1].trim().startsWith('|')) {
+                                lineIndex += 1;
+                                const rowText = lines[lineIndex].trim();
+                                if (isTableSeparator(rowText)) continue;
+                                const row = document.createElement('tr');
+                                for (const cellText of parseTableCells(rowText)) {
+                                    const cell = document.createElement('td');
+                                    appendInlineMarkdown(cell, cellText);
+                                    row.append(cell);
+                                }
+                                tbody.append(row);
+                            }
+                            table.append(tbody);
+                            tableWrap.append(table);
+                            markdownContent.append(tableWrap);
+                            continue;
+                        }
+                        const listMatch = trimmed.match(/^([-*])\s+(.+)$|^(\d+)[.)]\s+(.+)$/);
+                        if (listMatch) {
+                            flushParagraph();
+                            const type = listMatch[3] ? 'ol' : 'ul';
+                            if (!list || listType !== type) {
+                                endList();
+                                list = document.createElement(type);
+                                listType = type;
+                                markdownContent.append(list);
+                            }
+                            const item = document.createElement('li');
+                            appendInlineMarkdown(item, listMatch[2] || listMatch[4]);
+                            list.append(item);
+                            continue;
+                        }
+                        if (trimmed.startsWith('> ')) {
+                            flushParagraph();
+                            endList();
+                            const quote = document.createElement('blockquote');
+                            appendInlineMarkdown(quote, trimmed.slice(2));
+                            markdownContent.append(quote);
+                            continue;
+                        }
+                        endList();
+                        paragraph.push(trimmed);
+                    }
+                    flushParagraph();
+                    if (codeLines) {
+                        const pre = document.createElement('pre');
+                        const code = document.createElement('code');
+                        code.textContent = codeLines.join('\n');
+                        pre.append(code);
+                        markdownContent.append(pre);
+                    }
+                };
+
+                const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+                const renderImage = (anchor = null) => {
+                    zoomLevel.textContent = `${Math.round(zoomRatio * 100)}%`;
+                    if (!image.naturalWidth || !image.naturalHeight) return;
+
+                    const previousImageRect = image.getBoundingClientRect();
+                    const previousWrapRect = imageWrap.getBoundingClientRect();
+                    const anchorX = anchor?.clientX ?? previousWrapRect.left + imageWrap.clientWidth / 2;
+                    const anchorY = anchor?.clientY ?? previousWrapRect.top + imageWrap.clientHeight / 2;
+                    const anchorFractionX = previousImageRect.width
+                        ? clamp((anchorX - previousImageRect.left) / previousImageRect.width, 0, 1)
+                        : 0.5;
+                    const anchorFractionY = previousImageRect.height
+                        ? clamp((anchorY - previousImageRect.top) / previousImageRect.height, 0, 1)
+                        : 0.5;
+
+                    const availableWidth = Math.max(1, imageWrap.clientWidth - 24);
+                    const availableHeight = Math.max(1, imageWrap.clientHeight - 24);
+                    const fitRatio = Math.min(
+                        1,
+                        availableWidth / image.naturalWidth,
+                        availableHeight / image.naturalHeight,
+                    );
+                    image.style.width = `${Math.round(image.naturalWidth * fitRatio * zoomRatio)}px`;
+                    image.style.height = `${Math.round(image.naturalHeight * fitRatio * zoomRatio)}px`;
+                    imageWrap.classList.toggle('is-zoomed', zoomRatio > 1);
+
+                    if (zoomRatio <= 1) {
+                        imageWrap.scrollTo({ left: 0, top: 0 });
+                        return;
+                    }
+
+                    const nextWrapRect = imageWrap.getBoundingClientRect();
+                    const nextImageRect = image.getBoundingClientRect();
+                    const imageLeft = nextImageRect.left - nextWrapRect.left + imageWrap.scrollLeft;
+                    const imageTop = nextImageRect.top - nextWrapRect.top + imageWrap.scrollTop;
+                    imageWrap.scrollLeft = Math.max(
+                        0,
+                        imageLeft + anchorFractionX * image.offsetWidth - (anchorX - nextWrapRect.left),
+                    );
+                    imageWrap.scrollTop = Math.max(
+                        0,
+                        imageTop + anchorFractionY * image.offsetHeight - (anchorY - nextWrapRect.top),
+                    );
+                };
+
+                const setZoom = (nextZoom, anchor = null) => {
+                    zoomRatio = clamp(nextZoom, minZoom, maxZoom);
+                    renderImage(anchor);
+                };
+
+                const zoomAtCenter = (nextZoom) => {
+                    const rect = imageWrap.getBoundingClientRect();
+                    setZoom(nextZoom, {
+                        clientX: rect.left + imageWrap.clientWidth / 2,
+                        clientY: rect.top + imageWrap.clientHeight / 2,
+                    });
+                };
+
+                const loadGalleryPage = (index) => {
+                    if (!activeGallery?.length) return;
+                    activeGalleryIndex = clamp(index, 0, activeGallery.length - 1);
+                    const page = activeGallery[activeGalleryIndex];
+                    title.textContent = page.title;
+                    pageCount.textContent = `${activeGalleryIndex + 1} / ${activeGallery.length}`;
+                    previousPageButton.disabled = activeGalleryIndex === 0;
+                    nextPageButton.disabled = activeGalleryIndex === activeGallery.length - 1;
+                    image.style.removeProperty('width');
+                    image.style.removeProperty('height');
+                    imageWrap.classList.remove('is-zoomed', 'is-panning');
+                    imageWrap.scrollTo({ left: 0, top: 0 });
+                    zoomRatio = 1;
+                    zoomLevel.textContent = '100%';
+                    error.hidden = true;
+                    image.hidden = false;
+                    image.onload = () => {
+                        error.hidden = true;
+                        image.hidden = false;
+                        renderImage();
+                    };
+                    image.onerror = () => {
+                        image.hidden = true;
+                        error.hidden = false;
+                    };
+                    image.alt = page.alt;
+                    image.src = page.src;
+                };
+
+                const openEventDetails = () => {
+                    markdownRequestId += 1;
+                    markdownContent.replaceChildren();
+                    activeGallery = null;
+                    activeGalleryIndex = 0;
+                    pagesNavigation.hidden = true;
+                    title.textContent = '内部事件记录 · 280 设备 / MB17278';
+                    image.removeAttribute('src');
+                    image.onload = null;
+                    image.onerror = null;
+                    imageWrap.hidden = true;
+                    markdownWrap.hidden = true;
+                    eventTableWrap.hidden = false;
+                    zoomTools.hidden = true;
+                    note.textContent = '案例记录与故障上报时的 MQTT 快照 · 快照不代表当前 PLC 状态 · 按 Esc 或点击外侧区域关闭';
+                    dialog.showModal();
+                    closeButton.focus({ preventScroll: true });
+                };
+
+                zoomOutButton.addEventListener('click', () => zoomAtCenter(zoomRatio - zoomStep));
+                zoomInButton.addEventListener('click', () => zoomAtCenter(zoomRatio + zoomStep));
+                zoomFitButton.addEventListener('click', () => zoomAtCenter(1));
+                previousPageButton.addEventListener('click', () => loadGalleryPage(activeGalleryIndex - 1));
+                nextPageButton.addEventListener('click', () => loadGalleryPage(activeGalleryIndex + 1));
+
+                imageWrap.addEventListener('wheel', (event) => {
+                    event.preventDefault();
+                    setZoom(zoomRatio + (event.deltaY < 0 ? zoomStep : -zoomStep), event);
+                }, { passive: false });
+
+                imageWrap.addEventListener('pointerdown', (event) => {
+                    if (zoomRatio <= 1 || event.button !== 0 || event.target !== image) return;
+                    dragState = {
+                        pointerId: event.pointerId,
+                        x: event.clientX,
+                        y: event.clientY,
+                        scrollLeft: imageWrap.scrollLeft,
+                        scrollTop: imageWrap.scrollTop,
+                    };
+                    imageWrap.classList.add('is-panning');
+                    imageWrap.setPointerCapture(event.pointerId);
+                });
+
+                imageWrap.addEventListener('pointermove', (event) => {
+                    if (!dragState || dragState.pointerId !== event.pointerId) return;
+                    imageWrap.scrollLeft = dragState.scrollLeft - (event.clientX - dragState.x);
+                    imageWrap.scrollTop = dragState.scrollTop - (event.clientY - dragState.y);
+                });
+
+                const stopPanning = (event) => {
+                    if (!dragState || dragState.pointerId !== event.pointerId) return;
+                    dragState = null;
+                    imageWrap.classList.remove('is-panning');
+                };
+                imageWrap.addEventListener('pointerup', stopPanning);
+                imageWrap.addEventListener('pointercancel', stopPanning);
+                window.addEventListener('resize', () => {
+                    if (dialog.open && image.naturalWidth) renderImage();
+                }, { passive: true });
+
+                dialog.addEventListener('keydown', (event) => {
+                    if (!markdownWrap.hidden || !eventTableWrap.hidden) return;
+                    if (event.altKey || event.ctrlKey || event.metaKey) return;
+                    if (event.key === '+' || event.key === '=') {
+                        event.preventDefault();
+                        zoomAtCenter(zoomRatio + zoomStep);
+                    } else if (event.key === '-' || event.key === '_') {
+                        event.preventDefault();
+                        zoomAtCenter(zoomRatio - zoomStep);
+                    } else if (event.key === '0') {
+                        event.preventDefault();
+                        zoomAtCenter(1);
+                    }
+                });
+
+                this.stage.addEventListener('click', (event) => {
+                    if (!(event.target instanceof Element)) return;
+                    const eventTrigger = event.target.closest('[data-event-preview-trigger]');
+                    if (eventTrigger && this.stage.contains(eventTrigger)) {
+                        openEventDetails();
+                        return;
+                    }
+                    const trigger = event.target.closest('[data-preview-trigger]');
+                    if (!trigger || !this.stage.contains(trigger)) return;
+
+                    eventTableWrap.hidden = true;
+                    const previewType = trigger.dataset.previewType || 'image';
+                    const previewTitle = trigger.dataset.previewTitle || (previewType === 'markdown' ? 'Markdown 文档' : '图纸预览');
+                    activeGallery = previewGalleries[trigger.dataset.previewGallery] || null;
+                    activeGalleryIndex = 0;
+                    pagesNavigation.hidden = !activeGallery;
+                    title.textContent = previewTitle;
+                    image.style.removeProperty('width');
+                    image.style.removeProperty('height');
+                    imageWrap.classList.remove('is-zoomed', 'is-panning');
+                    imageWrap.scrollTo({ left: 0, top: 0 });
+                    zoomRatio = 1;
+                    zoomLevel.textContent = '100%';
+                    error.hidden = true;
+                    image.removeAttribute('src');
+                    image.onload = null;
+                    image.onerror = null;
+                    markdownContent.replaceChildren();
+
+                    if (previewType === 'markdown') {
+                        activeGallery = null;
+                        pagesNavigation.hidden = true;
+                        imageWrap.hidden = true;
+                        markdownWrap.hidden = false;
+                        zoomTools.hidden = true;
+                        note.textContent = '滚动阅读 Markdown 文档 · 按 Esc 或点击外侧区域关闭';
+                        markdownContent.textContent = '正在加载 Markdown 文档…';
+                        const requestId = ++markdownRequestId;
+                        fetch(trigger.dataset.previewSrc)
+                            .then((response) => {
+                                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                                return response.text();
+                            })
+                            .then((source) => {
+                                if (requestId !== markdownRequestId || !dialog.open) return;
+                                renderMarkdown(source);
+                            })
+                            .catch(() => {
+                                if (requestId !== markdownRequestId || !dialog.open) return;
+                                markdownContent.textContent = 'Markdown 文档暂不可用，请确认文件位于演示项目的 assets 目录。';
+                            });
+                    } else {
+                        imageWrap.hidden = false;
+                        markdownWrap.hidden = true;
+                        zoomTools.hidden = false;
+                        note.textContent = activeGallery
+                            ? '左右切换知识库页面 · 滚轮或 +/- 缩放 · 放大后可拖动查看 · 按 Esc 或点击外侧区域关闭'
+                            : '滚轮或 +/- 缩放 · 放大后可拖动查看 · 按 Esc 或点击外侧区域关闭';
+                        if (activeGallery) {
+                            loadGalleryPage(0);
+                        } else {
+                            image.alt = trigger.dataset.previewAlt || previewTitle;
+                            image.hidden = false;
+                            image.onload = () => {
+                                error.hidden = true;
+                                image.hidden = false;
+                                renderImage();
+                            };
+                            image.onerror = () => { image.hidden = true; error.hidden = false; };
+                            image.src = trigger.dataset.previewSrc;
+                        }
+                    }
+                    dialog.showModal();
+                    closeButton.focus({ preventScroll: true });
+                });
+
+                this.stage.addEventListener('keydown', (event) => {
+                    if (!(event.target instanceof Element)) return;
+                    const eventTrigger = event.target.closest('[data-event-preview-trigger]');
+                    if (eventTrigger && this.stage.contains(eventTrigger)) {
+                        if (event.key !== 'Enter' && event.key !== ' ') return;
+                        event.preventDefault();
+                        event.stopPropagation();
+                        openEventDetails();
+                        return;
+                    }
+
+                    const previewTrigger = event.target.closest('[data-preview-trigger][role="button"]');
+                    if (!previewTrigger || !this.stage.contains(previewTrigger)) return;
+                    if (event.key !== 'Enter' && event.key !== ' ') return;
+                    event.preventDefault();
+                    event.stopPropagation();
+                    previewTrigger.click();
+                });
+
+                closeButton.addEventListener('click', () => dialog.close());
+                dialog.addEventListener('click', (event) => {
+                    if (event.target === dialog) dialog.close();
+                });
+                dialog.addEventListener('close', () => {
+                    markdownRequestId += 1;
+                    activeGallery = null;
+                    activeGalleryIndex = 0;
+                    pagesNavigation.hidden = true;
+                    image.removeAttribute('src');
+                    image.onload = null;
+                    image.onerror = null;
+                    image.style.removeProperty('width');
+                    image.style.removeProperty('height');
+                    imageWrap.classList.remove('is-zoomed', 'is-panning');
+                    imageWrap.scrollTo({ left: 0, top: 0 });
+                    imageWrap.hidden = false;
+                    markdownWrap.hidden = true;
+                    eventTableWrap.hidden = true;
+                    zoomTools.hidden = false;
+                    note.textContent = '滚轮或 +/- 缩放 · 放大后可拖动查看 · 按 Esc 或点击外侧区域关闭';
+                    markdownContent.replaceChildren();
+                    zoomRatio = 1;
+                    zoomLevel.textContent = '100%';
+                });
             }
 
             setupTouchNavigation() {
