@@ -3691,6 +3691,113 @@
             position: relative;
         }
 
+        .outcome-card-result,
+        .outcome-card-transfer {
+            padding: 22px 28px;
+        }
+
+        .outcome-card-result .outcome-card-heading,
+        .outcome-card-transfer .outcome-card-heading {
+            gap: 7px;
+        }
+
+        .outcome-card-result .outcome-card-subtitle,
+        .outcome-card-transfer .outcome-card-subtitle {
+            font-size: calc(23px * var(--font-scale));
+            line-height: 1.25;
+        }
+
+        .outcome-card-result .outcome-card-copy {
+            gap: 5px;
+            margin-top: 9px;
+        }
+
+        .outcome-time-comparison {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+            align-items: center;
+            gap: 14px;
+            min-height: 62px;
+        }
+
+        .outcome-time-block {
+            display: grid;
+            min-width: 0;
+            gap: 2px;
+        }
+
+        .outcome-time-label {
+            color: #59697c;
+            font-size: calc(18px * var(--font-scale));
+            font-weight: 650;
+            line-height: 1.2;
+        }
+
+        .outcome-time-value {
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+            color: #56677b;
+            font-family: "DM Sans", "Noto Sans SC", sans-serif;
+            line-height: 1;
+            white-space: nowrap;
+        }
+
+        .outcome-time-value strong {
+            font-size: calc(40px * var(--font-scale));
+            font-weight: 800;
+            letter-spacing: -0.035em;
+        }
+
+        .outcome-time-value span {
+            font-family: "Noto Sans SC", sans-serif;
+            font-size: calc(19px * var(--font-scale));
+            font-weight: 650;
+        }
+
+        .outcome-time-block-agent .outcome-time-value {
+            color: #1552b1;
+        }
+
+        .outcome-time-arrow {
+            color: #6d92ca;
+            font-family: "DM Sans", sans-serif;
+            font-size: calc(26px * var(--font-scale));
+            font-weight: 700;
+        }
+
+        .outcome-result-scope,
+        .outcome-result-description,
+        .outcome-result-note {
+            margin: 0;
+        }
+
+        .outcome-result-scope {
+            color: #68798e;
+            font-size: calc(17px * var(--font-scale));
+            font-weight: 550;
+            line-height: 1.3;
+        }
+
+        .outcome-result-scope strong {
+            color: #1552b1;
+            font-weight: 750;
+        }
+
+        .outcome-result-description {
+            color: #59697c;
+            font-size: calc(19px * var(--font-scale));
+            font-weight: 550;
+            line-height: 1.36;
+        }
+
+        .outcome-result-note {
+            color: #8792a0;
+            font-size: calc(17px * var(--font-scale));
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
         .outcome-card-tag {
             position: absolute;
             top: 32px;
@@ -3794,8 +3901,62 @@
         }
 
         .outcome-card-transfer-copy {
-            gap: 8px;
-            margin-top: 12px;
+            gap: 5px;
+            margin-top: 9px;
+        }
+
+        .outcome-fde-list {
+            display: grid;
+            gap: 2px;
+        }
+
+        .outcome-fde-module {
+            display: grid;
+            grid-template-columns: 28px minmax(0, 1fr);
+            align-items: start;
+            gap: 9px;
+            padding: 4px 0;
+            border-bottom: 1px solid #e6ecf4;
+        }
+
+        .outcome-fde-index {
+            display: grid;
+            width: 24px;
+            height: 24px;
+            place-items: center;
+            border: 1px solid #cadbf1;
+            border-radius: 50%;
+            color: #1552b1;
+            background: #f1f6ff;
+            font-family: "DM Sans", sans-serif;
+            font-size: calc(14px * var(--font-scale));
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .outcome-fde-module-copy {
+            display: grid;
+            gap: 1px;
+            min-width: 0;
+        }
+
+        .outcome-fde-title,
+        .outcome-fde-description {
+            margin: 0;
+        }
+
+        .outcome-fde-title {
+            color: #174f9f;
+            font-size: calc(20px * var(--font-scale));
+            font-weight: 750;
+            line-height: 1.2;
+        }
+
+        .outcome-fde-description {
+            color: #59697c;
+            font-size: calc(17px * var(--font-scale));
+            font-weight: 550;
+            line-height: 1.28;
         }
 
         .outcome-transfer-summary {
@@ -4992,10 +5153,23 @@
                         <article class="outcome-card outcome-card-result" aria-labelledby="outcome-result-title">
                             <div class="outcome-card-heading">
                                 <h2 class="outcome-card-title" id="outcome-result-title"><span class="outcome-card-index">01</span>项目结果</h2>
-                                <p class="outcome-card-subtitle">从回答问题，到组织可追溯的检查线索</p>
+                                <p class="outcome-card-subtitle">减少重复分析耗时，快速生成可核验的检查线索</p>
                             </div>
-                            <div class="outcome-card-copy">
-                                <p>围绕真实设备故障报警，结合事件记录与相关技术资料，整理出带证据来源的候选检查路径。项目成果曾用于 WAIC 展示。</p>
+                            <div class="outcome-card-copy outcome-result-copy">
+                                <div class="outcome-time-comparison" aria-label="典型场景估算：传统人工处理 30 至 60 分钟，Agent 辅助处理 1 至 2 分钟">
+                                    <div class="outcome-time-block">
+                                        <span class="outcome-time-label">传统人工处理</span>
+                                        <span class="outcome-time-value"><strong>30–60</strong><span>分钟</span></span>
+                                    </div>
+                                    <span class="outcome-time-arrow" aria-hidden="true">→</span>
+                                    <div class="outcome-time-block outcome-time-block-agent">
+                                        <span class="outcome-time-label">Agent 辅助处理</span>
+                                        <span class="outcome-time-value"><strong>1–2</strong><span>分钟</span></span>
+                                    </div>
+                                </div>
+                                <p class="outcome-result-scope"><strong>典型场景估算</strong>｜仅指前期资料检索、跨源关联与线索整理，不含现场排查与维修</p>
+                                <p class="outcome-result-description">Agent 自动关联故障记录、PLC 程序与技术资料，整理带来源的候选检查路径，让工程师将更多精力投入现场核验与维修决策。</p>
+                                <p class="outcome-result-note">项目成果曾用于 WAIC 展示</p>
                             </div>
                         </article>
 
@@ -5026,22 +5200,33 @@
 
                         <article class="outcome-card outcome-card-transfer" aria-labelledby="outcome-transfer-title">
                             <div class="outcome-card-heading">
-                                <h2 class="outcome-card-title" id="outcome-transfer-title"><span class="outcome-card-index">04</span>平台泛化与能力迁移</h2>
-                                <p class="outcome-card-subtitle">复用 Agent 基座，按需装配新业务智能体</p>
+                                <h2 class="outcome-card-title" id="outcome-transfer-title"><span class="outcome-card-index">04</span>可迁移的 FDE 交付能力</h2>
+                                <p class="outcome-card-subtitle">从业务需求到系统集成，再到方案沉淀复用</p>
                             </div>
                             <div class="outcome-card-copy outcome-card-transfer-copy">
-                                <p class="outcome-transfer-summary">HiAgent 已沉淀通用 Agent Harness、MCP 工具接入与 Skill 体系；新业务可扩展领域 MCP 工具、配置专业 Skill 和规则，按角色与任务动态装配 Agent。</p>
-                                <div class="outcome-transfer-flow" aria-label="能力扩展逻辑：通用 Harness、扩展 MCP、配置 Skill、动态装配">
-                                    <span class="outcome-transfer-step">通用 Harness</span>
-                                    <span class="outcome-transfer-arrow" aria-hidden="true">→</span>
-                                    <span class="outcome-transfer-step">扩展 MCP</span>
-                                    <span class="outcome-transfer-arrow" aria-hidden="true">→</span>
-                                    <span class="outcome-transfer-step">配置 Skill</span>
-                                    <span class="outcome-transfer-arrow" aria-hidden="true">→</span>
-                                    <span class="outcome-transfer-step">动态装配</span>
+                                <div class="outcome-fde-list" aria-label="可迁移的 FDE 交付能力">
+                                    <div class="outcome-fde-module">
+                                        <span class="outcome-fde-index">01</span>
+                                        <div class="outcome-fde-module-copy">
+                                            <h3 class="outcome-fde-title">业务沟通与需求拆解</h3>
+                                            <p class="outcome-fde-description">识别业务痛点，澄清真实需求、约束条件与验收标准。</p>
+                                        </div>
+                                    </div>
+                                    <div class="outcome-fde-module">
+                                        <span class="outcome-fde-index">02</span>
+                                        <div class="outcome-fde-module-copy">
+                                            <h3 class="outcome-fde-title">跨系统集成与能力复用</h3>
+                                            <p class="outcome-fde-description">基于 API / MCP 连接现有系统，可按需适配 OA、ERP、工单等类别。</p>
+                                        </div>
+                                    </div>
+                                    <div class="outcome-fde-module">
+                                        <span class="outcome-fde-index">03</span>
+                                        <div class="outcome-fde-module-copy">
+                                            <h3 class="outcome-fde-title">方案沉淀与标准化交付</h3>
+                                            <p class="outcome-fde-description">将验证有效的工具、Skill、业务流程与规则沉淀为可复用模板。</p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <p class="outcome-transfer-scenario">医疗设备服务可考虑复用通用执行基座，接入设备知识、工单、备件信息及领域流程。</p>
-                                <p class="outcome-transfer-boundary">医疗设备相关知识、权限、安全和业务规则仍需重新适配与验证。</p>
                             </div>
                         </article>
                     </div>
