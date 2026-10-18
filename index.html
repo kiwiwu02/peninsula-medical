@@ -1673,6 +1673,33 @@
             font-weight: 800;
         }
 
+        .solution-reference-tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 1px 6px;
+            border: 1px solid #d6e5fb;
+            border-radius: 999px;
+            background: #f3f8ff;
+            color: #0d4eae;
+            font: inherit;
+            font-weight: 800;
+            line-height: 1.12;
+            cursor: pointer;
+            vertical-align: baseline;
+            transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
+        }
+
+        .solution-reference-tag:hover,
+        .solution-reference-tag:focus-visible {
+            border-color: #8eb4ed;
+            background: #e8f1ff;
+        }
+
+        .solution-reference-tag:focus-visible {
+            outline: 2px solid rgba(21, 85, 183, 0.25);
+            outline-offset: 2px;
+        }
+
         .solution-decision-card:first-child .solution-final-summary {
             margin: 0;
             color: #314b6a;
@@ -5706,10 +5733,9 @@
                                     <div class="solution-final-block">
                                         <span class="solution-final-kicker">参考 / 实际复用</span>
                                         <div class="solution-reference-list">
-                                            <p class="solution-reference-item"><strong>文档解析</strong> 方法参考 MinerU 的多格式文档解析方案。</p>
-                                            <p class="solution-reference-item"><strong>分块策略</strong> 参考 RAGFlow 的四类分块方式：General / QA / Table / One。</p>
-                                            <p class="solution-reference-item"><strong>检索策略</strong> 借鉴 RAGFlow 检索架构与融合排序方法。</p>
-                                            <p class="solution-reference-item"><strong>评测方法</strong> 借鉴 RAGAS · LLM-as-a-Judge · AutoResearch。</p>
+                                            <p class="solution-reference-item"><button class="solution-reference-tag" type="button" data-preview-trigger data-preview-type="image" data-preview-src="./assets/slide-06-document-parsing.png" data-preview-title="文档解析页面" data-preview-alt="项目知识库中的文档解析与原文预览截图" aria-haspopup="dialog" aria-controls="solutionDrawingDialog">文档解析</button> 方法参考 MinerU 的多格式文档解析方案。</p>
+                                            <p class="solution-reference-item"><button class="solution-reference-tag" type="button" data-preview-trigger data-preview-type="image" data-preview-gallery="chunking-retrieval" data-preview-src="./assets/slide-06-chunking-strategy.png" data-preview-title="分块策略设置" data-preview-alt="知识库分块策略配置界面截图" aria-haspopup="dialog" aria-controls="solutionDrawingDialog">分块与检索</button> 参考 RAGFlow 的文档处理与检索思路。</p>
+                                            <p class="solution-reference-item"><button class="solution-reference-tag" type="button" data-preview-trigger data-preview-type="image" data-preview-gallery="evaluation-methods" data-preview-src="./assets/slide-06-evaluation-dataset.png" data-preview-title="评测题集管理" data-preview-alt="工程师口径问答评测数据集管理页面截图" aria-haspopup="dialog" aria-controls="solutionDrawingDialog">评测方法</button> 借鉴 RAGAS · LLM-as-a-Judge · AutoResearch。</p>
                                         </div>
                                     </div>
                                     <div class="solution-final-divider" aria-hidden="true"></div>
@@ -6484,6 +6510,30 @@
                             src: './assets/slide-06-knowledge-base-chunks.png',
                             title: '知识库分块与原文预览',
                             alt: '项目知识库管理后台的分块与索引页面及原文预览截图',
+                        },
+                    ],
+                    'chunking-retrieval': [
+                        {
+                            src: './assets/slide-06-chunking-strategy.png',
+                            title: '分块策略设置',
+                            alt: '知识库分块策略配置界面截图',
+                        },
+                        {
+                            src: './assets/slide-06-retrieval-strategies.png',
+                            title: '检索策略配置',
+                            alt: '知识库检索策略及参数配置界面截图',
+                        },
+                    ],
+                    'evaluation-methods': [
+                        {
+                            src: './assets/slide-06-evaluation-dataset.png',
+                            title: '评测题集管理',
+                            alt: '工程师口径问答评测数据集管理页面截图',
+                        },
+                        {
+                            src: './assets/slide-06-evaluation-results.png',
+                            title: '检索策略效果对比',
+                            alt: '不同检索策略评测结果对比页面截图',
                         },
                     ],
                 };
